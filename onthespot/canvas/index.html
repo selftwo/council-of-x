@@ -1,0 +1,164 @@
+<!doctype html><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1">
+<title>onthespot · canvas</title>
+<style>
+:root{--fg:#16181d;--bg:#fff;--dim:#7a7f8a;--line:#e6e8ec;--soft:#f5f6f8;--ok:#0f8a3d;--okbg:#e9f7ee;--bad:#c8321f;--badbg:#fbeeec;--warn:#a86400;--warnbg:#fdf4e3;--blue:#1d5fd6;--bluebg:#eaf1fd;--purple:#6d3fc4;--purplebg:#f2ecfb;--teal:#0b7f74;--tealbg:#e6f5f3}
+body.dark{--fg:#e8eaee;--bg:#131417;--dim:#8b8f99;--line:#2a2d33;--soft:#1c1e23;--ok:#57cf82;--okbg:#15291c;--bad:#ff7b6b;--badbg:#311b17;--warn:#e0a63f;--warnbg:#2d2413;--blue:#6d9ff2;--bluebg:#17233a;--purple:#af8df0;--purplebg:#241b36;--teal:#4ecdc0;--tealbg:#12302d}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.55 "SF Mono",ui-monospace,Menlo,monospace;transition:background .15s}
+main{max-width:960px;margin:0 auto;padding:40px 24px 80px}
+h1{font-size:18px;margin:0}
+h2{font-size:12px;font-weight:600;letter-spacing:.08em;margin:44px 0 14px;padding-left:10px;border-left:3px solid var(--accent,var(--blue))}
+h2.g{--accent:var(--ok)}h2.p{--accent:var(--purple)}h2.b{--accent:var(--blue)}h2.t{--accent:var(--teal)}
+a{color:var(--blue)}.dim{color:var(--dim)}
+.sub{color:var(--dim);font-size:13px;margin:4px 0 0}
+ul.now{list-style:none;padding:0;margin:0}ul.now li{padding:5px 0 5px 18px;position:relative}
+ul.now li:before{content:"▪";position:absolute;left:0;color:var(--blue)}
+ul.now li:nth-child(2n):before{color:var(--purple)}ul.now li:nth-child(3n):before{color:var(--teal)}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th{text-align:left;font-weight:400;color:var(--dim);font-size:10px;padding:4px 8px 8px 0;border-bottom:1px solid var(--line)}
+td{padding:7px 8px 7px 0;border-bottom:1px solid var(--line);vertical-align:top}
+td.ok{color:var(--ok);font-weight:700}td.bad{color:var(--bad);font-weight:700}td.none{color:var(--dim)}
+.docs div{padding:7px 0;border-bottom:1px solid var(--line);display:flex;gap:14px;font-size:13px;align-items:baseline}
+.docs .dim{margin-left:auto;text-align:right;max-width:60%}
+footer{margin-top:70px;color:var(--dim);font-size:11px;border-top:1px solid var(--line);padding-top:12px;display:flex;justify-content:space-between}
+kbd{border:1px solid var(--line);padding:0 4px;border-radius:2px}
+</style>
+<main>
+<h1>onthespot</h1>
+<p class=sub>difficult conversations and situations, think and navigate gracefully. <a href="/">chat →</a> · <a href="../decisions.md">decisions.md</a> · <a href="../scenario-map-draft.md">scenario-map-draft.md</a></p>
+
+<h2 class=b>now</h2>
+<ul class=now><li>Ben delivered 10 rough scenarios (scenarios.md, 2026-07-20) plus the audience lever (same content up / across / down / external changes the right answer); mapped into 5 families in scenario-map-draft.md, pending his review</li><li>audience research done 2026-07-20 as drafts, reviewed, pending Ben: coaching/audience-calibration-research-draft.md (verdict: add P7 audience_mismatch and FM7 power_flatten, with full pass/fail definitions; TA ego states kept as shorthand only, weak evidence base) and scenarios/family-e-questions-draft.md (E1 Friday drop, E2 date vs requirements, E3 promo not-this-cycle, E4 comp, E5 invisible work; E4 flagged thinnest grounding)</li><li>Ben read the map, rubric, and research drafts (2026-07-20) and said go: build the chat UI, vibe-loop two scenarios per the recommended approach, deliver detailed HTML run artifacts for his review; his feedback then decides what changes in the rubrics</li><li>V1 harness LIVE: `node harness/server.mjs` → http://localhost:4795/ (chat UI, timestamps, soft timer); vibe loop run to green on both scenarios (see 2026-07-20 entry below); latest reports: runs/2026-07-20T08-00-17-mann-ai-sparring and runs/2026-07-20T07-58-55-e1-friday-drop</li><li>Ben: play both scenarios live in the chat UI, review the reports and canvas, give feedback on persona feel + what the reports should add; then rubric changes get decided</li><li>Wispr+parakeet stays demarcated (spec in practicer rubric C1/C6/C9, not built); judging stays off until the vibe loop settles (doctrine stage 1); second clean consecutive run still needed on both scenarios before anything is called calibrated</li><li>Ben: review the drafts: personas/*-dossier-draft.md, coaching/pedagogy-research-draft.md, evals/practicer-rubric-draft.md (5 open questions at its end: P3 strictness, P4 audio vs chat feed, hedge lexicon pruning, pause threshold, Wispr timestamp viability)</li><li>workstream 1 (next build): local web chat UI on top of the imported harness, per-message timestamps, visible soft timer; harness import happens inside this build so it lands tested</li><li>workstream 2 done 2026-07-20 as drafts: eight persona dossiers + fit table delivered, reviewed, pending Ben</li><li>workstream 3: Wispr Flow audio location + parakeet ASR with word timestamps, prove pause extraction on one real dictation (also answers rubric open question 5)</li><li>workstream 4 done 2026-07-20 as drafts: pedagogy research + practicer rubric v0 (8 code checks, 6 binary judge modes, baseline record schema; all few-shots TODO until real labeled sessions), reviewed, pending Ben</li></ul>
+
+<h2 class=g>runs</h2>
+<table><tr><th>when</th><th>scenario</th><th>mode</th><th>ben turns</th><th>counterpart turns</th><th>duration</th><th>cost</th><th>checks</th><th>report</th></tr>
+<tr>
+<td class=dim>07-20 · 08:00</td>
+<td><a href="../runs/2026-07-20T08-00-17-mann-ai-sparring/report.html">Sparring with Benjamin Mann on AI and product</a></td>
+<td class=dim>scripted</td>
+<td>6</td>
+<td>7</td>
+<td class=dim>0:11</td>
+<td class=dim>$0.0004</td>
+<td class="ok">✓ pass</td>
+<td><a href="../runs/2026-07-20T08-00-17-mann-ai-sparring/report.html">report</a></td>
+</tr>
+<tr>
+<td class=dim>07-20 · 07:59</td>
+<td><a href="../runs/2026-07-20T07-59-32-mann-ai-sparring/report.html">Sparring with Benjamin Mann on AI and product</a></td>
+<td class=dim>scripted</td>
+<td>6</td>
+<td>7</td>
+<td class=dim>0:12</td>
+<td class=dim>$0.0004</td>
+<td class="bad">✗ fail</td>
+<td><a href="../runs/2026-07-20T07-59-32-mann-ai-sparring/report.html">report</a></td>
+</tr>
+<tr>
+<td class=dim>07-20 · 07:58</td>
+<td><a href="../runs/2026-07-20T07-58-55-e1-friday-drop/report.html">The Friday drop (saying no to your manager)</a></td>
+<td class=dim>scripted</td>
+<td>6</td>
+<td>7</td>
+<td class=dim>0:09</td>
+<td class=dim>$0.0003</td>
+<td class="ok">✓ pass</td>
+<td><a href="../runs/2026-07-20T07-58-55-e1-friday-drop/report.html">report</a></td>
+</tr>
+<tr>
+<td class=dim>07-20 · 07:58</td>
+<td><a href="../runs/2026-07-20T07-58-43-mann-ai-sparring/report.html">Sparring with Benjamin Mann on AI and product</a></td>
+<td class=dim>scripted</td>
+<td>6</td>
+<td>7</td>
+<td class=dim>0:12</td>
+<td class=dim>$0.0004</td>
+<td class="bad">✗ fail</td>
+<td><a href="../runs/2026-07-20T07-58-43-mann-ai-sparring/report.html">report</a></td>
+</tr>
+<tr>
+<td class=dim>07-20 · 07:57</td>
+<td><a href="../runs/2026-07-20T07-57-51-e1-friday-drop/report.html">The Friday drop (saying no to your manager)</a></td>
+<td class=dim>scripted</td>
+<td>6</td>
+<td>7</td>
+<td class=dim>0:08</td>
+<td class=dim>$0.0003</td>
+<td class="bad">✗ fail</td>
+<td><a href="../runs/2026-07-20T07-57-51-e1-friday-drop/report.html">report</a></td>
+</tr>
+<tr>
+<td class=dim>07-20 · 07:57</td>
+<td><a href="../runs/2026-07-20T07-57-40-mann-ai-sparring/report.html">Sparring with Benjamin Mann on AI and product</a></td>
+<td class=dim>scripted</td>
+<td>6</td>
+<td>7</td>
+<td class=dim>0:11</td>
+<td class=dim>$0.0004</td>
+<td class="bad">✗ fail</td>
+<td><a href="../runs/2026-07-20T07-57-40-mann-ai-sparring/report.html">report</a></td>
+</tr>
+<tr>
+<td class=dim>07-20 · 07:56</td>
+<td><a href="../runs/2026-07-20T07-56-13-e1-friday-drop/report.html">The Friday drop (saying no to your manager)</a></td>
+<td class=dim>scripted</td>
+<td>6</td>
+<td>7</td>
+<td class=dim>0:10</td>
+<td class=dim>$0.0003</td>
+<td class="bad">✗ fail</td>
+<td><a href="../runs/2026-07-20T07-56-13-e1-friday-drop/report.html">report</a></td>
+</tr>
+<tr>
+<td class=dim>07-20 · 07:56</td>
+<td><a href="../runs/2026-07-20T07-56-02-mann-ai-sparring/report.html">Sparring with Benjamin Mann on AI and product</a></td>
+<td class=dim>scripted</td>
+<td>6</td>
+<td>7</td>
+<td class=dim>0:10</td>
+<td class=dim>$0.0004</td>
+<td class="bad">✗ fail</td>
+<td><a href="../runs/2026-07-20T07-56-02-mann-ai-sparring/report.html">report</a></td>
+</tr>
+<tr>
+<td class=dim>07-20 · 07:54</td>
+<td>Sparring with Benjamin Mann on AI and product</td>
+<td class=dim>interactive</td>
+<td>0</td>
+<td>1</td>
+<td class=dim>0:00</td>
+<td class=dim>$0.0000</td>
+<td class="none">unchecked</td>
+<td><span class=dim>—</span></td>
+</tr>
+<tr>
+<td class=dim>07-20 · 07:53</td>
+<td><a href="../runs/2026-07-20T07-53-14-e1-friday-drop/report.html">The Friday drop (saying no to your manager)</a></td>
+<td class=dim>scripted</td>
+<td>6</td>
+<td>7</td>
+<td class=dim>0:08</td>
+<td class=dim>$0.0003</td>
+<td class="bad">✗ fail</td>
+<td><a href="../runs/2026-07-20T07-53-14-e1-friday-drop/report.html">report</a></td>
+</tr>
+<tr>
+<td class=dim>07-20 · 07:52</td>
+<td><a href="../runs/2026-07-20T07-52-56-mann-ai-sparring/report.html">Sparring with Benjamin Mann on AI and product</a></td>
+<td class=dim>scripted</td>
+<td>6</td>
+<td>7</td>
+<td class=dim>0:11</td>
+<td class=dim>$0.0004</td>
+<td class="bad">✗ fail</td>
+<td><a href="../runs/2026-07-20T07-52-56-mann-ai-sparring/report.html">report</a></td>
+</tr></table>
+
+<h2 class=p>documents</h2>
+<div class=docs><div><a href="../README.md">README.md</a><span class=dim>onthespot</span></div><div><a href="../decisions.md">decisions.md</a><span class=dim>Decisions</span></div><div><a href="../scenario-map-draft.md">scenario-map-draft.md</a><span class=dim>Scenario map — draft for Ben's review (2026-07-20)</span></div><div><a href="../scenarios.md">scenarios.md</a><span class=dim></span></div><div><a href="../scenarios/e1-friday-drop.md">scenarios/e1-friday-drop.md</a><span class=dim>Family E1. Thursday 1:1. Ben is mid-quarter with two committed workstreams, one already at risk. His manager hands him an exec-requested competitive analysis due in ten days. The trap is the instant yes and the flat no; the pass is naming the trade.</span></div><div><a href="../scenarios/family-e-questions-draft.md">scenarios/family-e-questions-draft.md</a><span class=dim>Family E: manager difficult-conversation questions — draft for Ben's review (2026-07-20)</span></div><div><a href="../scenarios/mann-ai-sparring.md">scenarios/mann-ai-sparring.md</a><span class=dim>Family C. Ben articulates how he actually uses LLMs as a PM, his take on frontier vs open models, and how multi-agent systems work. Mann probes for operational definitions and evidence.</span></div><div><a href="../personas/fit-summary-draft.md">personas/fit-summary-draft.md</a><span class=dim>Persona x scenario fit summary (draft)</span></div><div><a href="../coaching/audience-calibration-research-draft.md">coaching/audience-calibration-research-draft.md</a><span class=dim>Audience calibration research — draft for Ben's review (2026-07-20)</span></div><div><a href="../coaching/pedagogy-research-draft.md">coaching/pedagogy-research-draft.md</a><span class=dim>Coaching pedagogy research — draft 1</span></div><div><a href="../evals/practicer-rubric-draft.md">evals/practicer-rubric-draft.md</a><span class=dim>Practicer rubric — draft 1 (binary failure-mode judges)</span></div></div>
+
+<footer><span><kbd>m</kbd> light/dark</span><span>generated 2026-07-20 08:00 · ben + claude</span></footer>
+</main>
+<script>
+if(matchMedia("(prefers-color-scheme:dark)").matches)document.body.classList.add("dark");
+addEventListener("keydown",e=>{if(e.key==="m")document.body.classList.toggle("dark")});
+</script>

@@ -1,0 +1,15 @@
+{
+  "scores": {
+    "persona_fidelity": 2,
+    "challenge": 3,
+    "groundedness": 3,
+    "conversational_memory": 4,
+    "space": 4,
+    "practicer_diagnosis": 4
+  },
+  "verdict": "Needs prompt work: strong sparring instincts, but the persona repeatedly outputs the banned em dash and leaks flattery, and the debrief skips the required delivery comment.",
+  "run": "2026-07-18T06-55-23-shreyas-sparring",
+  "scenario": "shreyas-sparring",
+  "prompt_version": "a4b113a8",
+  "judged_at": "2026-07-18T06:57:09.394Z"
+}

@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Rehearsal — voice sparring</title>
+<style>
+  :root { --bg:#14120f; --panel:#1e1b16; --ink:#e8e2d6; --dim:#8f8878; --accent:#d4a24e; --user:#7fa8d4; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.5 -apple-system, "SF Pro Text", sans-serif; }
+  main { max-width:760px; margin:0 auto; padding:24px 20px 140px; }
+  h1 { font-size:18px; font-weight:600; letter-spacing:.02em; margin:0 0 4px; }
+  .sub { color:var(--dim); font-size:13px; margin-bottom:20px; }
+  select, button, input[type=text] {
+    font:inherit; color:var(--ink); background:var(--panel); border:1px solid #35302a;
+    border-radius:8px; padding:8px 12px;
+  }
+  button { cursor:pointer; }
+  button.primary { background:var(--accent); color:#14120f; border-color:var(--accent); font-weight:600; }
+  button:disabled { opacity:.4; cursor:default; }
+  .row { display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin-bottom:14px; }
+  #log { display:flex; flex-direction:column; gap:10px; margin-top:18px; }
+  .turn { padding:10px 14px; border-radius:10px; max-width:85%; white-space:pre-wrap; }
+  .turn.user { align-self:flex-end; background:#20293a; border:1px solid #2e3c55; }
+  .turn.ai { align-self:flex-start; background:var(--panel); border:1px solid #35302a; }
+  .turn .meta { font-size:11px; color:var(--dim); margin-top:6px; }
+  #hud { position:fixed; bottom:0; left:0; right:0; background:#181510ee; border-top:1px solid #35302a;
+         backdrop-filter:blur(8px); padding:10px 20px; }
+  #hud .inner { max-width:760px; margin:0 auto; display:flex; gap:14px; align-items:center; flex-wrap:wrap; }
+  #state { font-size:13px; color:var(--dim); min-width:130px; }
+  #state.listening { color:#8fd48f; }
+  #state.speaking { color:var(--accent); }
+  #state.thinking { color:var(--user); }
+  #lat { font-size:12px; color:var(--dim); font-variant-numeric:tabular-nums; }
+  #typed { flex:1; min-width:180px; }
+  .desc { font-size:13px; color:var(--dim); margin:-6px 0 14px; }
+  #micbtn.on { background:#27351f; border-color:#4a6b3a; }
+  #vu { width:60px; height:8px; background:#2a2620; border-radius:4px; overflow:hidden; }
+  #vu i { display:block; height:100%; width:0%; background:#8fd48f; transition:width .08s linear; }
+  #heard { flex-basis:100%; font-size:13px; color:var(--dim); font-style:italic; min-height:18px; }
+  #heard.err { color:#d47f7f; font-style:normal; }
+  .banner { background:#3a2a1a; border:1px solid #6b4a2a; border-radius:8px; padding:10px 14px; font-size:13px; margin-bottom:14px; }
+  .coach { font-size:12.5px; color:#b3a8dd; border-left:2px solid #5a4d8a; padding:2px 0 2px 10px; margin-top:8px; font-style:italic; }
+  label.ck { font-size:12px; color:var(--dim); display:flex; gap:4px; align-items:center; user-select:none; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Rehearsal</h1>
+  <div class="sub">Voice sparring grounded in the council corpus. <span id="health"></span></div>
+  <div class="row">
+    <select id="scenario"></select>
+    <button class="primary" id="start">Start session</button>
+    <button id="debrief" disabled>End &amp; debrief</button>
+  </div>
+  <div class="desc" id="scdesc"></div>
+  <div id="log"></div>
+</main>
+<div id="hud"><div class="inner">
+  <button id="micbtn" title="toggle mic">🎙 mic</button>
+  <div id="vu" title="mic input level"><i></i></div>
+  <select id="ttssel" title="TTS engine">
+    <option value="browser">voice: browser (instant, robotic)</option>
+    <option value="gemini-2.5-flash-preview-tts" selected>voice: gemini 2.5 (human, ~5s pauses)</option>
+    <option value="gemini-3.1-flash-tts-preview">voice: gemini 3.1 (human, slower)</option>
+  </select>
+  <label class="ck" title="one whispered corpus-grounded hint after each exchange"><input type="checkbox" id="coachck" checked /> coach</label>
+  <span id="cost" style="font-size:12px;color:var(--dim)"></span>
+  <span id="state">idle</span>
+  <input id="typed" type="text" placeholder="or type a turn and hit Enter…" />
+  <span id="lat"></span>
+  <span id="heard"></span>
+</div></div>
+<script>
+const $ = (id) => document.getElementById(id);
+let scenarios = [], sessionOn = false, micOn = false, rec = null;
+let speaking = false, thinking = false, aborted = false;
+let speakQueue = [], ttsMode = "browser";
+let tSttFinal = 0;
+
+async function init() {
+  const h = await (await fetch("/api/health")).json();
+  $("health").textContent = `LLM: ${h.llm_default === "deepseek" ? h.models.deepseek : h.models.claude} · budget $${h.budget_usd} · spent $${h.spent_usd}`;
+  if (navigator.brave && await navigator.brave.isBrave?.()) {
+    const b = document.createElement("div");
+    b.className = "banner";
+    b.textContent = "You're in Brave: it blocks the speech recognition backend, so the mic won't transcribe here. Open this page in Chrome for voice, or type turns below.";
+    document.querySelector("main").insertBefore(b, document.querySelector(".row"));
+  }
+  scenarios = await (await fetch("/api/scenarios")).json();
+  $("scenario").innerHTML = scenarios.map(s => `<option value="${s.id}">${s.title}</option>`).join("");
+  showDesc();
+}
+function showDesc() {
+  const s = scenarios.find(x => x.id === $("scenario").value);
+  $("scdesc").textContent = s ? s.description : "";
+}
+$("scenario").onchange = showDesc;
+
+function setState(name) {
+  $("state").textContent = name;
+  $("state").className = name;
+}
+function addTurn(cls, text) {
+  const d = document.createElement("div");
+  d.className = "turn " + cls;
+  d.textContent = text;
+  $("log").appendChild(d);
+  d.scrollIntoView({ behavior: "smooth", block: "end" });
+  return d;
+}
+
+// ---------- TTS ----------
+function pickVoice() {
+  const vs = speechSynthesis.getVoices();
+  return vs.find(v => /Samantha|Ava|Karen|Daniel|Google US English/i.test(v.name)) || vs.find(v => v.lang.startsWith("en")) || null;
+}
+const PAUSE_MS = 400; // breathing room between sentences; tough conversations live in the pauses
+const ttsCache = new Map(); // "model|text" -> Promise<Blob|null>
+function fetchTts(text, model) {
+  const key = model + "|" + text;
+  if (!ttsCache.has(key)) ttsCache.set(key, (async () => {
+    try {
+      const r = await fetch("/api/tts", { method: "POST", headers: {"content-type":"application/json"},
+        body: JSON.stringify({ text, model, voice: "Charon" }) });
+      if (!r.ok) throw new Error((await r.text()).slice(0, 100));
+      return await r.blob();
+    } catch (e) {
+      if (model === "gemini-2.5-flash-preview-tts" && /429|quota/i.test(e.message)) {
+        heard("gemini 2.5 tts quota hit — trying 3.1 for this sentence");
+        return fetchTts(text, "gemini-3.1-flash-tts-preview");
+      }
+      heard("gemini tts failed (" + e.message + ") — falling back to browser voice", true);
+      return null;
+    }
+  })());
+  return ttsCache.get(key);
+}
+async function speakLoop() {
+  if (speaking || speakQueue.length === 0) return;
+  speaking = true;
+  setState("speaking");
+  while (speakQueue.length > 0 && !aborted) {
+    const { text, firstOfTurn } = speakQueue.shift();
+    if (firstOfTurn && tSttFinal) {
+      $("lat").textContent = `voice-to-voice ${(performance.now() - tSttFinal | 0)}ms · ` + $("lat").textContent;
+    }
+    const ttsSel = $("ttssel").value;
+    let blob = null;
+    if (ttsSel !== "browser") {
+      // prefetch the next sentences while this one synthesizes/plays, so gaps shrink to the pause we choose
+      for (const q of speakQueue.slice(0, 2)) fetchTts(q.text, ttsSel);
+      blob = await fetchTts(text, ttsSel);
+    }
+    if (aborted) break;
+    if (blob) {
+      const url = URL.createObjectURL(blob);
+      await new Promise((done) => { const a = new Audio(url); window.__audio = a; a.onended = a.onerror = done; a.play(); });
+    } else {
+      await new Promise((done) => {
+        const u = new SpeechSynthesisUtterance(text);
+        const v = pickVoice(); if (v) u.voice = v;
+        u.rate = 0.92; // unhurried
+        u.onend = u.onerror = done;
+        speechSynthesis.speak(u);
+      });
+    }
+    if (!aborted && speakQueue.length) await new Promise((r) => setTimeout(r, PAUSE_MS));
+  }
+  speaking = false;
+  if (!thinking) setState(micOn ? "listening" : "idle");
+}
+function bargeIn() {
+  aborted = true;
+  speakQueue = [];
+  speechSynthesis.cancel();
+  if (window.__audio) { try { window.__audio.pause(); } catch {} }
+  speaking = false;
+}
+
+// ---------- turn ----------
+async function sendTurn(text) {
+  if (!sessionOn || thinking) return;
+  aborted = false;
+  thinking = true;
+  tSttFinal = performance.now();
+  addTurn("user", text);
+  setState("thinking");
+  const aiDiv = addTurn("ai", "…");
+  aiDiv.textContent = "";
+  let firstOfTurn = true;
+  const resp = await fetch("/api/turn", { method: "POST", headers: {"content-type":"application/json"}, body: JSON.stringify({ text }) });
+  const reader = resp.body.getReader();
+  const dec = new TextDecoder();
+  let buf = "";
+  while (true) {
+    const { value, done } = await reader.read();
+    if (done) break;
+    buf += dec.decode(value, { stream: true });
+    let idx;
+    while ((idx = buf.indexOf("\n\n")) >= 0) {
+      const frame = buf.slice(0, idx); buf = buf.slice(idx + 2);
+      const ev = /event: (\w+)/.exec(frame)?.[1];
+      const data = /data: (.*)/.exec(frame)?.[1];
+      if (!ev || !data) continue;
+      const d = JSON.parse(data);
+      if (ev === "sentence") {
+        aiDiv.textContent += (aiDiv.textContent ? " " : "") + d.text;
+        if (!aborted) { speakQueue.push({ text: d.text, firstOfTurn }); speakLoop(); }
+        firstOfTurn = false;
+      } else if (ev === "done") {
+        const meta = document.createElement("div");
+        meta.className = "meta";
+        meta.textContent = `first token ${d.first_token_ms}ms · first sentence ${d.first_sentence_ms ?? d.total_ms}ms · total ${d.total_ms}ms` + (d.usd ? ` · $${d.usd.toFixed(5)}` : "");
+        aiDiv.appendChild(meta);
+        $("lat").textContent = `llm: ${d.first_sentence_ms ?? d.total_ms}ms to speakable`;
+        if (d.total_usd != null) $("cost").textContent = `session spend $${d.total_usd}`;
+        if ($("coachck").checked) fetchCoach(aiDiv);
+      } else if (ev === "error") {
+        aiDiv.textContent += " [" + d.message + "]";
+      }
+    }
+  }
+  thinking = false;
+  if (!speaking) setState(micOn ? "listening" : "idle");
+}
+
+// coach whisper: text-only, never spoken, arrives async under the persona's turn
+async function fetchCoach(aiDiv) {
+  try {
+    const r = await fetch("/api/coach", { method: "POST" });
+    if (!r.ok) return;
+    const d = await r.json();
+    if (!d.text) return;
+    const c = document.createElement("div");
+    c.className = "coach";
+    c.textContent = "coach: " + d.text;
+    aiDiv.appendChild(c);
+  } catch {}
+}
+
+// ---------- STT ----------
+let vuStream = null, sawResult = false, watchdog = null;
+
+async function startVu() {
+  try {
+    vuStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    const ctx = new AudioContext();
+    const src = ctx.createMediaStreamSource(vuStream);
+    const an = ctx.createAnalyser();
+    an.fftSize = 512;
+    src.connect(an);
+    const data = new Uint8Array(an.frequencyBinCount);
+    (function loop() {
+      if (!micOn) { $("vu").querySelector("i").style.width = "0%"; return; }
+      an.getByteTimeDomainData(data);
+      let peak = 0;
+      for (const v of data) peak = Math.max(peak, Math.abs(v - 128));
+      $("vu").querySelector("i").style.width = Math.min(100, peak * 1.6) + "%";
+      requestAnimationFrame(loop);
+    })();
+  } catch (e) {
+    heard("mic access failed: " + e.message, true);
+  }
+}
+
+function heard(text, isErr = false) {
+  $("heard").textContent = text;
+  $("heard").className = isErr ? "err" : "";
+}
+
+function startMic() {
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SR) { heard("No Web Speech API in this browser. Use Chrome, or type turns below.", true); return; }
+  rec = new SR();
+  rec.continuous = true;
+  rec.interimResults = true;
+  rec.lang = "en-US";
+  rec.onresult = (e) => {
+    sawResult = true;
+    const r = e.results[e.results.length - 1];
+    const text = r[0].transcript.trim();
+    heard((r.isFinal ? "heard: " : "hearing: ") + text);
+    // barge-in: user starts talking over the assistant
+    if ((speaking || speakQueue.length) && text.split(/\s+/).length >= 2) bargeIn();
+    if (r.isFinal && text.length > 1) sendTurn(text);
+  };
+  rec.onend = () => { if (micOn) try { rec.start(); } catch {} };
+  rec.onerror = (e) => {
+    if (e.error === "not-allowed") { micOn = false; setState("mic blocked"); heard("mic permission denied", true); }
+    else if (e.error === "network") heard("speech recognition backend unreachable (error: network). Brave and some browsers block it — use Chrome, or type below.", true);
+    else if (e.error !== "no-speech") heard("speech recognition error: " + e.error, true);
+  };
+  rec.start();
+  micOn = true;
+  sawResult = false;
+  $("micbtn").classList.add("on");
+  setState("listening");
+  startVu();
+  heard("say something — you should see 'hearing: …' here as you speak");
+  clearTimeout(watchdog);
+  watchdog = setTimeout(() => {
+    if (micOn && !sawResult) heard("mic level moves but no words recognized after 12s — this browser's speech recognition isn't working (Brave blocks it). Use Chrome, or type turns below.", true);
+  }, 12000);
+}
+function stopMic() {
+  micOn = false;
+  $("micbtn").classList.remove("on");
+  if (rec) try { rec.stop(); } catch {}
+  if (vuStream) { vuStream.getTracks().forEach((t) => t.stop()); vuStream = null; }
+  clearTimeout(watchdog);
+  heard("");
+  setState("idle");
+}
+$("micbtn").onclick = () => (micOn ? stopMic() : startMic());
+
+// ---------- session ----------
+$("start").onclick = async () => {
+  const id = $("scenario").value;
+  $("start").disabled = true;
+  const r = await (await fetch("/api/session", { method: "POST", headers: {"content-type":"application/json"}, body: JSON.stringify({ scenario: id }) })).json();
+  $("start").disabled = false;
+  if (r.error) return alert(r.error);
+  sessionOn = true;
+  $("debrief").disabled = false;
+  $("log").innerHTML = "";
+  ttsCache.clear();
+  if (r.opening) {
+    addTurn("ai", r.opening);
+    speakQueue.push({ text: r.opening, firstOfTurn: false });
+    aborted = false;
+    speakLoop();
+  }
+  if (!micOn) startMic();
+};
+$("debrief").onclick = () => sendTurn("End session. Give me the debrief.");
+$("typed").addEventListener("keydown", (e) => {
+  if (e.key === "Enter" && $("typed").value.trim()) {
+    bargeIn(); aborted = false;
+    sendTurn($("typed").value.trim());
+    $("typed").value = "";
+  }
+});
+speechSynthesis.onvoiceschanged = () => {};
+init();
+</script>
+</body>
+</html>

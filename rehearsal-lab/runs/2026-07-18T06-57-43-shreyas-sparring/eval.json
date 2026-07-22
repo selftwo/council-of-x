@@ -1,0 +1,15 @@
+{
+  "scores": {
+    "persona_fidelity": 2,
+    "challenge": 3,
+    "groundedness": 4,
+    "conversational_memory": 4,
+    "space": 3,
+    "practicer_diagnosis": 4
+  },
+  "verdict": "Needs prompt work: strong grounded reasoning and contingent reactions, but repeated em dash leaks, a double question, and grading openers break the prompt's own hard rules.",
+  "run": "2026-07-18T06-57-43-shreyas-sparring",
+  "scenario": "shreyas-sparring",
+  "prompt_version": "48f5aaa5",
+  "judged_at": "2026-07-18T06:59:45.392Z"
+}

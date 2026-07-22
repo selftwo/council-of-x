@@ -1,0 +1,102 @@
+<!doctype html><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1">
+<title>voice stack · rehearsal lab</title>
+<style>
+:root{--fg:#16181d;--bg:#fff;--dim:#7a7f8a;--line:#e6e8ec;--soft:#f5f6f8;--ok:#0f8a3d;--okbg:#e9f7ee;--bad:#c8321f;--badbg:#fbeeec;--warn:#a86400;--warnbg:#fdf4e3;--blue:#1d5fd6;--bluebg:#eaf1fd;--purple:#6d3fc4;--purplebg:#f2ecfb;--teal:#0b7f74;--tealbg:#e6f5f3}
+body.dark{--fg:#e8eaee;--bg:#131417;--dim:#8b8f99;--line:#2a2d33;--soft:#1c1e23;--ok:#57cf82;--okbg:#15291c;--bad:#ff7b6b;--badbg:#311b17;--warn:#e0a63f;--warnbg:#2d2413;--blue:#6d9ff2;--bluebg:#17233a;--purple:#af8df0;--purplebg:#241b36;--teal:#4ecdc0;--tealbg:#12302d}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.6 "SF Mono",ui-monospace,Menlo,monospace}
+main{max-width:920px;margin:0 auto;padding:40px 24px 80px}
+h1{font-size:18px;margin:0 0 4px}
+h2{font-size:12px;font-weight:600;letter-spacing:.08em;margin:44px 0 14px;padding-left:10px;border-left:3px solid var(--accent,var(--blue))}
+h2.g{--accent:var(--ok)}h2.r{--accent:var(--bad)}h2.p{--accent:var(--purple)}h2.b{--accent:var(--blue)}h2.t{--accent:var(--teal)}h2.w{--accent:var(--warn)}
+p{margin:10px 0}.sub{color:var(--dim);font-size:13px}a{color:var(--blue)}
+.flow{display:flex;gap:8px;align-items:stretch;flex-wrap:wrap;margin:16px 0}
+.box{border:1.5px solid var(--c,var(--line));background:var(--cb,var(--soft));padding:9px 12px;flex:1;min-width:118px}
+.box b{display:block;font-size:12.5px;color:var(--c,var(--fg))}.box span{font-size:11px;color:var(--dim)}
+.box.blue{--c:var(--blue);--cb:var(--bluebg)}.box.purple{--c:var(--purple);--cb:var(--purplebg)}
+.box.green{--c:var(--ok);--cb:var(--okbg)}.box.teal{--c:var(--teal);--cb:var(--tealbg)}.box.amber{--c:var(--warn);--cb:var(--warnbg)}
+.arr{align-self:center;color:var(--dim)}
+.bars{margin:14px 0}
+.bar{display:grid;grid-template-columns:220px 1fr 90px;gap:10px;align-items:center;padding:6px 0;font-size:12.5px}
+.bar .track{background:var(--soft);border:1px solid var(--line);height:16px;position:relative}
+.bar .fill{position:absolute;inset:0 auto 0 0;background:var(--c)}
+.bar.green{--c:var(--ok)}.bar.blue{--c:var(--blue)}.bar.purple{--c:var(--purple)}.bar.amber{--c:var(--warn)}.bar.red{--c:var(--bad)}
+.bar .amt{text-align:right;color:var(--dim)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:640px){.two{grid-template-columns:1fr}}
+.card{border:1px solid var(--line);border-top:3px solid var(--c,var(--blue));padding:12px 14px}
+.card.green{--c:var(--ok)}.card.red{--c:var(--bad)}.card.amber{--c:var(--warn)}.card.purple{--c:var(--purple)}.card.blue{--c:var(--blue)}.card.teal{--c:var(--teal)}
+.card b{font-size:13px}.card p{font-size:12.5px;color:var(--dim);margin:6px 0 0}
+.half{color:var(--warn);font-weight:700}.tick{color:var(--ok);font-weight:700}.cross{color:var(--bad);font-weight:700}
+table{border-collapse:collapse;width:100%;font-size:12.5px;margin:10px 0}
+th{text-align:left;font-weight:600;color:var(--dim);font-size:11px;padding:4px 10px 8px 0;border-bottom:1px solid var(--line)}
+td{padding:7px 10px 7px 0;border-bottom:1px solid var(--line);vertical-align:top}
+.pill{display:inline-block;font-size:10px;padding:1px 8px;border-radius:9px;border:1px solid var(--c,var(--line));color:var(--c,var(--dim));background:var(--cb,transparent)}
+.pill.green{--c:var(--ok);--cb:var(--okbg)}.pill.amber{--c:var(--warn);--cb:var(--warnbg)}.pill.red{--c:var(--bad);--cb:var(--badbg)}.pill.blue{--c:var(--blue);--cb:var(--bluebg)}.pill.purple{--c:var(--purple);--cb:var(--purplebg)}
+.story{border-left:3px solid var(--warn);background:var(--warnbg);padding:10px 14px;margin:14px 0;font-size:13px}
+ul{margin:8px 0;padding-left:20px}li{margin:5px 0}
+footer{margin-top:70px;color:var(--dim);font-size:11px;border-top:1px solid var(--line);padding-top:12px;display:flex;justify-content:space-between}
+kbd{border:1px solid var(--line);padding:0 4px;border-radius:2px}
+</style>
+<main>
+<h1>the voice stack: pipecat, prices, and the plan</h1>
+<p class=sub>researched 2026-07-18 · three independent workers: sonnet × pipecat docs, sonnet × pricing sweep, codex (gpt-5.6) second opinion · full text: <a href="../references/voice/stt-tts-cost-report.md">cost report</a> · <a href="../references/voice/pipecat-notes.md">pipecat notes</a></p>
+
+<h2 class=b>the pipeline, drawn</h2>
+<div class=flow>
+<div class="box blue"><b>your voice</b><span>~70% of the 2 minutes. mic → browser → local WebRTC</span></div>
+<div class=arr>→</div>
+<div class="box teal"><b>STT · Deepgram</b><span>speech to text, streaming, ~$0.0048/min</span></div>
+<div class=arr>→</div>
+<div class="box purple"><b>brain · DeepSeek</b><span>same calibrated prompts, ~$0.0003/session</span></div>
+<div class=arr>→</div>
+<div class="box green"><b>TTS · Cartesia</b><span>persona's voice, ~$0.038/1k chars</span></div>
+<div class=arr>→</div>
+<div class="box amber"><b>transcript.jsonl</b><span>same schema → checks.mjs + judges run unchanged</span></div>
+</div>
+<p>Pipecat is the open-source Python framework that runs this loop in real time: it listens while you talk, detects when your turn actually ends (a small local model judges whether the sentence is <em>finished</em>, not just whether you paused — important for how you speak), lets you interrupt the persona mid-reply, and logs every turn with timing. It ships a DeepSeek service class, so the calibrated brain drops in as-is.</p>
+
+<h2 class=g>the eval loop survives voice untouched</h2>
+<div class=two>
+<div class="card green"><b>what stays exactly the same</b><p>runs/&lt;id&gt;/ folders, prompt hash versioning, transcript.jsonl schema, checks.mjs, both judges, report.html, this canvas. A voice run is just another run folder. Node stays the source of truth.</p></div>
+<div class="card blue"><b>what gets added</b><p>one thin Python file (voice/bot.py) that runs the Pipecat pipeline and writes our transcript format, plus new per-turn fields only voice can have: was the bot interrupted, gap between you stopping and it speaking, per-service latency, audio recordings of both sides.</p></div>
+</div>
+<p class=sub>the one integration risk to verify at build time: Pipecat's DeepSeek service doesn't document the thinking-disabled flag our harness needs (v4 flash reasoning drains max_tokens without it). if it can't pass through, we subclass the service — small, known work.</p>
+
+<h2 class=w>what a 2-minute session costs (you talk 70%, persona 30%)</h2>
+<div class=bars>
+<div class="bar green"><span>AssemblyAI + Inworld</span><div class=track><div class=fill style="width:3.3%"></div></div><span class=amt>$0.030</span></div>
+<div class="bar blue"><span>Deepgram + Cartesia ← default</span><div class=track><div class=fill style="width:5.4%"></div></div><span class=amt>$0.049</span></div>
+<div class="bar purple"><span>Deepgram + ElevenLabs Flash</span><div class=track><div class=fill style="width:9%"></div></div><span class=amt>$0.06–0.10</span></div>
+<div class="bar amber"><span>Deepgram + Hume Octave</span><div class=track><div class=fill style="width:12%"></div></div><span class=amt>$0.06–0.16</span></div>
+<div class="bar red"><span>OpenAI Realtime speech-to-speech</span><div class=track><div class=fill style="width:70%"></div></div><span class=amt>$0.36–0.92</span></div>
+</div>
+<p>Read the bars this way: even daily practice costs a coffee <em>per month</em>. DeepSeek is a rounding error ($0.0003, measured from our own ledger, ~90% cache hits). STT covers all 2 minutes but is cheap per minute; TTS speaks only ~1,000 characters but is the priciest line. So the stack choice is about how the voice <b>feels</b>, not what it costs. Free credits ($200 Deepgram, $50 AssemblyAI) make the STT side effectively free for the whole calibration era.</p>
+
+<h2 class=r>speech-to-speech: checked, ruled out</h2>
+<p>The vault flagged OpenAI Realtime (one model listens, thinks, and speaks) as the alternative to compare before committing to Pipecat. Verdict from both independent workers: <span class=cross>✗ ruled out</span>. The decisive reason: the brain must stay DeepSeek, because the persona prompts are calibrated on it; in Realtime, OpenAI's own model runs the conversation and DeepSeek could only be a tool it consults. It also happens to be worse on voice quality (ranks below dedicated TTS), slower to first audio (0.8–2.3s vs 0.1–0.25s), and 7–15× the cost. Revisit only if the DeepSeek requirement ever drops.</p>
+
+<h2 class=p>the one open call: whose voice ◐</h2>
+<table>
+<tr><th>candidate</th><th>why it's in the running</th><th>$/1k chars</th><th>backed by</th></tr>
+<tr><td><b>Cartesia Sonic 3.5</b> <span class="pill blue">default</span></td><td>Pipecat's recommended pair with Deepgram, near-top rankings, ~90ms latency, expressive character voices (Kyle, Cory)</td><td>$0.038</td><td>codex pick + pipecat docs</td></tr>
+<tr><td><b>Inworld TTS-2</b></td><td>most consistently top-ranked for sounding human on both public arenas, and the cheapest of the set</td><td>$0.025</td><td>pricing agent's #1 (codex didn't evaluate it)</td></tr>
+<tr><td><b>Hume Octave 2</b></td><td>the only one with direct emotion steering ("say it firmly / skeptically") — made for tough-persona work</td><td>$0.05–0.15</td><td>pricing agent's wildcard; arenas disagree on it</td></tr>
+</table>
+<div class=story><b>how you decide (codex's method, kept):</b> a fixed ~20-line audition script of pushback lines — interruption, skepticism, corrective feedback, calm authority, one sharp challenge — rendered by all three, listened to on your phone and headphones. Voice choice is more voice-specific than vendor-specific; your ear is the eval. The harness swaps the winner in with one line.</div>
+
+<h2 class=t>what happens next</h2>
+<ul>
+<li>keep calibrating scenarios in text (voice waits for calibrated brains, per the phase order)</li>
+<li>when you say go: <code>uv</code> + <code>voice/bot.py</code> (Deepgram → DeepSeek → Cartesia, local WebRTC, no cloud account), transcript adapter into the existing loop, verify the thinking-disabled pass-through</li>
+<li>the audition script for the three voices gets written from real persona lines in the calibrated scenarios</li>
+<li>keys needed then: Deepgram + Cartesia (or the audition winner) — same .env handling rules as always</li>
+</ul>
+
+<h2 class=b>unverified numbers, honestly flagged</h2>
+<p class=sub>Cartesia's STT price is unpublished; two official ElevenLabs pages disagree by 2× on Flash pricing; arena rankings shift weekly (directional only); OpenAI Realtime real-world $/min comes from third-party trackers. None of these change the conclusion; all are flagged in the <a href="../references/voice/stt-tts-cost-report.md">full report</a>.</p>
+
+<footer><span><a href="index.html">← canvas</a> · <kbd>m</kbd> light/dark</span><span>rehearsal lab</span></footer>
+</main>
+<script>
+if(matchMedia("(prefers-color-scheme:dark)").matches)document.body.classList.add("dark");
+addEventListener("keydown",e=>{if(e.key==="m")document.body.classList.toggle("dark")});
+</script>

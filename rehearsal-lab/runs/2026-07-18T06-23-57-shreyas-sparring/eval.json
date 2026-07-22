@@ -1,0 +1,16 @@
+{
+  "scores": {
+    "persona_fidelity": 2,
+    "challenge": 4,
+    "groundedness": 4,
+    "conversational_memory": 4,
+    "space": 3,
+    "practicer_diagnosis": 3
+  },
+  "verdict": "Needs prompt work: strong challenge and grounding, but em dashes and asterisks leak into spoken text, questions stack, and the debrief ignores pacing.",
+  "run": "2026-07-18T06-23-57-shreyas-sparring",
+  "scenario": "shreyas-sparring",
+  "prompt_version": "88ada955",
+  "judged_at": "2026-07-18T06:35:00Z",
+  "note": "backfilled; scenario.md is the reconstructed pre-fix prompt"
+}

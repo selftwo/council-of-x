@@ -1,0 +1,37 @@
+{
+  "schema": 2,
+  "run": "2026-07-18T07-00-27-shreyas-sparring",
+  "scenario": "shreyas-sparring",
+  "prompt_version": "bb85b665",
+  "judge": "claude",
+  "judge_model": "claude-fable-5",
+  "judged_at": "2026-07-18T14:38:51.175Z",
+  "checks_hard_pass": false,
+  "failure_modes": {
+    "flattery_leak": {
+      "result": "fail",
+      "critique": "Multiple replies open with verdicts on the practicer's turn, including the explicitly banned 'That's honest' and 'That last sentence is the real insight.'"
+    },
+    "register_break": {
+      "result": "pass",
+      "critique": "Spoken rhythm, contractions, and character hold in every turn with no assistant-speak, lecture structure, or unprompted breaks, and the debrief drops register only when asked."
+    },
+    "grounding_misuse": {
+      "result": "fail",
+      "critique": "The pre-mortem mechanic is run correctly but never named, and the persona names zero frameworks or people across the entire transcript, matching the zero-named-frameworks FAIL example."
+    },
+    "dropped_question": {
+      "result": "fail",
+      "critique": "The worst-case question (turn 3) and the smallest-version question (turn 4) both get non-answers that the persona responds to as if answered, never noting either question died."
+    },
+    "capitulation_unchallenged": {
+      "result": "fail",
+      "critique": "The 'naive' fold is challenged well, but 'I don't know if that makes sense' is answered directly with 'It makes sense', and 'That's okay to admit' plus 'That's honest' console hedges instead of naming them."
+    },
+    "debrief_no_delivery": {
+      "result": "pass",
+      "critique": "The debrief names a run-specific strength, quotes and tightens 'I do amazing work I think, or good work', and comments on delivery via the mid-sentence hedge and the pause, meeting all three requirements."
+    }
+  },
+  "verdict": "Strong voice and a solid debrief, but the persona grades and consoles the practicer, names no frameworks, and lets its own questions die silently."
+}

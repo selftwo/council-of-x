@@ -1,0 +1,127 @@
+<!doctype html><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1">
+<title>shreyas-sparring @ a4b113a8 · rehearsal lab</title>
+<style>
+:root{--fg:#111;--bg:#fff;--dim:#888;--line:#e4e4e4;--soft:#f6f6f6;--up:#0a7d33;--down:#b3261e}
+@media(prefers-color-scheme:dark){:root{--fg:#e8e8e8;--bg:#111;--dim:#8a8a8a;--line:#2a2a2a;--soft:#1a1a1a;--up:#5dd48a;--down:#ff7b72}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.55 "SF Mono",ui-monospace,Menlo,monospace}
+main{max-width:860px;margin:0 auto;padding:40px 24px 80px}
+h1{font-size:18px;margin:0 0 4px}h2{font-size:12px;font-weight:400;color:var(--dim);letter-spacing:.08em;margin:44px 0 14px;text-transform:lowercase}
+.meta{color:var(--dim);font-size:12px}.meta b{color:var(--fg);font-weight:600}
+a{color:inherit}
+.scores{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.score{border:1px solid var(--line);padding:10px 12px}.score .num{font-size:20px;font-weight:700}.score small{color:var(--dim);font-weight:400}
+.score .lbl{font-size:11px;color:var(--dim)}.score .bar{height:3px;background:var(--soft);margin-top:8px}.score .bar i{display:block;height:100%;background:var(--fg)}
+.up{color:var(--up);font-size:12px}.down{color:var(--down);font-size:12px}.dim{color:var(--dim)}
+.turn{margin:0 0 18px;padding-left:14px;border-left:2px solid var(--line)}
+.turn.user{border-left-color:var(--fg)}
+.who{font-size:11px;color:var(--dim);letter-spacing:.06em}.turn.user .who{color:var(--fg);font-weight:700}
+.txt{white-space:pre-wrap;margin:2px 0 4px}.chips{font-size:11px;color:var(--dim)}
+pre{background:var(--soft);border:1px solid var(--line);padding:14px;overflow:auto;font-size:12px;white-space:pre-wrap}
+.diff ins{background:none;color:var(--up);text-decoration:none}.diff del{background:none;color:var(--down);text-decoration:none}.diff .hunk{color:var(--dim)}
+.verdict{border:1px solid var(--fg);padding:12px 14px;font-weight:600}
+footer{margin-top:70px;color:var(--dim);font-size:11px;border-top:1px solid var(--line);padding-top:12px;display:flex;justify-content:space-between}
+</style>
+<main>
+<h1>Product sparring, Shreyas register</h1>
+<p class=meta>run <b>2026-07-18T06-55-23-shreyas-sparring</b> · scenario <b>shreyas-sparring</b> @ prompt <b>a4b113a8</b> · brain <b>deepseek-v4-flash</b> · scripted (shreyas-calibration-2.txt)<br>
+6 model turns · avg first token <b>543ms</b> · total <b>$0.00030</b></p>
+
+<h2>what happened</h2>
+<p class=verdict>Needs prompt work: strong sparring instincts, but the persona repeatedly outputs the banned em dash and leaks flattery, and the debrief skips the required delivery comment.</p>
+<div class=scores><div class=score><div class=num>2<small>/5</small> </div><div class=lbl>persona fidelity</div><div class=bar><i style="width:40%"></i></div></div><div class=score><div class=num>3<small>/5</small> </div><div class=lbl>challenge</div><div class=bar><i style="width:60%"></i></div></div><div class=score><div class=num>3<small>/5</small> </div><div class=lbl>groundedness</div><div class=bar><i style="width:60%"></i></div></div><div class=score><div class=num>4<small>/5</small> </div><div class=lbl>conversational memory</div><div class=bar><i style="width:80%"></i></div></div><div class=score><div class=num>4<small>/5</small> </div><div class=lbl>space</div><div class=bar><i style="width:80%"></i></div></div><div class=score><div class=num>4<small>/5</small> </div><div class=lbl>practicer diagnosis</div><div class=bar><i style="width:80%"></i></div></div></div>
+
+<h2>what changed since last run</h2>
+<p class=dim>prompt unchanged since <a href="../2026-07-18T06-54-24-shreyas-sparring/report.html">2026-07-18T06-54-24-shreyas-sparring</a>.</p>
+
+<h2>the stream</h2>
+<div class="turn assistant"><div class=who>persona</div><div class=txt>Good to talk. What's the situation you want to think through? Give me the real version, not the tidy version.</div><span class=chips>scripted opening</span></div>
+<div class="turn user"><div class=who>ben</div><div class=txt>Okay so this is a piece I have been thinking about, essentially reflecting on, like, I build all these tools for myself, right, the agents, the pipelines, the whole personal OS sort of thing, and I keep not publishing any of it. And there is this discourse, you know, build in public and all that, and I am doing amazing work I think, or good work, but it stays on my machine. So the question is something around, should I be packaging this as a portfolio, or is it more like, the work itself is the point, right, sort of. I don't know if that makes sense.</div></div>
+<div class="turn assistant"><div class=who>persona</div><div class=txt>It makes sense. Let me sit with that for a second.
+
+You said "should I be packaging this as a portfolio." That's an execution question. But I think the real question is deeper. You're asking whether the work has value if nobody sees it.
+
+So here's my one question. If you published everything tomorrow and got zero reaction, would you still do the work?</div><span class=chips>first token 685ms · 1594ms · 954in/77out (896 cached) · $0.000032</span></div>
+<div class="turn user"><div class=who>ben</div><div class=txt>Yeah so the real version, okay. I want a better job basically, or better opportunities, like the AI PM sort of roles, or even founding engineer adjacent things. And my resume says PM things but the interesting stuff is all this building. So the portfolio is, it's coming from the question that, how does anyone even see this. But then every time I sit to publish I start perfecting, cleaning the repo, rewriting the readme, and then weeks pass and I ship nothing. Who am I even perfecting for, nobody is reading it yet.</div></div>
+<div class="turn assistant"><div class=who>persona</div><div class=txt>You just surfaced the real problem yourself. You said "who am I even perfecting for, nobody is reading it yet." That's a paper tiger you created — the fear that someone will judge your unfinished work, when in reality nobody is looking at all.
+
+Let me run a quick pre-mortem on this. Imagine it's six months from now and you still haven't published anything. What specifically went wrong? Be honest.</div><span class=chips>first token 543ms · 1494ms · 1149in/86out (1024 cached) · $0.000044</span></div>
+<div class="turn user"><div class=who>ben</div><div class=txt>The evidence, hmm. I mean, honestly the confidence is more like a feeling. A couple of founders I talked to got very interested when I showed the actual tools, like screen-shared, live. Nobody has ever asked me for a repo link. So maybe that is the evidence pointing the other way actually, that the demo is the asset, not the repo. But a public repo feels more, I don't know, legitimate, like proof it exists.</div></div>
+<div class="turn assistant"><div class=who>persona</div><div class=txt>You're trusting a feeling over actual data. The data says a live demo gets interest. The feeling says a tidy repo makes you legitimate. That's the wrong source of confidence.
+
+Annie Duke talks about this — we overweight what feels comfortable and underweight what's actually informative. A clean repo tells people you can clean a repo. A live demo tells people you can build.
+
+So here's my question. What's the smallest possible version of a demo that would get you hired, and what would it take to record it this weekend?</div><span class=chips>first token 510ms · 2113ms · 1333in/108out (1152 cached) · $0.000059</span></div>
+<div class="turn user"><div class=who>ben</div><div class=txt>My highest leverage hour right now is probably the practice tool itself, making it actually work for me daily. Publishing is the overhead dressed up as leverage. That is uncomfortable to say but I think it is true.</div></div>
+<div class="turn assistant"><div class=who>persona</div><div class=txt>That's a crisp insight. You just named it yourself — publishing was overhead dressed as leverage. Most people never get that far.
+
+But here's what I want to push on. You said your highest leverage hour is making the tool work for you daily. That sounds like you're optimizing the tool. I want to know if you're optimizing the outcome.
+
+What would happen if you spent that same hour not building, but showing the tool to one person who could hire you or introduce you to someone who could?</div><span class=chips>first token 473ms · 1732ms · 1487in/102out (1408 cached) · $0.000044</span></div>
+<div class="turn user"><div class=who>ben</div><div class=txt>But then again, everyone senior I talk to has a blog or a repo trail, and hiring managers do google you, so maybe I am wrong and the polish does matter, maybe I should just spend the two weeks and do the proper public repo with the docs and everything. You probably think the demo thing is naive.</div></div>
+<div class="turn assistant"><div class=who>persona</div><div class=txt>I don't think it's naive. I think you just moved from one paper tiger to another.
+
+You're asking me which option is right. But I think the question underneath is harder. You're asking: is it worth investing in polish before you know if the thing has real demand.
+
+So let me ask you this. If you spent two weeks polishing the repo and got zero interviews from it, would you regret the two weeks, or would you say it was worth doing anyway?</div><span class=chips>first token 542ms · 1816ms · 1657in/97out (1536 cached) · $0.000048</span></div>
+<div class="turn user"><div class=who>ben</div><div class=txt>Okay, end session. Debrief.</div></div>
+<div class="turn assistant"><div class=who>persona</div><div class=txt>Your thinking was crispest when you named the paper tiger yourself — that nobody is reading yet, so perfecting is overhead. You also got to a real insight distinguishing leverage from overhead, then backed away from it because the polished repo felt safer.
+
+Where you stayed vague: you kept framing this as a binary choice between polish and demos, when the real question is what signal actually moves a hiring decision. You buried your own data — the live demos got interest, the repos never did — and reached for what feels legitimate instead.
+
+One sentence I'd tighten: "Publishing is the overhead dressed up as leverage" is good. I'd make it more precise: "Polishing for an audience that doesn't exist yet is overhead, not leverage."
+
+For next time: before you build anything else, record one five-minute demo of your tool solving a real problem, send it to one person who could hire you, and notice how you feel doing that versus cleaning the repo. That's your signal.</div><span class=chips>first token 506ms · 3037ms · 1766in/201out (1664 cached) · $0.000075</span></div>
+
+<h2>judge notes</h2>
+<pre># Eval: shreyas-sparring @ a4b113a8 (deepseek-v4-flash)
+
+Run: 2026-07-18T06-55-23-shreyas-sparring · judged 2026-07-18T06:57:09.391Z
+
+# Persona eval: shreyas-sparring, run a4b113a8
+
+| Dimension | Score | Justification |
+|---|---|---|
+| Persona fidelity | 2 | Register is right, but the persona outputs the banned em dash character four times, including twice in debrief mode where the prompt explicitly repeats the ban. |
+| Challenge | 3 | Pushes well and holds positions, but leaks flattery ("That's a crisp insight... Most people never get that far"), which the rubric treats as disqualifying for a high score. |
+| Groundedness | 3 | Pre-mortem and paper tiger are used with correct mechanics, but the Annie Duke attribution is vague and generic, and the pre-mortem is launched then silently abandoned. |
+| Conversational memory | 4 | Quotes the practicer accurately and builds callbacks, but lets its own unanswered question drop without noticing. |
+| Space | 4 | Short turns, one question mark each, tolerates thinking. One question is double-barreled. |
+| Practicer diagnosis | 4 | Debrief is specific, quotes real sentences, tightens phrasing, sets an exercise. It never comments on pacing or rambling, which the rubric requires. |
+
+## Evidence
+
+**Persona fidelity (2).** The voice itself is strong: "Let me sit with that for a second" and "So here's my one question" are in register, contractions throughout, no markdown, no assistant leaks, all turns under 100 words. But the scenario says "Never output the characters — or –" and "This applies in debrief mode too," and the persona violates it four times: "That's a paper tiger you created — the fear that someone will judge your unfinished work," "Annie Duke talks about this — we overweight what feels comfortable," and twice in the debrief ("the paper tiger yourself — that nobody is reading yet," "your own data — the live demos got interest"). A hard formatting rule broken repeatedly, including in the mode where it was restated, caps this at 2.
+
+**Challenge (3).** The good: "I don't think it's naive. I think you just moved from one paper tiger to another" holds ground and reframes rather than validating. "You're trusting a feeling over actual data" names the fuzziness plainly. The bad: "That's a crisp insight. You just named it yourself... Most people never get that far" is flattery, and the rubric says flattery must be absent. The warmth is earned by content rather than turn count, so this is a 3, not lower.
+
+**Groundedness (3).** Pre-mortem mechanics are correct: "Imagine it's six months from now and you still haven't published anything. What specifically went wrong?" is the actual technique, not a name-drop. Paper tiger is applied correctly both times (a feared threat that is not real). But "Annie Duke talks about this — we overweight what feels comfortable and underweight what's actually informative" attributes a generic claim to her with no identifiable concept; the prompt's own example is "Annie Duke calls this resulting," and this is not that. It is loose attribution rather than a wrong framework, so 3 rather than the 2 cap.
+
+**Conversational memory (4).** Strong contingent quoting: "You said 'who am I even perfecting for, nobody is reading it yet'" and the debrief's "'Publishing is the overhead dressed up as leverage' is good" are near-exact. "You just moved from one paper tiger to another" builds on its own earlier frame instead of repeating it. The gap: the practicer never answered the pre-mortem question (the next turn talks about evidence instead), and the persona rolls on as if it had, never returning to it. A sharper sparring partner notices a dodged question.
+
+**Space (4).** Every turn has exactly one question mark, replies stay short, and "Let me sit with that for a second" models the pause. The one flaw: "What's the smallest possible version of a demo that would get you hired, and what would it take to record it this weekend?" is two questions wearing one question mark.
+
+**Practicer diagnosis (4).** The debrief names transcript-specific moments ("crispest when you named the paper tiger yourself"), maps them to the leverage versus overhead principle, quotes a real sentence and tightens it at the phrasing level, and ends with a concrete, doable exercise. What is missing is the required comment on how they talked: the practicer rambled and hedged visibly ("right, sort of," "I don't know if that makes sense," the reversal in the polish turn), and the debrief says nothing about delivery, pacing, or rambling. "You buried your own data" is about content, not speech.
+
+## Verdict
+
+**Needs prompt work.** The thinking and challenge are genuinely good, but the persona repeatedly emits the banned em dash and lets flattery leak, so the two most mechanical rules in the prompt are the ones failing.
+
+## Top 3 prompt fixes
+
+1. **Harden the em dash ban with a self-check step**, since restating the rule twice did not work on this model. Change "Never output the characters — or – or *." to: "Never output the characters — or – or *. Before you finish any reply, reread it. If it contains — or –, rewrite that sentence with a period or a comma. A reply containing those characters is a failed reply, in sparring and in debrief."
+
+2. **Ban praise openers explicitly.** Add under "Do not be sycophantic": "Never open a reply by grading what the user said. No 'that's a crisp insight', no 'great point', no 'most people never get that far'. If the user said something true, build on it or push past it. Agreement is shown by moving forward, not by complimenting."
+
+3. **Handle dodged questions.** Add to conversation rules: "If the user's reply does not answer the question you asked, notice it out loud. Either say you're letting it go, or ask them to come back to it. Never continue as if an unanswered question was answered." Secondary, same edit pass: in debrief mode, change "say one thing about how they talked" to "say one thing about how they talked, and make it about delivery: quote a moment where they rambled, hedged, or buried the point mid-sentence."
+
+## One thing to keep
+
+The exact-quote callback habit. Lines like "You said 'who am I even perfecting for, nobody is reading it yet'" and the debrief's tightening of "publishing is the overhead dressed up as leverage" are the persona's strongest behavior: they make the challenge feel earned from this conversation rather than generic. Whatever edits land, do not dilute the instruction pattern that produces verbatim quoting of the practicer's own words.
+
+```json
+{"scores":{"persona_fidelity":2,"challenge":3,"groundedness":3,"conversational_memory":4,"space":4,"practicer_diagnosis":4},"verdict":"Needs prompt work: strong sparring instincts, but the persona repeatedly outputs the banned em dash and leaks flattery, and the debrief skips the required delivery comment."}
+```
+</pre>
+
+<footer><span><a href="../../canvas/index.html">← canvas</a> · <a href="scenario.md">prompt snapshot</a> · <a href="transcript.jsonl">raw jsonl</a></span><span>rehearsal lab · 2026-07-18</span></footer>
+</main>

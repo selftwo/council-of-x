@@ -1,0 +1,108 @@
+<!doctype html><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1">
+<title>rehearsal lab · canvas</title>
+<style>
+:root{--fg:#16181d;--bg:#fff;--dim:#7a7f8a;--line:#e6e8ec;--soft:#f5f6f8;--ok:#0f8a3d;--okbg:#e9f7ee;--bad:#c8321f;--badbg:#fbeeec;--warn:#a86400;--warnbg:#fdf4e3;--blue:#1d5fd6;--bluebg:#eaf1fd;--purple:#6d3fc4;--purplebg:#f2ecfb;--teal:#0b7f74;--tealbg:#e6f5f3}
+body.dark{--fg:#e8eaee;--bg:#131417;--dim:#8b8f99;--line:#2a2d33;--soft:#1c1e23;--ok:#57cf82;--okbg:#15291c;--bad:#ff7b6b;--badbg:#311b17;--warn:#e0a63f;--warnbg:#2d2413;--blue:#6d9ff2;--bluebg:#17233a;--purple:#af8df0;--purplebg:#241b36;--teal:#4ecdc0;--tealbg:#12302d}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.55 "SF Mono",ui-monospace,Menlo,monospace;transition:background .15s}
+main{max-width:960px;margin:0 auto;padding:40px 24px 80px}
+h1{font-size:18px;margin:0}
+h2{font-size:12px;font-weight:600;letter-spacing:.08em;margin:44px 0 14px;padding-left:10px;border-left:3px solid var(--accent,var(--blue))}
+h2.g{--accent:var(--ok)}h2.p{--accent:var(--purple)}h2.b{--accent:var(--blue)}h2.t{--accent:var(--teal)}
+a{color:var(--blue)}.dim{color:var(--dim)}.ver{color:var(--purple);font-size:11px}
+.sub{color:var(--dim);font-size:13px;margin:4px 0 0}
+ul.now{list-style:none;padding:0;margin:0}ul.now li{padding:5px 0 5px 18px;position:relative}
+ul.now li:before{content:"▪";position:absolute;left:0;color:var(--blue)}
+ul.now li:nth-child(2n):before{color:var(--purple)}ul.now li:nth-child(3n):before{color:var(--teal)}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th{text-align:left;font-weight:400;color:var(--dim);font-size:10px;padding:4px 8px 8px 0;border-bottom:1px solid var(--line)}
+td{padding:7px 8px 7px 0;border-bottom:1px solid var(--line);vertical-align:top}
+td.ok{color:var(--ok);font-weight:700}td.bad{color:var(--bad);font-weight:700}td.mid{color:var(--warn);font-weight:700}td.none{color:var(--dim)}td.split{color:var(--warn);font-weight:700}
+.legend{font-size:11px;color:var(--dim);margin-top:8px}
+.legend b{font-weight:700}.legend .lok{color:var(--ok)}.legend .lbad{color:var(--bad)}.legend .lsplit{color:var(--warn)}
+.d{border-left:3px solid var(--purple);background:var(--purplebg);padding:10px 14px;margin:0 0 14px}
+.d .when{font-size:11px;color:var(--purple);font-weight:700}.d b{display:block;margin:1px 0 3px}
+.d .impact{margin-top:8px;font-size:12px;border:1px solid var(--warn);background:var(--warnbg);color:var(--warn);padding:5px 10px;display:inline-block}
+.files div{padding:7px 0;border-bottom:1px solid var(--line);display:flex;gap:14px;font-size:13px;align-items:baseline}
+.files .tag{margin-left:auto;font-size:10px;padding:1px 8px;border-radius:9px;white-space:nowrap;border:1px solid var(--line);color:var(--dim)}
+.files .tag.blue{color:var(--blue);border-color:var(--blue);background:var(--bluebg)}
+.files .tag.green{color:var(--ok);border-color:var(--ok);background:var(--okbg)}
+.files .tag.purple{color:var(--purple);border-color:var(--purple);background:var(--purplebg)}
+.files .tag.red{color:var(--bad);border-color:var(--bad);background:var(--badbg)}
+.files .tag.amber{color:var(--warn);border-color:var(--warn);background:var(--warnbg)}
+footer{margin-top:70px;color:var(--dim);font-size:11px;border-top:1px solid var(--line);padding-top:12px;display:flex;justify-content:space-between}
+kbd{border:1px solid var(--line);padding:0 4px;border-radius:2px}
+</style>
+<main>
+<h1>rehearsal lab</h1>
+<p class=sub>practice difficult conversations against corpus-grounded personas. text calibration first, paid voice after. this canvas regenerates from decisions.md and runs/. <a href="how-evals-work.html">how the evals work →</a></p>
+
+<h2 class=b>now</h2>
+<ul class=now><li>lab frozen 2026-07-20: all new work happens in ../onthespot (see the closing entry below)</li></ul>
+
+<h2 class=g>runs · code checks + six binary failure-mode judges (rubric v2) · older runs show legacy 1-5 scores</h2>
+<table><tr><th>when</th><th>scenario @ prompt</th><th>checks</th><th>flattery</th><th>register</th><th>grounding</th><th>memory</th><th>challenge</th><th>debrief</th><th>judges</th><th>cost</th></tr>
+<tr>
+<td class=dim>07-18 · 07:00</td>
+<td><a href="../runs/2026-07-18T07-00-27-shreyas-sparring/report.html">shreyas-sparring</a> <span class=ver>@bb85b665</span></td>
+<td class="bad">✗</td>
+<td class="bad" title="flattery">✗</td><td class="ok" title="register">✓</td><td class="bad" title="grounding">✗</td><td class="bad" title="memory">✗</td><td class="split" title="challenge · judges disagree">◐</td><td class="ok" title="debrief">✓</td>
+<td class=dim>2</td>
+<td class=dim>$0.0004</td>
+</tr>
+<tr>
+<td class=dim>07-18 · 06:57</td>
+<td><a href="../runs/2026-07-18T06-57-43-shreyas-sparring/report.html">shreyas-sparring</a> <span class=ver>@48f5aaa5</span></td>
+<td class="none">·</td>
+<td class="bad">2</td><td class="mid">3</td><td class="ok">4</td><td class="ok">4</td><td class="mid">3</td><td class="ok">4</td>
+<td class=dim>1</td>
+<td class=dim>$0.0004</td>
+</tr>
+<tr>
+<td class=dim>07-18 · 06:55</td>
+<td><a href="../runs/2026-07-18T06-55-23-shreyas-sparring/report.html">shreyas-sparring</a> <span class=ver>@a4b113a8</span></td>
+<td class="none">·</td>
+<td class="bad">2</td><td class="mid">3</td><td class="mid">3</td><td class="ok">4</td><td class="ok">4</td><td class="ok">4</td>
+<td class=dim>1</td>
+<td class=dim>$0.0003</td>
+</tr>
+<tr>
+<td class=dim>07-18 · 06:54</td>
+<td><a href="../runs/2026-07-18T06-54-24-shreyas-sparring/report.html">shreyas-sparring</a> <span class=ver>@a4b113a8</span></td>
+<td class="none">·</td>
+<td class=none colspan=6>not judged</td>
+<td class=dim>0</td>
+<td class=dim>$0.0008</td>
+</tr>
+<tr>
+<td class=dim>07-18 · 06:23</td>
+<td><a href="../runs/2026-07-18T06-23-57-shreyas-sparring/report.html">shreyas-sparring</a> <span class=ver>@88ada955</span></td>
+<td class="none">·</td>
+<td class="bad">2</td><td class="ok">4</td><td class="ok">4</td><td class="ok">4</td><td class="mid">3</td><td class="mid">3</td>
+<td class=dim>1</td>
+<td class=dim>$0.0006</td>
+</tr></table>
+<p class=legend><b class=lok>✓ pass</b> · <b class=lbad>✗ fail</b> · <b class=lsplit>◐ judges disagree, needs your call</b> · checks = deterministic code rules · judges column counts judge models (claude, gpt-5.6)</p>
+
+<h2 class=p>decisions</h2>
+<div class=d><span class=when>2026-07-18</span><b>Model roles</b>DeepSeek v4 flash is the production brain (cheap, fast, prompt-cached). Claude (subscription, `claude -p`) is the judge. Fable/Opus in this thread runs the loop and edits prompts. Sonnet subagents may draft docs or mine the corpus; anything a subagent writes gets reviewed here before it lands.<div class=impact>impact · cost stays near zero during calibration; judgment quality stays high.</div></div>
+<div class=d><span class=when>2026-07-18</span><b>Voice stack researched: Pipecat split pipeline, Deepgram + Cartesia default, speech-to-speech ruled out</b>Three independent workers (Sonnet on Pipecat docs, Sonnet on pricing, Codex GPT-5.6 second opinion) researched the voice phase. Findings: Pipecat's architecture preserves the whole eval loop (per-turn transcript events map onto our transcript.jsonl; checks.mjs and both judges run unmodified on voice runs; a thin Python voice/bot.py joins the Node harness, Node stays source of truth for prompts and versions). The ai-notes-mandated comparison with speech-to-speech (OpenAI Realtime) is done and Realtime is ruled out: the brain must stay DeepSeek (calibrated prompts), and Realtime is also slower to first audio, lower-rated on voice quality, and 7 to 15x the cost. Cost per 2-minute session at Ben's 70/30 talking split: $0.03 to $0.16 for every sensible stack, so voice feel decides, not cost. STT pick: Deepgram Nova-3 ($0.0048/min, $200 free credit, both workers agree, Pipecat's own default). TTS default: Cartesia Sonic 3.5 (~$0.038/1k chars, Pipecat default, Codex pick), with a flagged disagreement: the pricing agent ranks Inworld TTS-2 first (cheapest and most consistently top-ranked for human-ness) and flags Hume Octave for its emotion steering. Resolution method: a fixed 20-line pushback-line audition script, Ben's ear decides. Build-time verification item: Pipecat's DeepSeekLLMService must pass through thinking-disabled or we subclass it.<div class=impact>impact · the voice phase has a concrete build plan and a cost ceiling of pennies per session; the eval loop needs no redesign for voice; the only open decision is which voice wins the audition.</div></div>
+<div class=d><span class=when>2026-07-18</span><b>Findings from calibration runs 2 to 4 (shreyas-sparring)</b>Three loop iterations on one turns file (mocked Ben, publish-or-not topic). Cured: reply truncation (v4 flash reasoning was draining max_tokens; harness now disables thinking, which also cut first-token latency from ~4s to ~1.5s) and the em dash leak (fixed only once the rule targeted the source, definitions attached with punctuation, not just the character). Still open: complimenting openers survive the ban lists (the model routes around named phrases), and the anti-flattery pressure in v4 squeezed out framework naming entirely. Also observed: judge scores vary between passes on similar behavior, so single-pass scores are directional, not precise.<div class=impact>impact · next prompt round should merge the compliment rule into a positive instruction (open with substance) instead of longer ban lists, and the calibrated bar should be measured with a pinned judge model.</div></div>
+<div class=d><span class=when>2026-07-18</span><b>Other models as workers and second judges</b>References landed: references/model-prompting-research.md (Ben's per-model steering research, July 2026) and references/calling-other-models.md (exact invocations). Codex (GPT-5.6) is wired and verified as second judge and available for grunt execution and image generation; Grok/Imagine is media backup. Rules: judges see nothing minable, DeepSeek never judges itself, delegated output gets reviewed, judge models recorded in every eval.<div class=impact>impact · eval verdicts no longer depend on one lab's model; delegation paths for mechanical work exist without adding orchestration complexity.</div></div>
+<div class=d><span class=when>2026-07-18</span><b>Eval system rebuilt on the evals-skills method (rubric v2)</b>Adopted Hamel Husain's evals-skills doctrine (cloned into sources/evals-skills) after Ben pointed to it, cross-confirmed by Ben's own ai-notes vault (08-evals-and-verification). Changes: 1-5 Likert scores replaced by six binary failure-mode judges with critique-before-verdict and few-shot examples from our real runs; everything countable moved to deterministic code checks (harness/checks.mjs); judge model pinned (claude-fable-5); a second judge from a different lab (GPT-5.6 terra via Codex CLI) runs the same rubric, and disagreements are flagged for Ben, whose calls accumulate as labels for proper TPR/TNR judge validation later. Deviation noted: all six judgments run in one call per judge (latency), not one call each; split if verdicts look correlated. First double-judged run: 5/6 agreement across labs, the split was capitulation_unchallenged.<div class=impact>impact · judge noise stops driving prompt iteration; code catches character/question/length violations for free; "calibrated" now means all hard checks pass plus all six modes pass, twice consecutively.</div></div>
+<div class=d><span class=when>2026-07-18</span><b>Mocked Ben turns come from his own dictation</b>Scripted practice turns are written in Ben's actual spoken register, drawn from his Obsidian vault (ben-vault journals, Wispr Flow transcripts): loops, restarts, "right, sort of", buried points. Evals of the persona's diagnosis quality are only meaningful if the input sounds like him.<div class=impact>impact · turns-samples/ files imitate real failure modes, not clean prose.</div></div>
+<div class=d><span class=when>2026-07-18</span><b>Every run is a visible artifact</b>Each run lives in runs/&lt;id&gt;/ with the transcript, an exact snapshot of the prompt that ran (versioned by hash), the judge's eval, and a generated report.html showing what happened, the stream, and what changed since the previous run. The canvas at canvas/index.html indexes runs, decisions, and files. Design register follows Ben's mono OS (localhost:4780).<div class=impact>impact · Ben can verify any claim about a run by opening its report; nothing exists only in chat.</div></div>
+<div class=d><span class=when>2026-07-18</span><b>Persona shortlist approved</b>Ben approved the recommended eight from the 30-candidate catalog: Matt Abrahams, Tristan de Montebello, Boz, Wes Kao, Alisa Cohn, Richard Rumelt, Benjamin Mann, Ethan Evans. Progression: warm up with de Montebello and Abrahams, content rounds with Rumelt, Mann, Cohn, stress-test with Boz.<div class=impact>impact · new scenario files get built around these eight, grounded in coaching/ extracts.</div></div>
+<div class=d><span class=when>2026-07-18</span><b>Scenario picks approved</b>Ben picked 10 of the 15 proposals in scenarios/proposals.md: A1 skip-level ambush, A3 the cold call, B6 hot-take sparring, C8 the steamroller peer, C9 the slipping date, D11 the promo case, D12 the interview gauntlet, D13 the negotiation, E14 the 60-second drill, E15 explain it to a sharp outsider. Not picked: A2 ("why not just use ChatGPT?"), B4 ("AI kills the PM role"), B5 the skeptic CTO, C7 stakeholder pushback / Rajan (already built separately), C10 no to a pet feature.<div class=impact>impact · build queue is fixed in that order; each becomes a real scenario file grounded in the coaching map and run through the calibration loop before the next one starts.</div></div>
+<div class=d><span class=when>2026-07-18</span><b>The calibration loop is the product for now</b>spar.mjs (conversation vs DeepSeek) → judge.mjs (Claude via subscription scores against evals/rubric.md) → apply the judge's prompt fixes → rerun. A scenario counts as calibrated at ≥4/5 on all rubric dimensions across two consecutive runs.<div class=impact>impact · first loop already caught real defects (em dash leakage, stacked questions, debrief silent on pacing) and the fixes are in the prompts.</div></div>
+<div class=d><span class=when>2026-07-18</span><b>Text first, voice later</b>Gemini dropped entirely (TTS and STT); no more time on free-tier voice. Phase order: calibrate the DeepSeek v4 flash brain with text-only runs and evals, then bring Pipecat plus a paid voice API (ElevenLabs or Cartesia, Ben pays). Quality over free.<div class=impact>impact · the voice prototype at prototypes/rehearsal-voice is now a legacy testbed; all new work happens in rehearsal-lab.</div></div>
+<div class=d><span class=when>2026-07-20</span><b>Lab frozen; the product is now onthespot</b>Ben delivered the working-backwards press release and made the reshape calls (recorded in ../onthespot/decisions.md). The product is **onthespot**: difficult conversations and situations, think and navigate gracefully. V1 is a local web chat (Wispr Flow dictation in, text out) with per-message timestamps, a soft timer, pause analysis from local ASR on the Wispr Flow audio, and two rubrics per session (the persona rubric from here, plus a new practicer rubric measuring Ben). Ben handwrites the scenarios fresh; the approved queue here is scrapped as a queue and kept as raw material. Named personas survive but each needs a mined dossier before scenarios get built around it. Voice (the stack researched here) is V2; video is V3.<div class=impact>impact · this folder stops taking new work. The harness, rubric v2, coaching map, persona catalog, and voice research carry into onthespot as imports or references; runs/ and this log stay as the research record.</div></div>
+
+<h2 class=t>files</h2>
+<div class=files><div><a href="../canvas/how-evals-work.html">canvas/how-evals-work.html</a><span class=dim>how the eval system works, explained visually</span><span class="tag blue">explainer</span></div><div><a href="../canvas/voice-stack.html">canvas/voice-stack.html</a><span class=dim>pipecat + STT/TTS research: pipeline, prices, the plan</span><span class="tag blue">explainer</span></div><div><a href="../references/voice/stt-tts-cost-report.md">references/voice/stt-tts-cost-report.md</a><span class=dim>voice cost + quality report, three workers, math shown</span><span class="tag amber">reference</span></div><div><a href="../references/voice/pipecat-notes.md">references/voice/pipecat-notes.md</a><span class=dim>pipecat architecture and how the harness reshapes</span><span class="tag amber">reference</span></div><div><a href="../inventory.md">inventory.md</a><span class=dim>every file in the lab and why it exists</span><span class="tag blue">inventory</span></div><div><a href="../scenarios/proposals.md">scenarios/proposals.md</a><span class=dim>15 candidates, 10 approved by Ben</span><span class="tag green">picked</span></div><div><a href="../personas/catalog.md">personas/catalog.md</a><span class=dim>30 personas, shortlist of 8 approved</span><span class="tag green">picked</span></div><div><a href="../coaching/coaching-map.md">coaching/coaching-map.md</a><span class=dim>15 coachable behaviors + 6 corpus maps</span><span class="tag purple">eval seeds</span></div><div><a href="../evals/rubric.md">evals/rubric.md</a><span class=dim>rubric v2: binary failure modes, few-shot from real runs</span><span class="tag red">v2</span></div><div><a href="../references/model-prompting-research.md">references/model-prompting-research.md</a><span class=dim>per-model steering and guarding (July 2026)</span><span class="tag amber">reference</span></div><div><a href="../references/calling-other-models.md">references/calling-other-models.md</a><span class=dim>Codex and Grok as workers and second judges</span><span class="tag amber">reference</span></div><div><a href="../decisions.md">decisions.md</a><span class=dim>this canvas's source of truth</span></div><div><a href="../CLAUDE.md">CLAUDE.md</a><span class=dim>working rules for any session in this lab</span></div><div><a href="../start.md">start.md</a><span class=dim>session playbook</span></div></div>
+
+<footer><span><kbd>m</kbd> light/dark</span><span>generated 2026-07-20 06:17 · ben + claude</span></footer>
+</main>
+<script>
+if(matchMedia("(prefers-color-scheme:dark)").matches)document.body.classList.add("dark");
+addEventListener("keydown",e=>{if(e.key==="m")document.body.classList.toggle("dark")});
+</script>

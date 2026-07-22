@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "rehearsal-voice",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["prototypes/rehearsal-voice/server.mjs"],
+      "port": 7860
+    },
+    {
+      "name": "rehearsal-lab-canvas",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["rehearsal-lab/harness/serve.mjs"],
+      "port": 4790
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+# Calibration script 1: simulates Ben's real failure modes against the Shreyas persona.
+# Turn 1: vague framing (should get named as vague, not accommodated)
+So I've been building this voice practice tool thing, and I'm wondering if it's like, a real product or just a toy, I mean it's useful to me but I don't know, maybe I should be doing something more serious with my time, what do you think about these personal tool things in general?
+# Turn 2: rambling, buries the point (should get pushed to the headline)
+Okay so the real situation is, I have this portfolio site I'm building, and also this practice tool, and also there's the knowledge system underneath it, and I guess what happened is I keep starting these things and they're all connected in my head, like the corpus feeds the personas and the personas feed the practice and the practice feeds the portfolio because it shows I can build, but when someone asks me what I'm working on I kind of freeze and list everything and it sounds like nothing.
+# Turn 3: responds to pressure with a crisp answer (should be acknowledged, then deepened, not flattered)
+Fine, the headline is: I'm building a conversation practice tool for myself because speaking under pressure is my biggest career bottleneck, and everything else is infrastructure for it.
+# Turn 4: folds too easily, seeks validation (should be challenged on conviction, not comforted)
+You're right, it's probably not that strong an idea, I mean Google or someone will just build this anyway, maybe I should stop.
+# Turn 5: debrief
+End session. Debrief me.
