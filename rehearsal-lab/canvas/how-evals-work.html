@@ -1,0 +1,98 @@
+<!doctype html><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1">
+<title>how the evals work · rehearsal lab</title>
+<style>
+:root{--fg:#16181d;--bg:#fff;--dim:#7a7f8a;--line:#e6e8ec;--soft:#f5f6f8;--ok:#0f8a3d;--okbg:#e9f7ee;--bad:#c8321f;--badbg:#fbeeec;--warn:#a86400;--warnbg:#fdf4e3;--blue:#1d5fd6;--bluebg:#eaf1fd;--purple:#6d3fc4;--purplebg:#f2ecfb;--teal:#0b7f74;--tealbg:#e6f5f3}
+body.dark{--fg:#e8eaee;--bg:#131417;--dim:#8b8f99;--line:#2a2d33;--soft:#1c1e23;--ok:#57cf82;--okbg:#15291c;--bad:#ff7b6b;--badbg:#311b17;--warn:#e0a63f;--warnbg:#2d2413;--blue:#6d9ff2;--bluebg:#17233a;--purple:#af8df0;--purplebg:#241b36;--teal:#4ecdc0;--tealbg:#12302d}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.6 "SF Mono",ui-monospace,Menlo,monospace}
+main{max-width:880px;margin:0 auto;padding:40px 24px 80px}
+h1{font-size:18px;margin:0 0 4px}
+h2{font-size:12px;font-weight:600;letter-spacing:.08em;margin:48px 0 16px;padding-left:10px;border-left:3px solid var(--accent,var(--blue))}
+h2.g{--accent:var(--ok)}h2.r{--accent:var(--bad)}h2.p{--accent:var(--purple)}h2.b{--accent:var(--blue)}h2.t{--accent:var(--teal)}h2.w{--accent:var(--warn)}
+p{margin:10px 0}.sub{color:var(--dim);font-size:13px}
+a{color:var(--blue)}
+.flow{display:flex;flex-direction:column;gap:0;margin:20px 0}
+.frow{display:flex;gap:10px;align-items:stretch;flex-wrap:wrap}
+.box{border:1.5px solid var(--c,var(--line));background:var(--cb,var(--soft));padding:10px 14px;flex:1;min-width:150px}
+.box b{display:block;font-size:13px;color:var(--c,var(--fg))}
+.box span{font-size:11.5px;color:var(--dim)}
+.box.blue{--c:var(--blue);--cb:var(--bluebg)}.box.purple{--c:var(--purple);--cb:var(--purplebg)}
+.box.green{--c:var(--ok);--cb:var(--okbg)}.box.red{--c:var(--bad);--cb:var(--badbg)}
+.box.amber{--c:var(--warn);--cb:var(--warnbg)}.box.teal{--c:var(--teal);--cb:var(--tealbg)}
+.arrow{text-align:center;color:var(--dim);font-size:14px;padding:4px 0}
+.arrow.loop{color:var(--warn);font-weight:700}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:640px){.two{grid-template-columns:1fr}}
+.card{border:1px solid var(--line);border-top:3px solid var(--c,var(--blue));padding:12px 14px}
+.card.green{--c:var(--ok)}.card.red{--c:var(--bad)}.card.amber{--c:var(--warn)}.card.purple{--c:var(--purple)}
+.card b{font-size:13px}.card p{font-size:12.5px;color:var(--dim);margin:6px 0 0}
+.story{border-left:3px solid var(--warn);background:var(--warnbg);padding:10px 14px;margin:14px 0;font-size:13px}
+.tick{color:var(--ok);font-weight:700}.cross{color:var(--bad);font-weight:700}.half{color:var(--warn);font-weight:700}
+ul{margin:8px 0;padding-left:20px}li{margin:5px 0}
+table{border-collapse:collapse;width:100%;font-size:12.5px;margin:10px 0}
+th{text-align:left;font-weight:600;color:var(--dim);font-size:11px;padding:4px 10px 8px 0;border-bottom:1px solid var(--line)}
+td{padding:7px 10px 7px 0;border-bottom:1px solid var(--line);vertical-align:top}
+footer{margin-top:70px;color:var(--dim);font-size:11px;border-top:1px solid var(--line);padding-top:12px;display:flex;justify-content:space-between}
+kbd{border:1px solid var(--line);padding:0 4px;border-radius:2px}
+</style>
+<main>
+<h1>how the evals work</h1>
+<p class=sub>the whole system, explained simply. written 2026-07-18, after rubric v2 landed.</p>
+
+<h2 class=b>the idea in one paragraph</h2>
+<p>We built a robot sparring partner (DeepSeek) that plays a tough person, like Shreyas, so Ben can practice hard conversations. But a robot actor drifts: it flatters, it forgets its own questions, it types like a chatbot instead of talking like a person. So after every practice conversation, the transcript goes through a checking pipeline, the results become a report you can open and read, and the worst problems become edits to the robot's instructions. Then we run it again and see if the problems went away. That circle is the whole lab.</p>
+
+<h2 class=p>the loop, drawn</h2>
+<div class=flow>
+<div class=frow>
+<div class="box purple"><b>1 · scenario prompt</b><span>the robot's instructions: who it plays, how it talks, what it must never do. every version gets a hash like @bb85b665, so nothing changes invisibly.</span></div>
+<div class="box blue"><b>2 · the conversation</b><span>mocked-Ben turns (written in his real dictated voice, rambles included) go to DeepSeek. every reply is logged with speed and cost.</span></div>
+</div>
+<div class=arrow>↓ transcript.jsonl</div>
+<div class=frow>
+<div class="box green"><b>3 · robot checks (code)</b><span>a script counts the rule-breaking a machine can count: banned characters, two questions in one reply, replies too long, markdown leaking. no opinion involved. always right.</span></div>
+<div class="box red"><b>4 · two judges (LLMs)</b><span>Claude and GPT-5.6, separately, answer six yes/no questions like "did it flatter?" and "did it drop its own question?". each must explain BEFORE answering.</span></div>
+</div>
+<div class=arrow>↓ checks.json + eval.json + eval-codex.json</div>
+<div class=frow>
+<div class="box teal"><b>5 · report.html</b><span>one page per run: what happened, every check, both judges with their reasons, the exact diff of what changed in the prompt, the full conversation.</span></div>
+<div class="box amber"><b>6 · prompt fixes</b><span>the judges propose exact lines to change. we apply them, the decision log records why, and the canvas shows the new version hash.</span></div>
+</div>
+<div class="arrow loop">↺ back to 2 · rerun the same turns · did the fails turn to passes?</div>
+</div>
+
+<h2 class=g>who checks what, and why it's split</h2>
+<div class=two>
+<div class="card green"><b>code checks: things you can count</b><p>Is there an em dash? How many question marks? How many words? A script answers these perfectly every time, for free. We learned this the hard way: on the same transcript, one judge pass missed em dashes and another invented them, and even my own quick check got it wrong once. Counting is now code's job, permanently.</p></div>
+<div class="card red"><b>judges: things that need taste</b><p>"Was that reply flattery or a real challenge?" needs judgment. For those we use LLM judges, but caged: each question is yes/no (no fuzzy 1-to-5 scores), the judge must write its reasoning before its verdict (otherwise it decides first and invents reasons after), and every question comes with real examples from past runs showing exactly where pass ends and fail begins.</p></div>
+</div>
+
+<h2 class=r>why two judges from two different labs</h2>
+<p>One judge has house habits and blind spots. So every run can be judged twice: Claude (Anthropic) and GPT-5.6 (OpenAI, called through the Codex CLI). Where they agree, confidence is high. Where they disagree, the report marks it <span class=half>◐ your call</span> and Ben decides. On the first double-judged run they agreed on five of six questions; the one split was "did the persona push back hard enough when Ben caved?", which is genuinely debatable, and that's the point: the debatable ones should reach a human.</p>
+<p>Every human call Ben makes gets kept. Once enough pile up (about 40 per question), we can measure each judge against Ben's answers properly (the TPR/TNR method from the evals-skills playbook) and know exactly how much to trust each one. Until then, honesty requires saying: the code checks are facts, the judge verdicts are strong opinions with reasons attached.</p>
+
+<h2 class=w>how confident are we, really</h2>
+<table>
+<tr><th>claim</th><th>confidence</th><th>because</th></tr>
+<tr><td>the transcript, timings, and costs are real</td><td class=tick>certain</td><td>logged directly from the API stream, files on disk you can open</td></tr>
+<tr><td>character/question/length rules pass or fail</td><td class=tick>certain</td><td>counted by code, same answer every time</td></tr>
+<tr><td>a prompt fix actually changed the prompt</td><td class=tick>certain</td><td>every run snapshots its exact prompt; reports show the diff</td></tr>
+<tr><td>"the persona flattered / dropped a question"</td><td class=half>strong opinion</td><td>binary verdict, reasoning first, real examples as anchors, two labs</td></tr>
+<tr><td>"this scenario is fully calibrated"</td><td class=half>not yet claimable</td><td>needs all checks + all judges passing twice in a row, plus Ben's spot review</td></tr>
+</table>
+<div class=story><b>the story that shaped this:</b> early on, the judge scored the same kind of behavior a 4 one run and a 3 the next, and I told Ben "zero em dashes" based on a quick check while the judge said three (the judge was right). Both failures are why v2 exists: scores became yes/no questions, counting became code, and every claim now links to a file you can open.</div>
+
+<h2 class=t>where the method comes from</h2>
+<ul>
+<li><b>Hamel Husain's evals-skills</b> (cloned in sources/evals-skills): binary pass/fail per failure mode instead of score scales, code checks before LLM judges, few-shot examples from real labeled data, critique before verdict, pin your judge model, validate judges against human labels before trusting them.</li>
+<li><b>Ben's own ai-notes vault</b> (08-evals-and-verification/): independently says the same things. Note 006: a judge asked for score-then-reasoning "picks a score first and then hallucinates justifications to defend it", so reverse the order. Note 080: a deterministic checker beat an LLM judge on constraint tasks. Note 010d: mitigate judge bias by cross-checking across model families. Note 010c: the judge must run in a separate context from the writer. All four are now built in.</li>
+<li><b>the model-prompting research</b> (references/model-prompting-research.md): per-model steering for every model we call, and the reason we never let a judge see anything it could mine for the answer.</li>
+</ul>
+
+<h2 class=b>what's next</h2>
+<p>Build the 10 scenarios Ben picked (A1 first: the skip-level ambush), calibrate each through this loop, keep collecting Ben's verdicts on judge disagreements, and then bring the calibrated prompts into the voice pipeline (Pipecat + paid STT/TTS; the speech-to-speech alternative from the ai-notes vault gets a written comparison before we commit).</p>
+
+<footer><span><a href="index.html">← canvas</a> · <kbd>m</kbd> light/dark</span><span>rehearsal lab</span></footer>
+</main>
+<script>
+if(matchMedia("(prefers-color-scheme:dark)").matches)document.body.classList.add("dark");
+addEventListener("keydown",e=>{if(e.key==="m")document.body.classList.toggle("dark")});
+</script>

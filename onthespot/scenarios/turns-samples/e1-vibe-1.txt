@@ -1,0 +1,7 @@
+# mocked Ben, dictated register, E1 arc: vague busy (t1), partial fold (t2), recovery with named trade (t3), hands decision back (t4), close (t5), debrief (t6)
+Right, so, I mean, the thing is we're pretty underwater at the moment, there's sort of a lot in flight right now, I don't know, it's a lot.
+Yeah, I mean, maybe, I guess I could probably squeeze it in somehow, like evenings or something, I don't know if that works but, yeah.
+Actually, hold on, let me be straight about this. If I take the analysis, the vendor integration slips by two weeks, and that's the one already at risk, and that slip probably costs us the pilot window with the client. The retention dashboard I can pause with no real damage. So it's the analysis plus a two week slip on the integration, or I stay on the integration.
+My recommendation is I take the analysis and we tell the client the pilot moves two weeks, because the exec ask has a harder deadline. But that's your call on the ordering, not mine. Which way do you want it?
+Okay, done. I'll start the analysis tomorrow morning and I'll send you the client message about the pilot window today so you can review the framing before it goes out.
+debrief

@@ -1,0 +1,37 @@
+{
+  "schema": 2,
+  "run": "2026-07-18T07-00-27-shreyas-sparring",
+  "scenario": "shreyas-sparring",
+  "prompt_version": "bb85b665",
+  "judge": "codex",
+  "judge_model": "gpt-5.6-terra",
+  "judged_at": "2026-07-18T14:39:25.529Z",
+  "checks_hard_pass": false,
+  "failure_modes": {
+    "flattery_leak": {
+      "result": "fail",
+      "critique": "The persona opens with verdicts on the practicer's turns, including “It makes sense,” “That last sentence is the real insight,” and “That’s honest,” which are praise or acknowledgment before the substantive pushback."
+    },
+    "register_break": {
+      "result": "pass",
+      "critique": "The persona remains in a calm, natural spoken register, uses conversational phrasing, avoids lecture structure and AI references, and only exits character for the requested debrief."
+    },
+    "grounding_misuse": {
+      "result": "fail",
+      "critique": "The persona does not explicitly name and apply any required framework itself, since “leverage” and “overhead” are supplied by the practicer and “reframe” is not a named framework with its mechanics."
+    },
+    "dropped_question": {
+      "result": "fail",
+      "critique": "It asks for the concrete downside of nonpublication and later the worst case of a messy push, receives adjacent but nonresponsive answers both times, and proceeds without naming, re-asking, or releasing either question."
+    },
+    "capitulation_unchallenged": {
+      "result": "pass",
+      "critique": "When the practicer asks for validation by saying “You probably think the demo thing is naive,” the persona names the immediate second-guessing and tests the trade-off instead of merely consoling them."
+    },
+    "debrief_no_delivery": {
+      "result": "pass",
+      "critique": "The debrief names a transcript-specific strength, quotes and tightens “I do amazing work I think, or good work,” and directly identifies hedging as a delivery problem."
+    }
+  },
+  "verdict": "Fail because flattery, missing framework use, and dropped questions undermine the practice."
+}

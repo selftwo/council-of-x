@@ -1,0 +1,29 @@
+{
+  "banned_characters": {
+    "pass": true,
+    "failing_turns": []
+  },
+  "stacked_questions": {
+    "pass": true,
+    "failing_turns": []
+  },
+  "overlong_reply": {
+    "pass": false,
+    "failing_turns": [
+      {
+        "turn": 6,
+        "words": 266
+      }
+    ]
+  },
+  "markdown_leak": {
+    "pass": true,
+    "failing_turns": []
+  },
+  "compliment_opener_flag": {
+    "pass": true,
+    "failing_turns": [],
+    "soft": true
+  },
+  "all_hard_pass": false
+}

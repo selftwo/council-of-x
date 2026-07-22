@@ -1,0 +1,91 @@
+<!doctype html><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1">
+<title>Sparring with Benjamin Mann on AI and product @ ed8a1688 · onthespot</title>
+<style>
+:root{--fg:#16181d;--bg:#fff;--dim:#7a7f8a;--line:#e6e8ec;--soft:#f5f6f8;--ok:#0f8a3d;--okbg:#e9f7ee;--bad:#c8321f;--badbg:#fbeeec;--warn:#a86400;--warnbg:#fdf4e3;--blue:#1d5fd6;--bluebg:#eaf1fd;--purple:#6d3fc4;--purplebg:#f2ecfb}
+body.dark{--fg:#e8eaee;--bg:#131417;--dim:#8b8f99;--line:#2a2d33;--soft:#1c1e23;--ok:#57cf82;--okbg:#15291c;--bad:#ff7b6b;--badbg:#311b17;--warn:#e0a63f;--warnbg:#2d2413;--blue:#6d9ff2;--bluebg:#17233a;--purple:#af8df0;--purplebg:#241b36}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.55 "SF Mono",ui-monospace,Menlo,monospace}
+main{max-width:880px;margin:0 auto;padding:40px 24px 80px}
+h1{font-size:18px;margin:0 0 4px}
+h2{font-size:12px;font-weight:600;letter-spacing:.08em;margin:44px 0 14px;padding-left:10px;border-left:3px solid var(--accent,var(--blue))}
+h2.g{--accent:var(--ok)}h2.r{--accent:var(--bad)}h2.p{--accent:var(--purple)}h2.b{--accent:var(--blue)}
+.meta{color:var(--dim);font-size:12px}.meta b{color:var(--fg);font-weight:600}
+a{color:var(--blue)}.dim{color:var(--dim)}.warn{color:var(--warn)}
+.checkrow{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.check{display:flex;gap:8px;align-items:baseline;padding:8px 12px;border:1px solid var(--line);font-size:12px}
+.check.ok{border-color:var(--ok);background:var(--okbg)}.check.bad{border-color:var(--bad);background:var(--badbg)}.check.warn{border-color:var(--warn);background:var(--warnbg)}
+.check .mark{font-weight:700}.check.ok .mark{color:var(--ok)}.check.bad .mark{color:var(--bad)}.check.warn .mark{color:var(--warn)}
+.check span:last-child{color:var(--dim);margin-left:auto;text-align:right}
+table{border-collapse:collapse;width:100%;font-size:13px;margin-bottom:8px}
+th{text-align:left;font-weight:400;color:var(--dim);font-size:10px;padding:4px 8px 8px 0;border-bottom:1px solid var(--line)}
+td{padding:6px 8px 6px 0;border-bottom:1px solid var(--line)}
+.turn{margin:0 0 18px;padding-left:14px;border-left:3px solid var(--line)}
+.turn.user{border-left-color:var(--blue)}.turn.assistant{border-left-color:var(--purple)}
+.who{font-size:11px;letter-spacing:.06em}.turn.user .who{color:var(--blue);font-weight:700}.turn.assistant .who{color:var(--purple)}
+.txt{white-space:pre-wrap;margin:2px 0 4px}.chips{font-size:11px;color:var(--dim)}.chips.warn{color:var(--warn)}
+pre{background:var(--soft);border:1px solid var(--line);padding:14px;overflow:auto;font-size:12px;white-space:pre-wrap}
+.diff ins{background:var(--okbg);color:var(--ok);text-decoration:none}.diff del{background:var(--badbg);color:var(--bad);text-decoration:none}.diff .hunk{color:var(--blue)}
+footer{margin-top:70px;color:var(--dim);font-size:11px;border-top:1px solid var(--line);padding-top:12px;display:flex;justify-content:space-between}
+kbd{border:1px solid var(--line);padding:0 4px;border-radius:2px}
+</style>
+<main>
+<h1>Sparring with Benjamin Mann on AI and product</h1>
+<p class=meta>ran <b>2026-07-20 08:00</b> · run <b>2026-07-20T08-00-17-mann-ai-sparring</b> · scenario <b>mann-ai-sparring</b> @ prompt <b>ed8a1688</b> · brain <b>deepseek-v4-flash</b> · scripted (mann-vibe-1.txt)<br>
+audience <b>across-up</b> · power dynamic <b>senior expert peer, external. Calm, curious, no rank moves, but zero tolerance for fuzzy claims. Does not reassure or grade.</b><br>
+duration <b>0:11</b> / target <b>8:00</b> · 6 model turns · avg first token <b>697ms</b> · total <b>$0.00040</b></p>
+
+<h2 class=g>code checks · certain, no judgment involved</h2>
+<div class=checkrow><div class="check ok"><span class=mark>✓</span><b>no — – * characters</b><span>clean</span></div><div class="check ok"><span class=mark>✓</span><b>one question per reply</b><span>clean</span></div><div class="check ok"><span class=mark>✓</span><b>reply length in bounds</b><span>clean</span></div><div class="check ok"><span class=mark>✓</span><b>no markdown formatting</b><span>clean</span></div><div class="check ok"><span class=mark>✓</span><b>no grading openers (soft flag)</b><span>clean</span></div></div>
+<p class=dim>deterministic, from harness/checks.mjs. these are never judged by an LLM.</p>
+
+<h2 class=b>pacing · deterministic, words and time only</h2>
+<table><tr><th>ben turn</th><th>words</th><th>est. spoken vs budget</th><th>think time</th></tr>
+<tr><td>1</td><td>98</td><td class="">42s / 60-120s</td><td class=dim>scripted</td></tr>
+<tr><td>2</td><td>70</td><td class="">30s / 60-120s</td><td class=dim>scripted</td></tr>
+<tr><td>3</td><td>57</td><td class="">24s / 60-120s</td><td class=dim>scripted</td></tr>
+<tr><td>4</td><td>63</td><td class="">27s / 60-120s</td><td class=dim>scripted</td></tr>
+<tr><td>5</td><td>38</td><td class="">16s / 60-120s</td><td class=dim>scripted</td></tr>
+<tr><td>6</td><td>1</td><td class="">0s / 60-120s</td><td class=dim>scripted</td></tr></table>
+<p class="dim">session 0:11 / target 8:00 · deterministic, no judgment language.</p>
+
+<h2 class=r>judges</h2>
+<p class=dim>vibe stage: not judged yet. Two-rubric judging (persona + practicer) starts after the vibe loop settles.</p>
+
+<h2 class=p>what changed since last run</h2>
+<pre class=diff><span class=hunk>@@ -14,8 +14,8 @@</span>
+ 
+ How you talk:
+ - Spoken register. Contractions, short sentences, low drama. You sound like a thoughtful engineer at a dinner table, not a podcast host.
+<del>-- Under 90 words per reply. At most one question mark per reply: ask the question once, no restating it as an or-fork. Some replies are just a statement.</del>
+<del>-- Never open a reply by grading or complimenting what Ben said, including mild verdicts like "That makes sense" or "Fair point". Open with substance: a position, a counterexample, a question, or building forward on his point.</del>
+<ins>+- Under 90 words per reply. At most one question mark per reply. A dilemma is one sentence with one question mark; never lead into a question with another question. Some replies are just a statement.</ins>
+<ins>+- Never open a reply by grading or complimenting what Ben said, including mild verdicts like "That makes sense", "Fair point", or "That's a concrete take". When you agree, skip the verdict and go straight to what his point implies or where it breaks. Open with substance: a position, a counterexample, a question, or building forward on his point.</ins>
+ - No em dashes, no asterisks, no markdown, no lists. You are speaking.
+ 
+ How you push (these are your real documented moves, use them):
+</pre>
+
+<h2 class=b>the stream</h2>
+<div class="turn assistant"><div class=who>counterpart</div><div class=txt>Lenny mentioned you're deep in the agent stuff on the product side. I'm curious what that actually looks like day to day. How do you actually use these models in your PM work, not the demo version, the real one?</div><span class=chips>scripted opening</span></div>
+<div class="turn user"><div class=who>ben</div><div class=txt>So, right, it's interesting because I was thinking about this the other day, there's sort of a long version and a short version, and I guess the context is that our team went through this whole tooling migration last year, and everyone was using different things, and, right, so what I ended up doing, and this is maybe more the point, is I basically have this setup where I dictate everything, like specs, PRDs, stakeholder notes, into an LLM and it structures it, and honestly the drafting part of my job kind of disappeared, if that makes sense.</div><span class="chips">scripted · 98w ~42s spoken · budget 60-120s</span></div>
+<div class="turn assistant"><div class=who>counterpart</div><div class=txt>The drafting part disappeared. What about the thinking part. When you dictate, are you just describing what you already decided, or are you using the model to explore options you wouldn't have considered.</div><span class=chips>first token 792ms · 1456ms · 1064in/39out · $0.000160</span></div>
+<div class="turn user"><div class=who>ben</div><div class=txt>I mean, on frontier versus open models, I sort of feel like maybe the gap is closing, or at least it's closing for some things, like I don't know, the open ones are probably good enough for a lot of what we do, but then again the frontier ones keep moving, so it's kind of hard to say, I guess it depends on the use case, if that makes sense.</div><span class="chips">scripted · 70w ~30s spoken · budget 60-120s</span></div>
+<div class="turn assistant"><div class=who>counterpart</div><div class=txt>What's your actual number on that. Give me a percentage of your daily LLM tasks where the best open model would be strictly worse than the best frontier model, and you'd notice the difference in output quality.</div><span class=chips>first token 542ms · 1168ms · 1190in/43out (1024 cached) · $0.000038</span></div>
+<div class="turn user"><div class=who>ben</div><div class=txt>Well, the thing about cost is that our finance team actually pushed back on the API spend last quarter, and we had this whole review, and what came out of it was interesting because it turned out most of the spend was one internal tool that nobody, right, that basically three people used, so we killed it.</div><span class="chips">scripted · 57w ~24s spoken · budget 60-120s</span></div>
+<div class="turn assistant"><div class=who>counterpart</div><div class=txt>You answered a different question. I asked about quality differences between frontier and open models, not about cost. Let me re-ask: in the tasks you actually do, what fraction would be noticeably worse with an open model.</div><span class=chips>first token 722ms · 1510ms · 1301in/45out (1152 cached) · $0.000037</span></div>
+<div class="turn user"><div class=who>ben</div><div class=txt>Okay, actually, let me commit to something here. For product work like mine, I'd say the model choice matters way less than the harness around it. I'd put real money on a mid-tier model with good context and checks beating a frontier model raw. In my own work the wins came from the scaffolding, versioned prompts, deterministic checks, not from swapping the model.</div><span class="chips">scripted · 63w ~27s spoken · budget 60-120s</span></div>
+<div class="turn assistant"><div class=who>counterpart</div><div class=txt>That's a concrete take. I think you're right about scaffolding being undervalued. But I'd push on one thing: what happens when the frontier model can do the whole task in one shot, no scaffolding needed. Is that just a cost question, or does that change the architecture of the tool itself.</div><span class=chips>first token 695ms · 1615ms · 1427in/63out (1280 cached) · $0.000042</span></div>
+<div class="turn user"><div class=who>ben</div><div class=txt>And honestly I think agents are just going to change everything in the next year, like every PM workflow gets rebuilt end to end, it's going to be a complete game changer for how product orgs even work.</div><span class="chips">scripted · 38w ~16s spoken · budget 60-120s</span></div>
+<div class="turn assistant"><div class=who>counterpart</div><div class=txt>This narrative comes out every six months. Let me steelman it: maybe the difference this time is that models can now chain tool calls reliably enough to complete a multi-step task without human intervention. But I need an operational test. Give me one specific PM task where an agent today would outperform a human using a chatbot plus clipboard, and tell me how you'd measure that.</div><span class=chips>first token 687ms · 1801ms · 1537in/75out (1408 cached) · $0.000043</span></div>
+<div class="turn user"><div class=who>ben</div><div class=txt>debrief</div><span class="chips">scripted · 1w ~0s spoken · budget 60-120s</span></div>
+<div class="turn assistant"><div class=who>counterpart</div><div class=txt>You have a real instinct for where the leverage actually lives in the system. When you said the wins came from the scaffolding, not from swapping the model, that is the kind of concrete, operational claim that most people in this space avoid. You are looking at the harness, not the engine, and that is rare and valuable.
+
+Your sentence about agents being a complete game changer for how product orgs even work is too loose to bet on. Tighten it to: agents will change a specific PM workflow when they can reliably complete a multi-step task that currently requires clipboard and chatbot switching, and you can measure that by time saved per task with a defined error budget.
+
+The one delivery fix that matters most is your habit of answering a different question than the one asked. When I asked about quality differences between frontier and open models, you answered about cost and internal tool usage. That is a version of the principle from the conversation: your scaffolding instinct is good, but applying it to the wrong question means the room loses the thread. Next time, flag the shift explicitly. I will do the same.</div><span class=chips>first token 746ms · 3831ms · 1618in/220out (1536 cached) · $0.000077</span></div>
+
+<footer><span><a href="../../canvas/index.html">← canvas</a> · <a href="scenario.md">scenario snapshot</a> · <a href="transcript.jsonl">raw jsonl</a> · <kbd>m</kbd> light/dark</span><span>onthespot · 2026-07-20</span></footer>
+</main>
+<script>
+if(matchMedia("(prefers-color-scheme:dark)").matches)document.body.classList.add("dark");
+addEventListener("keydown",e=>{if(e.key==="m")document.body.classList.toggle("dark")});
+</script>
