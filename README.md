@@ -19,6 +19,10 @@ council/
     └── examples/        ← sample outputs produced from real vault content
 ```
 
+## Spun-out application layer
+
+The onthespot chat product and the rehearsal-voice practice agent moved to their own repository on 2026-07-27: github.com/selftwo/onthespot (private), extracted at commit `22f8c33` of this repo. Council stays the source layer: absorbed corpora and raw analysis. The frozen method material (`rehearsal-lab/`, `skills-lab/`, coaching research drafts) remains here; the product takes deliberate copies from it rather than reaching across repositories.
+
 ## The model
 
 Three layers, applied to every source:
