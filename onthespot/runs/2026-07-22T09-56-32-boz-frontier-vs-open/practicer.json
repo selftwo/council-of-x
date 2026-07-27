@@ -1,0 +1,100 @@
+{
+  "run": "2026-07-22T09-56-32-boz-frontier-vs-open",
+  "scenario": "boz-frontier-vs-open",
+  "audience": "across-up",
+  "judge_model": "claude-opus-4-8",
+  "graded_at": "2026-07-22",
+  "verdicts": {
+    "P1_buried_lead": {
+      "pass": true,
+      "critique": "He commits early. Boz demanded a landed answer with no both-sides hedge, and by the second sentence Ben has said 'pushing for frontier capabilities is not needed,' which is the directional answer, then names open weights and closes 'that's what we're doing.' T6 opens with a counter-question but the position is already established. The opening sentence of T1 is throat-clearing, so watch it, but the point arrives inside the two-sentence window.",
+      "offending_turns": []
+    },
+    "P2_hedged_claims": {
+      "pass": true,
+      "critique": "He picks open weights and defends it on cost and specificity throughout, in first person, no fake-neutral framing. Where he weakens under pressure it is evasion (P5), not softening of the stated claim; the core position stays committed."
+    },
+    "P3_unsaid_ending": {
+      "pass": true,
+      "critique": "Endings land. T1 closes 'that's what we're doing,' T6 closes 'gets the job done.' Both are declarative, no taper, no un-saying. No C4 hits."
+    },
+    "P4_leaking": {
+      "pass": true,
+      "critique": "No apologies, no self-commentary, no announced wobble even while being pushed hard. Chat text clean; audio half not built."
+    },
+    "P5_question_dodged": {
+      "pass": false,
+      "critique": "Boz asked twice, plainly, whether Ben had actually run the model swap on this agent or was speaking hypothetically. Ben answered 'You will see when we get there' (T5), which abandons the literal question and deflects. To a persona whose entire stance is zero tolerance for opinions formed without doing the work, that reads as a bluff. T3 also meets the pricing-change challenge with generic 'there is always a risk' talk rather than his specific plan, but T5 is the clean dodge.",
+      "offending_turns": [
+        5
+      ]
+    },
+    "P6_incoherent_structure": {
+      "pass": true,
+      "critique": "No turn crosses the ~80-word feed threshold (max 72). The two longest, T1 and T6, each hold a shape: claim plus cost-and-specificity reasons on T1, and counter-question plus the 'old frontier models still do the job, economics decide' argument on T6. Kept short, he stayed coherent, which is itself a useful contrast with the networking run."
+    }
+  },
+  "nudges": [
+    {
+      "turn": 5,
+      "what_happened": "Boz asked twice whether Ben had actually run the model swap or was speaking hypothetically; Ben answered 'You will see when we get there.'",
+      "why_it_costs_him": "To a blunt expert whose whole test is 'did you do the work,' a deflection reads as a bluff and forfeits the credibility his committed opening earned. Admitting the gap and defending the bet would have held the ground; dodging surrendered it.",
+      "his_line": "You will see when we get there.",
+      "tighter": "No, I haven't run the swap on this agent yet. It's a deliberate bet. If the provider breaks compatibility I re-tune on a held-out eval set, and right now the economics are worth that risk."
+    },
+    {
+      "turn": 3,
+      "what_happened": "Challenged on what happens when the provider changes pricing or the model card, he answered with generic optionality, 'there is always a risk, and you need to be ready with replacements,' not his specific plan.",
+      "why_it_costs_him": "Generic risk talk with a blunt expert signals he has not thought the specific case through, which invites the harder follow-up that came next.",
+      "his_line": "There is always a risk, and you need to be ready with replacements.",
+      "tighter": "If they change the model under me, my eval suite catches the regression and I swap to another provider I have already benchmarked. That is the replacement plan."
+    }
+  ],
+  "strength": {
+    "turn": 1,
+    "what_worked": "Boz explicitly banned the both-sides answer and demanded a landed position, and Ben gave exactly that: he picked open weights and owned it with cost-and-specificity reasons, closing 'that's what we're doing.' Committing under pressure is his growth edge and he hit it cleanly on the opening.",
+    "his_line": "from a budget and economics perspective, the open weights one works much better. That's what we're doing."
+  },
+  "hardest_moment": {
+    "turn": 5,
+    "read": "Boz cornered him on whether he had actually done the swap, the exact 'did you do the work' pressure this persona exists to apply. Ben deflected with 'You will see when we get there,' which reads as a bluff. A Self 2 response would have admitted he has not run it, called it a deliberate bet, and named the fallback; honesty plus a defended position beats the deflection with this counterpart every time."
+  },
+  "one_fix": {
+    "id": "P5",
+    "what": "When the pointed 'have you actually done it' question lands, answer it straight, even when the honest answer is 'no, not yet,' then defend the bet with a named fallback.",
+    "why": "He argued well until the one factual question he could not spin, and the dodge cost him more standing than the honest 'no' ever would have. With a do-the-work persona, admitted gaps plus a defended position win respect; deflection loses it.",
+    "drill": "Next session, when a counterpart asks whether you actually did something, first word is yes or no. If no, follow immediately with the bet you are making and the fallback if it breaks. No 'you will see.'"
+  },
+  "raw_verdicts": {
+    "P1_buried_lead": {
+      "pass": true,
+      "critique": "He commits early. Boz demanded a landed answer with no both-sides hedge, and by the second sentence Ben has said 'pushing for frontier capabilities is not needed,' which is the directional answer, then names open weights and closes 'that's what we're doing.' T6 opens with a counter-question but the position is already established. The opening sentence of T1 is throat-clearing, so watch it, but the point arrives inside the two-sentence window.",
+      "offending_turns": []
+    },
+    "P2_hedged_claims": {
+      "pass": true,
+      "critique": "He picks open weights and defends it on cost and specificity throughout, in first person, no fake-neutral framing. Where he weakens under pressure it is evasion (P5), not softening of the stated claim; the core position stays committed."
+    },
+    "P3_unsaid_ending": {
+      "pass": true,
+      "critique": "Endings land. T1 closes 'that's what we're doing,' T6 closes 'gets the job done.' Both are declarative, no taper, no un-saying. No C4 hits."
+    },
+    "P4_leaking": {
+      "pass": true,
+      "critique": "No apologies, no self-commentary, no announced wobble even while being pushed hard. Chat text clean; audio half not built."
+    },
+    "P5_question_dodged": {
+      "pass": false,
+      "critique": "Boz asked twice, plainly, whether Ben had actually run the model swap on this agent or was speaking hypothetically. Ben answered 'You will see when we get there' (T5), which abandons the literal question and deflects. To a persona whose entire stance is zero tolerance for opinions formed without doing the work, that reads as a bluff. T3 also meets the pricing-change challenge with generic 'there is always a risk' talk rather than his specific plan, but T5 is the clean dodge.",
+      "offending_turns": [
+        5
+      ]
+    },
+    "P6_incoherent_structure": {
+      "pass": true,
+      "critique": "No turn crosses the ~80-word feed threshold (max 72). The two longest, T1 and T6, each hold a shape: claim plus cost-and-specificity reasons on T1, and counter-question plus the 'old frontier models still do the job, economics decide' argument on T6. Kept short, he stayed coherent, which is itself a useful contrast with the networking run."
+    }
+  },
+  "reconcile_notes": [],
+  "reconciled_by": "harness/reconcile.mjs (P3 gate + P1/P5 tiebreaker, 2026-07-22)"
+}

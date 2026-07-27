@@ -1,0 +1,81 @@
+<!doctype html><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1">
+<title>coaching · vp-networking-intro · onthespot</title>
+<style>
+:root{--fg:#16181d;--bg:#fff;--dim:#7a7f8a;--line:#e6e8ec;--soft:#f5f6f8;--ok:#0f8a3d;--okbg:#e9f7ee;--bad:#c8321f;--badbg:#fbeeec;--blue:#1d5fd6;--bluebg:#eaf1fd;--purple:#6d3fc4;--purplebg:#f2ecfb}
+body.dark{--fg:#e8eaee;--bg:#131417;--dim:#8b8f99;--line:#2a2d33;--soft:#1c1e23;--ok:#57cf82;--okbg:#15291c;--bad:#ff7b6b;--badbg:#311b17;--blue:#6d9ff2;--bluebg:#17233a;--purple:#af8df0;--purplebg:#241b36}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.6 "SF Mono",ui-monospace,Menlo,monospace}
+main{max-width:820px;margin:0 auto;padding:40px 24px 80px}
+h1{font-size:18px;margin:0 0 4px}
+h2{font-size:12px;font-weight:600;letter-spacing:.08em;margin:40px 0 14px;padding-left:10px;border-left:3px solid var(--accent,var(--blue))}
+h2.p{--accent:var(--purple)}h2.g{--accent:var(--ok)}h2.b{--accent:var(--blue)}
+.meta{color:var(--dim);font-size:12px}.dim{color:var(--dim)}a{color:var(--blue)}
+.check{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border:1px solid var(--line);margin-bottom:8px;font-size:12px}
+.check.ok{border-color:var(--ok);background:var(--okbg)}.check.bad{border-color:var(--bad);background:var(--badbg)}
+.check .mark{font-weight:700}.check.ok .mark{color:var(--ok)}.check.bad .mark{color:var(--bad)}
+.crit{color:var(--fg);opacity:.85;margin-top:4px;font-weight:400}
+.nudge{border:1px solid var(--line);border-left:3px solid var(--purple);padding:12px 14px;margin-bottom:12px}
+.nhead{font-weight:600;font-size:12px;margin-bottom:4px}.why{color:var(--dim);font-size:12px;margin-bottom:8px}
+.quote{background:var(--soft);padding:8px 10px;margin:4px 0;font-size:13px}
+.quote.tighter{background:var(--okbg)}
+.qlab{display:inline-block;min-width:60px;color:var(--dim);font-size:10px;letter-spacing:.06em;text-transform:uppercase;margin-right:8px}
+.fix{border:1px solid var(--purple);background:var(--purplebg);padding:14px 16px}
+.fix b{font-size:13px}.fix .drill{margin-top:8px;padding-top:8px;border-top:1px solid var(--line)}
+table{border-collapse:collapse;width:100%;font-size:12px}td{padding:5px 8px 5px 0;border-bottom:1px solid var(--line);vertical-align:top}
+.callout{background:var(--bluebg);border:1px solid var(--blue);padding:10px 14px;font-size:12px;margin-bottom:20px}
+footer{margin-top:60px;color:var(--dim);font-size:11px;border-top:1px solid var(--line);padding-top:12px;display:flex;justify-content:space-between}
+kbd{border:1px solid var(--line);padding:0 4px;border-radius:2px}
+</style>
+<main>
+<h1>coaching: how you did</h1>
+<p class=meta>scenario <b>vp-networking-intro</b> · audience <b>external</b> · judged by <b>claude-opus-4-8</b> · 2026-07-22</p>
+<div class=callout>This grades <b>you</b>, not the counterpart. Binary pass/fail per habit, critique before verdict, no scores. Chat text only for now: Wispr strips fillers and some hedges, so those counts are lower bounds, and time-to-send includes your dictation, so it is not pause length.</div>
+
+<h2 class=p>the single fix for this session</h2>
+<div class=fix><b>Lead every substantive turn with a one-sentence answer to the exact question, then stop and let the counterpart pull the next thread.</b>
+<div class=why style="margin-top:6px">The whole conversation stalled because the answer to 'what is it' never came first; the VP had to dig five times and left saying he would have to try it to get it. Answer-first would have converted the hook he earned into interest instead of losing it.</div>
+<div class=drill><span class=qlab>drill</span> Next session, before each reply, say the single sentence that answers the literal question out loud first, even if it feels blunt, then add context only if asked. Cap the opening at one sentence.</div></div>
+
+<h2 class=b>habit verdicts</h2>
+<div class=callout style="background:var(--soft);border-color:var(--line)">verdicts reconciled by code (P3 severity gate, P1/P5 tiebreaker): P3: softened one taper to a note (baseline gate); P5: all offending turns subsumed by P1 (tiebreaker) → pass. The judge's raw verdicts are kept in practicer.json.</div>
+<div class="check bad"><span class=mark>✗</span><div><b>answers first, no wind-up</b> <span class=dim>(ben turns 2, 4, 6)</span><div class=crit>He never fronts the answer on the substantive turns. Asked what was dead about digital experiences (T2), he gives 76 words of cultural riff and the VP says 'you lost me.' Asked what he is making (T4), he opens on 'reimagining what practicing the learning pedagogy changes' and a list before the product ever surfaces. Asked how he got here (T6), he narrates practice in general and the point never lands. The VP had to ask 'what is it' five separate ways, which is the signature of a buried lead in every one of these turns.</div></div></div><div class="check ok"><span class=mark>✓</span><div><b>commits, does not hedge</b><div class=crit>Not a hedging failure. His problem here is vagueness and abstraction, not softened positions; hedge count is 1 and he never wraps a stated claim in qualifiers. The diffuseness belongs to P1 and P6, not here.</div></div></div><div class="check ok"><span class=mark>✓</span><div><b>lands the ending</b> <span class=dim>(ben turns 6)</span><div class=crit>T6 tapers into a rhetorical shrug: 'Practice makes things better, so why not?' That deflates his own point instead of landing a declarative close, and it lands right where the VP wanted his personal throughline. One clear instance fails the mode.</div><div class=crit style="opacity:.7">reconciled: one soft taper (turn 6) recorded as a note, not a session fail; P3 fails on 2+ tapers or a content-reversing close</div></div></div><div class="check ok"><span class=mark>✓</span><div><b>no self-sabotage</b><div class=crit>No self-commentary, no apologies, no announced wobble. Chat text is clean and nothing in the flow suggests he narrated his own performance. Audio half not built, so this is chat-only.</div></div></div><div class="check ok"><span class=mark>✓</span><div><b>answers what was asked</b><div class=crit>Two direct questions get answered with a different, easier one. Asked what he is actually building (T4) he answers with pedagogy abstractions and a list, not the thing; the VP re-asks for 'the one sentence version.' Asked for his personal throughline (T6) he answers with why practice matters in general; the VP re-asks, 'I asked how you got here.' He does recover at T5, T7 and T8 when cornered, but the pattern of answering the abstract question instead of the literal one is the reason the conversation stalled.</div><div class=crit style="opacity:.7">reconciled: turns 4, 6 were buried leads, not independent dodges; counted once under P1 (answers-first). No standalone dodge remains</div></div></div><div class="check bad"><span class=mark>✗</span><div><b>structured, one arc</b> <span class=dim>(ben turns 2, 6)</span><div class=crit>T6 (84 words) is a stream with no arc: mirror practice, then work going icy, then rare high-stakes moments, then 'so why not,' with no thesis carried to a close. T2 (76 words) breaks the same way and the VP confirmed it live with 'I think you lost me somewhere in the middle there.' No discernible beginning-middle-end in either.</div></div></div>
+
+<h2 class=p>nudges, with a tighter version of what you actually said</h2>
+<div class=nudge>
+    <div class=nhead>ben turn 2 · Asked the crisp question 'what was dead about it before you showed up,' he answered with a 76-word essay about screens, real life and software quality and never said what he builds; the VP replied 'you lost me somewhere in the middle.'</div>
+    <div class=why>With a time-scarce external stranger, the first diffuse answer spends the curiosity his hook just earned, and at a mixer he does not get that attention back.</div>
+    <div class=quote><span class=qlab>he said</span> People have been saying that, with so much exposure and time spent across screens and digital interfaces, there is a lack of going back to doing things in real life.</div>
+    <div class=quote tighter><span class=qlab>tighter</span> Fair question. Most software today feels dead because it is one more screen you scroll alone, so I built the opposite: a tool you actually talk to.</div>
+  </div><div class=nudge>
+    <div class=nhead>ben turn 4 · Asked plainly 'what's the thing you're making,' he opened on 'reimagining what practicing the learning pedagogy changes' and a five-item list; the VP said 'That's a lot of bullets for a party.'</div>
+    <div class=why>Abstraction plus a list reads as someone who has not decided what the product is, which is fatal at a mixer where you get one sentence before attention moves on.</div>
+    <div class=quote><span class=qlab>he said</span> I'm reimagining what practicing the learning pedagogy changes</div>
+    <div class=quote tighter><span class=qlab>tighter</span> It's a practice app for tough conversations. You rehearse the hard ones out loud with a realistic AI, under pressure, and it coaches you on what to fix.</div>
+  </div><div class=nudge>
+    <div class=nhead>ben turn 6 · Asked how HE ended up in this problem, he answered about practice in general and closed on 'Practice makes things better, so why not?'; the VP pushed back, 'I asked how you got here.'</div>
+    <div class=why>It skips the personal story that would make him memorable, and the trailing 'so why not' deflates the point instead of landing it.</div>
+    <div class=quote><span class=qlab>he said</span> Practice makes things better, so why not?</div>
+    <div class=quote tighter><span class=qlab>tighter</span> Honestly, it is personal. I kept walking out of conversations thinking I should have said it better, so I built the thing I needed.</div>
+  </div>
+
+<h2 class=g>what worked</h2><div class="check ok"><span class=mark>✓</span><div><b>ben turn 5</b><div class=crit>Forced to compress to one sentence, he produced a clean, plain description of the product. The constraint pulled the clear answer out of him, which proves the crisp version exists in his head; the job is to reach for it first, not fourth.</div><div class=quote style="margin-top:8px">Being put on the spot for tough conversations, more familiar and easy</div></div></div>
+
+<h2 class=b>the hardest moment</h2><p><b class=dim>ben turn 2.</b> The wheels came off on the very first substantive question. He had a good hook ('fun and live again') and the VP leaned in, then the follow-up spiked the pressure and he flooded 76 words of abstraction and lost the room. A Self 2 response would have been the one plain sentence he already owns, the line he only reached at T5: name the product and the pain in one breath, then stop and let the VP ask for more.</p>
+
+<h2 class=b>signals (deterministic, measured by code)</h2>
+<table>
+    <tr><td class=dim>ben turns</td><td>8</td></tr>
+    <tr><td class=dim>talk share</td><td>0.68</td></tr>
+    <tr><td class=dim>words per turn (median / max)</td><td>62 / 84</td></tr>
+    <tr><td class=dim>time to send, incl. dictation (median / p90)</td><td>34s / 43s</td></tr>
+    <tr><td class=dim>session</td><td>247s / target 5:00</td></tr>
+    <tr><td class=dim>hedges (chat text, lower bound)</td><td>1 (0.3/100w)</td></tr>
+    <tr><td class=dim>un-said endings</td><td>turns 6</td></tr>
+    <tr><td class=dim>over budget turns</td><td>none</td></tr>
+  </table><p class=dim>chat-text only; hedge and filler counts are lower bounds (Wispr cleans them); audio/parakeet half not built</p>
+
+<footer><span><a href="report.html">← persona report</a> · <a href="../../canvas/index.html">canvas</a> · <a href="../../coaching/session-2026-07-22-baseline.md">session note</a> · <kbd>m</kbd> light/dark</span><span>onthespot coaching · 2026-07-22</span></footer>
+</main>
+<script>
+if(matchMedia("(prefers-color-scheme:dark)").matches)document.body.classList.add("dark");
+addEventListener("keydown",e=>{if(e.key==="m")document.body.classList.toggle("dark")});
+</script>

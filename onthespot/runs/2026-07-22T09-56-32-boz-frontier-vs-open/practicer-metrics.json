@@ -1,0 +1,100 @@
+{
+  "run": "2026-07-22T09-56-32-boz-frontier-vs-open",
+  "scenario": "boz-frontier-vs-open",
+  "audience": "across-up",
+  "target_minutes": 7,
+  "response_budget_seconds": "60-120",
+  "note": "chat-text only; hedge and filler counts are lower bounds (Wispr cleans them); audio/parakeet half not built",
+  "ben_turns": 6,
+  "talk_share": 0.42,
+  "words_per_turn": {
+    "median": 48,
+    "max": 72
+  },
+  "think_s": {
+    "median": 32,
+    "p90": 46
+  },
+  "session_s": 184,
+  "over_target": false,
+  "hedges_total": 1,
+  "hedges_per_100w": 0.4,
+  "apologies_total": 0,
+  "unsaid_ending_turns": [],
+  "leak_turns": [],
+  "over_budget_turns": [],
+  "per_turn": [
+    {
+      "turn": 1,
+      "words": 68,
+      "spoken_s_est": 29,
+      "over_budget": false,
+      "think_s": 41,
+      "hedges": 0,
+      "apologies": 0,
+      "unsaid_ending": false,
+      "leak": false,
+      "has_markdown_list": false
+    },
+    {
+      "turn": 2,
+      "words": 50,
+      "spoken_s_est": 21,
+      "over_budget": false,
+      "think_s": 32,
+      "hedges": 0,
+      "apologies": 0,
+      "unsaid_ending": false,
+      "leak": false,
+      "has_markdown_list": false
+    },
+    {
+      "turn": 3,
+      "words": 45,
+      "spoken_s_est": 19,
+      "over_budget": false,
+      "think_s": 32,
+      "hedges": 0,
+      "apologies": 0,
+      "unsaid_ending": false,
+      "leak": false,
+      "has_markdown_list": false
+    },
+    {
+      "turn": 4,
+      "words": 7,
+      "spoken_s_est": 3,
+      "over_budget": false,
+      "think_s": 9,
+      "hedges": 0,
+      "apologies": 0,
+      "unsaid_ending": false,
+      "leak": false,
+      "has_markdown_list": false
+    },
+    {
+      "turn": 5,
+      "words": 7,
+      "spoken_s_est": 3,
+      "over_budget": false,
+      "think_s": 13,
+      "hedges": 0,
+      "apologies": 0,
+      "unsaid_ending": false,
+      "leak": false,
+      "has_markdown_list": false
+    },
+    {
+      "turn": 6,
+      "words": 72,
+      "spoken_s_est": 31,
+      "over_budget": false,
+      "think_s": 46,
+      "hedges": 1,
+      "apologies": 0,
+      "unsaid_ending": false,
+      "leak": false,
+      "has_markdown_list": false
+    }
+  ]
+}

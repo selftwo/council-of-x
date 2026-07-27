@@ -11,6 +11,8 @@ import { spawnSync } from "node:child_process";
 import { join, dirname, resolve, basename } from "node:path";
 import { fileURLToPath } from "node:url";
 import { runChecks } from "./checks.mjs";
+import { renderCoaching } from "./coaching-report.mjs";
+import { applyReconcile } from "./reconcile.mjs";
 
 const HARNESS = dirname(fileURLToPath(import.meta.url));
 const RUNS = join(HARNESS, "..", "runs");
@@ -83,8 +85,20 @@ const pacingHtml = `<table><tr><th>ben turn</th><th>words</th><th>est. spoken vs
 ${pacingRows || "<tr><td colspan=4 class=dim>no ben turns</td></tr>"}</table>
 <p class="${sessionOverTarget ? "warn" : "dim"}">session ${mmss(durationS)}${targetS !== null ? ` / target ${meta.target_minutes}:00` : ""} · deterministic, no judgment language.</p>`;
 
-// ---- judges: vibe stage, not judged yet ----
-const judgesHtml = `<p class=dim>vibe stage: not judged yet. Two-rubric judging (persona + practicer) starts after the vibe loop settles.</p>`;
+// ---- judges: persona is vibe-stage; practicer (grades Ben) shows when a grading exists ----
+if (existsSync(join(runDir, "practicer.json"))) applyReconcile(runDir); // P3 gate + P1/P5 tiebreaker before render
+const practicer = readJson(join(runDir, "practicer.json"));
+let judgesHtml = `<p class=dim>persona rubric: vibe stage, not judged yet. Persona judging starts after the vibe loop settles.</p>`;
+if (practicer) {
+  renderCoaching(runDir);
+  const MODE_LABEL = { P1_buried_lead: "answers first", P2_hedged_claims: "commits", P3_unsaid_ending: "lands ending", P4_leaking: "no self-sabotage", P5_question_dodged: "answers the question", P6_incoherent_structure: "structured" };
+  const chips = Object.entries(practicer.verdicts || {}).map(([k, v]) =>
+    `<span class="pv ${v.pass ? "ok" : "bad"}">${v.pass ? "✓" : "✗"} ${MODE_LABEL[k] || k}</span>`).join(" ");
+  judgesHtml += `<h3 style="font-size:12px;margin:20px 0 8px">practicer rubric: how Ben did (judge ${esc(practicer.judge_model)})</h3>
+  <div class=pvrow>${chips}</div>
+  <p><b>one fix:</b> ${esc(practicer.one_fix?.what || "")}</p>
+  <p><a href="coaching.html">→ full coaching report (verdicts, nudges, rewrites)</a></p>`;
+}
 
 const stream = turns.map((t) => {
   let chips = "";
@@ -119,6 +133,9 @@ a{color:var(--blue)}.dim{color:var(--dim)}.warn{color:var(--warn)}
 .check.ok{border-color:var(--ok);background:var(--okbg)}.check.bad{border-color:var(--bad);background:var(--badbg)}.check.warn{border-color:var(--warn);background:var(--warnbg)}
 .check .mark{font-weight:700}.check.ok .mark{color:var(--ok)}.check.bad .mark{color:var(--bad)}.check.warn .mark{color:var(--warn)}
 .check span:last-child{color:var(--dim);margin-left:auto;text-align:right}
+.pvrow{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+.pv{font-size:11px;padding:3px 8px;border:1px solid var(--line);border-radius:2px}
+.pv.ok{border-color:var(--ok);color:var(--ok);background:var(--okbg)}.pv.bad{border-color:var(--bad);color:var(--bad);background:var(--badbg)}
 table{border-collapse:collapse;width:100%;font-size:13px;margin-bottom:8px}
 th{text-align:left;font-weight:400;color:var(--dim);font-size:10px;padding:4px 8px 8px 0;border-bottom:1px solid var(--line)}
 td{padding:6px 8px 6px 0;border-bottom:1px solid var(--line)}

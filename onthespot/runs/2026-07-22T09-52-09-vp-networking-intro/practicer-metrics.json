@@ -1,0 +1,126 @@
+{
+  "run": "2026-07-22T09-52-09-vp-networking-intro",
+  "scenario": "vp-networking-intro",
+  "audience": "external",
+  "target_minutes": 5,
+  "response_budget_seconds": "30-60",
+  "note": "chat-text only; hedge and filler counts are lower bounds (Wispr cleans them); audio/parakeet half not built",
+  "ben_turns": 8,
+  "talk_share": 0.68,
+  "words_per_turn": {
+    "median": 62,
+    "max": 84
+  },
+  "think_s": {
+    "median": 34,
+    "p90": 43
+  },
+  "session_s": 247,
+  "over_target": false,
+  "hedges_total": 1,
+  "hedges_per_100w": 0.3,
+  "apologies_total": 0,
+  "unsaid_ending_turns": [
+    6
+  ],
+  "leak_turns": [],
+  "over_budget_turns": [],
+  "per_turn": [
+    {
+      "turn": 1,
+      "words": 19,
+      "spoken_s_est": 8,
+      "over_budget": false,
+      "think_s": 18,
+      "hedges": 0,
+      "apologies": 0,
+      "unsaid_ending": false,
+      "leak": false,
+      "has_markdown_list": false
+    },
+    {
+      "turn": 2,
+      "words": 76,
+      "spoken_s_est": 33,
+      "over_budget": false,
+      "think_s": 38,
+      "hedges": 0,
+      "apologies": 0,
+      "unsaid_ending": false,
+      "leak": false,
+      "has_markdown_list": false
+    },
+    {
+      "turn": 3,
+      "words": 3,
+      "spoken_s_est": 1,
+      "over_budget": false,
+      "think_s": 5,
+      "hedges": 0,
+      "apologies": 0,
+      "unsaid_ending": false,
+      "leak": false,
+      "has_markdown_list": false
+    },
+    {
+      "turn": 4,
+      "words": 62,
+      "spoken_s_est": 27,
+      "over_budget": false,
+      "think_s": 43,
+      "hedges": 0,
+      "apologies": 0,
+      "unsaid_ending": false,
+      "leak": false,
+      "has_markdown_list": true
+    },
+    {
+      "turn": 5,
+      "words": 12,
+      "spoken_s_est": 5,
+      "over_budget": false,
+      "think_s": 13,
+      "hedges": 0,
+      "apologies": 0,
+      "unsaid_ending": false,
+      "leak": false,
+      "has_markdown_list": false
+    },
+    {
+      "turn": 6,
+      "words": 84,
+      "spoken_s_est": 36,
+      "over_budget": false,
+      "think_s": 41,
+      "hedges": 0,
+      "apologies": 0,
+      "unsaid_ending": true,
+      "leak": false,
+      "has_markdown_list": false
+    },
+    {
+      "turn": 7,
+      "words": 62,
+      "spoken_s_est": 27,
+      "over_budget": false,
+      "think_s": 30,
+      "hedges": 1,
+      "apologies": 0,
+      "unsaid_ending": false,
+      "leak": false,
+      "has_markdown_list": false
+    },
+    {
+      "turn": 8,
+      "words": 65,
+      "spoken_s_est": 28,
+      "over_budget": false,
+      "think_s": 41,
+      "hedges": 0,
+      "apologies": 0,
+      "unsaid_ending": false,
+      "leak": false,
+      "has_markdown_list": false
+    }
+  ]
+}
