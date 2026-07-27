@@ -43,6 +43,13 @@ button:hover{border-color:var(--blue)}
 button.primary{border-color:var(--blue);color:var(--blue)}
 #endpanel{display:none;padding:20px;border:1px solid var(--line);margin-top:12px}
 #endpanel.on{display:block}
+#coachBox{margin:14px 0}
+.fixbox{border:1px solid var(--purple);background:var(--purplebg);padding:12px 14px;margin-bottom:10px}
+.fixbox .lab{font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--purple)}
+.fixbox b{font-size:13px}
+.pvrow{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:6px}
+.pv{font-size:10px;padding:2px 7px;border:1px solid var(--line);border-radius:2px}
+.pv.ok{border-color:var(--ok);color:var(--ok);background:var(--okbg)}.pv.bad{border-color:var(--bad);color:var(--bad);background:var(--badbg)}
 kbd{border:1px solid var(--line);padding:0 4px;border-radius:2px}
 </style>
 <main id=picker>
@@ -72,8 +79,10 @@ kbd{border:1px solid var(--line);padding:0 4px;border-radius:2px}
 </footer>
 <div id=endpanel>
   <p id=endMsg></p>
+  <div id=coachBox></div>
   <div class=btns>
     <a id=reportLink href="#" target=_blank><button class=primary>open report</button></a>
+    <a id=coachLink href="#" target=_blank style="display:none"><button>coaching</button></a>
     <button id=backBtn>back to scenarios</button>
   </div>
 </div>
@@ -227,14 +236,39 @@ async function send() {
   box.focus();
 }
 
+const P_SHORT = { P1_buried_lead: "answers-first", P2_hedged_claims: "commits", P3_unsaid_ending: "lands-ending", P4_leaking: "no-leak", P5_question_dodged: "answers-asked", P6_incoherent_structure: "structured" };
+
+async function renderCoaching(run) {
+  const box = document.getElementById("coachBox");
+  const coachLink = document.getElementById("coachLink");
+  box.innerHTML = "";
+  coachLink.style.display = "none";
+  try {
+    const res = await fetch("/api/coaching?run=" + encodeURIComponent(run));
+    if (!res.ok) throw new Error("none");
+    const g = await res.json();
+    if (!g || !g.verdicts) throw new Error("none");
+    const chips = Object.entries(g.verdicts).map(([k, v]) => `<span class="pv ${v.pass ? "ok" : "bad"}">${v.pass ? "✓" : "✗"} ${P_SHORT[k] || k}</span>`).join(" ");
+    box.innerHTML = `<div class=fixbox><div class=lab>the one fix for this session</div><b>${esc(g.one_fix?.what || "")}</b></div>
+      <div class=pvrow>${chips}</div>
+      <p class=dim style="font-size:12px">how you did, graded by ${esc(g.judge_model || "the judge")}. open the full coaching for the nudges and rewrites.</p>`;
+    coachLink.href = "/runs/" + encodeURIComponent(run) + "/coaching.html";
+    coachLink.style.display = "";
+  } catch {
+    box.innerHTML = `<p class=dim style="font-size:12px">coaching on your own responses is generated after the session is graded. the report above has the code checks now.</p>`;
+  }
+}
+
 document.getElementById("endBtn").onclick = async () => {
   if (!state) return;
-  const res = await fetch("/api/end", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ run: state.run }) });
+  const run = state.run;
+  const res = await fetch("/api/end", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ run }) });
   const data = await res.json();
   if (timerHandle) clearInterval(timerHandle);
-  document.getElementById("endMsg").textContent = "session ended. report:";
+  document.getElementById("endMsg").textContent = "session ended.";
   document.getElementById("reportLink").href = data.report || "#";
   endPanel.classList.add("on");
+  renderCoaching(run);
 };
 
 document.getElementById("backBtn").onclick = () => {

@@ -17,6 +17,9 @@ table{border-collapse:collapse;width:100%;font-size:13px}
 th{text-align:left;font-weight:400;color:var(--dim);font-size:10px;padding:4px 8px 8px 0;border-bottom:1px solid var(--line)}
 td{padding:7px 8px 7px 0;border-bottom:1px solid var(--line);vertical-align:top}
 td.ok{color:var(--ok);font-weight:700}td.bad{color:var(--bad);font-weight:700}td.none{color:var(--dim)}
+.pvrow{display:flex;flex-wrap:wrap;gap:4px}
+.pv{font-size:10px;padding:2px 6px;border:1px solid var(--line);border-radius:2px;white-space:nowrap}
+.pv.ok{border-color:var(--ok);color:var(--ok);background:var(--okbg)}.pv.bad{border-color:var(--bad);color:var(--bad);background:var(--badbg)}
 .docs div{padding:7px 0;border-bottom:1px solid var(--line);display:flex;gap:14px;font-size:13px;align-items:baseline}
 .docs .dim{margin-left:auto;text-align:right;max-width:60%}
 footer{margin-top:70px;color:var(--dim);font-size:11px;border-top:1px solid var(--line);padding-top:12px;display:flex;justify-content:space-between}
@@ -27,10 +30,109 @@ kbd{border:1px solid var(--line);padding:0 4px;border-radius:2px}
 <p class=sub>difficult conversations and situations, think and navigate gracefully. <a href="/">chat →</a> · <a href="../decisions.md">decisions.md</a> · <a href="../scenario-map-draft.md">scenario-map-draft.md</a></p>
 
 <h2 class=b>now</h2>
-<ul class=now><li>Ben delivered 10 rough scenarios (scenarios.md, 2026-07-20) plus the audience lever (same content up / across / down / external changes the right answer); mapped into 5 families in scenario-map-draft.md, pending his review</li><li>audience research done 2026-07-20 as drafts, reviewed, pending Ben: coaching/audience-calibration-research-draft.md (verdict: add P7 audience_mismatch and FM7 power_flatten, with full pass/fail definitions; TA ego states kept as shorthand only, weak evidence base) and scenarios/family-e-questions-draft.md (E1 Friday drop, E2 date vs requirements, E3 promo not-this-cycle, E4 comp, E5 invisible work; E4 flagged thinnest grounding)</li><li>Ben read the map, rubric, and research drafts (2026-07-20) and said go: build the chat UI, vibe-loop two scenarios per the recommended approach, deliver detailed HTML run artifacts for his review; his feedback then decides what changes in the rubrics</li><li>V1 harness LIVE: `node harness/server.mjs` → http://localhost:4795/ (chat UI, timestamps, soft timer); vibe loop run to green on both scenarios (see 2026-07-20 entry below); latest reports: runs/2026-07-20T08-00-17-mann-ai-sparring and runs/2026-07-20T07-58-55-e1-friday-drop</li><li>Ben: play both scenarios live in the chat UI, review the reports and canvas, give feedback on persona feel + what the reports should add; then rubric changes get decided</li><li>Wispr+parakeet stays demarcated (spec in practicer rubric C1/C6/C9, not built); judging stays off until the vibe loop settles (doctrine stage 1); second clean consecutive run still needed on both scenarios before anything is called calibrated</li><li>Ben: review the drafts: personas/*-dossier-draft.md, coaching/pedagogy-research-draft.md, evals/practicer-rubric-draft.md (5 open questions at its end: P3 strictness, P4 audio vs chat feed, hedge lexicon pruning, pause threshold, Wispr timestamp viability)</li><li>workstream 1 (next build): local web chat UI on top of the imported harness, per-message timestamps, visible soft timer; harness import happens inside this build so it lands tested</li><li>workstream 2 done 2026-07-20 as drafts: eight persona dossiers + fit table delivered, reviewed, pending Ben</li><li>workstream 3: Wispr Flow audio location + parakeet ASR with word timestamps, prove pause extraction on one real dictation (also answers rubric open question 5)</li><li>workstream 4 done 2026-07-20 as drafts: pedagogy research + practicer rubric v0 (8 code checks, 6 binary judge modes, baseline record schema; all few-shots TODO until real labeled sessions), reviewed, pending Ben</li></ul>
+<ul class=now><li>A/B brain comparison done 2026-07-22 (deepseek v4-flash vs gemini 3.5-flash-lite as the counterpart, Ben's real turns replayed through both): deepseek wins all three scenarios on the blind Opus pairwise judge. See the a/b section on the canvas and runs/AB-*/index.html. Deepseek stays the production brain; gemini flash-lite's chatbot cadence (a question every turn), 3-4x slower first token, and 7-13x cost per session make it the weaker roleplay partner for this use case</li><li>Ben delivered 10 rough scenarios (scenarios.md, 2026-07-20) plus the audience lever (same content up / across / down / external changes the right answer); mapped into 5 families in scenario-map-draft.md, pending his review</li><li>audience research done 2026-07-20 as drafts, reviewed, pending Ben: coaching/audience-calibration-research-draft.md (verdict: add P7 audience_mismatch and FM7 power_flatten, with full pass/fail definitions; TA ego states kept as shorthand only, weak evidence base) and scenarios/family-e-questions-draft.md (E1 Friday drop, E2 date vs requirements, E3 promo not-this-cycle, E4 comp, E5 invisible work; E4 flagged thinnest grounding)</li><li>Ben read the map, rubric, and research drafts (2026-07-20) and said go: build the chat UI, vibe-loop two scenarios per the recommended approach, deliver detailed HTML run artifacts for his review; his feedback then decides what changes in the rubrics</li><li>V1 harness LIVE: `node harness/server.mjs` → http://localhost:4795/ (chat UI, timestamps, soft timer); vibe loop run to green on both scenarios (see 2026-07-20 entry below); latest reports: runs/2026-07-20T08-00-17-mann-ai-sparring and runs/2026-07-20T07-58-55-e1-friday-drop</li><li>Ben: play both scenarios live in the chat UI, review the reports and canvas, give feedback on persona feel + what the reports should add; then rubric changes get decided</li><li>Wispr+parakeet stays demarcated (spec in practicer rubric C1/C6/C9, not built); judging stays off until the vibe loop settles (doctrine stage 1); second clean consecutive run still needed on both scenarios before anything is called calibrated</li><li>Ben: review the drafts: personas/*-dossier-draft.md, coaching/pedagogy-research-draft.md, evals/practicer-rubric-draft.md (5 open questions at its end: P3 strictness, P4 audio vs chat feed, hedge lexicon pruning, pause threshold, Wispr timestamp viability)</li><li>workstream 1 (next build): local web chat UI on top of the imported harness, per-message timestamps, visible soft timer; harness import happens inside this build so it lands tested</li><li>workstream 2 done 2026-07-20 as drafts: eight persona dossiers + fit table delivered, reviewed, pending Ben</li><li>workstream 3: Wispr Flow audio location + parakeet ASR with word timestamps, prove pause extraction on one real dictation (also answers rubric open question 5)</li><li>workstream 4 done 2026-07-20 as drafts: pedagogy research + practicer rubric v0 (8 code checks, 6 binary judge modes, baseline record schema; all few-shots TODO until real labeled sessions), reviewed, pending Ben</li></ul>
 
 <h2 class=g>runs</h2>
 <table><tr><th>when</th><th>scenario</th><th>mode</th><th>ben turns</th><th>counterpart turns</th><th>duration</th><th>cost</th><th>checks</th><th>report</th></tr>
+<tr>
+<td class=dim>07-22 · 12:01</td>
+<td>The networking VP (introduce yourself and your career)</td>
+<td class=dim>ab</td>
+<td>8</td>
+<td>9</td>
+<td class=dim>0:19</td>
+<td class=dim>$0.0023</td>
+<td class="ok">✓ pass</td>
+<td><span class=dim>—</span></td>
+</tr>
+<tr>
+<td class=dim>07-22 · 12:01</td>
+<td>The networking VP (introduce yourself and your career)</td>
+<td class=dim>ab</td>
+<td>8</td>
+<td>9</td>
+<td class=dim>0:10</td>
+<td class=dim>$0.0003</td>
+<td class="bad">✗ fail</td>
+<td><span class=dim>—</span></td>
+</tr>
+<tr>
+<td class=dim>07-22 · 12:01</td>
+<td>Sparring with Benjamin Mann on AI and product</td>
+<td class=dim>ab</td>
+<td>3</td>
+<td>4</td>
+<td class=dim>0:09</td>
+<td class=dim>$0.0013</td>
+<td class="ok">✓ pass</td>
+<td><span class=dim>—</span></td>
+</tr>
+<tr>
+<td class=dim>07-22 · 12:01</td>
+<td>Sparring with Benjamin Mann on AI and product</td>
+<td class=dim>ab</td>
+<td>3</td>
+<td>4</td>
+<td class=dim>0:05</td>
+<td class=dim>$0.0003</td>
+<td class="ok">✓ pass</td>
+<td><span class=dim>—</span></td>
+</tr>
+<tr>
+<td class=dim>07-22 · 12:00</td>
+<td>Hot-take with Boz on frontier vs open models</td>
+<td class=dim>ab</td>
+<td>6</td>
+<td>7</td>
+<td class=dim>0:19</td>
+<td class=dim>$0.0023</td>
+<td class="ok">✓ pass</td>
+<td><span class=dim>—</span></td>
+</tr>
+<tr>
+<td class=dim>07-22 · 12:00</td>
+<td>Hot-take with Boz on frontier vs open models</td>
+<td class=dim>ab</td>
+<td>6</td>
+<td>7</td>
+<td class=dim>0:11</td>
+<td class=dim>$0.0002</td>
+<td class="ok">✓ pass</td>
+<td><span class=dim>—</span></td>
+</tr>
+<tr>
+<td class=dim>07-22 · 09:56</td>
+<td><a href="../runs/2026-07-22T09-56-32-boz-frontier-vs-open/report.html">Hot-take with Boz on frontier vs open models</a></td>
+<td class=dim>interactive</td>
+<td>6</td>
+<td>7</td>
+<td class=dim>3:04</td>
+<td class=dim>$0.0002</td>
+<td class="ok">✓ pass</td>
+<td><a href="../runs/2026-07-22T09-56-32-boz-frontier-vs-open/report.html">report</a></td>
+</tr>
+<tr>
+<td class=dim>07-22 · 09:52</td>
+<td><a href="../runs/2026-07-22T09-52-09-vp-networking-intro/report.html">The networking VP (introduce yourself and your career)</a></td>
+<td class=dim>interactive</td>
+<td>8</td>
+<td>9</td>
+<td class=dim>4:07</td>
+<td class=dim>$0.0002</td>
+<td class="bad">✗ fail</td>
+<td><a href="../runs/2026-07-22T09-52-09-vp-networking-intro/report.html">report</a></td>
+</tr>
+<tr>
+<td class=dim>07-22 · 09:11</td>
+<td><a href="../runs/2026-07-22T09-11-03-mann-ai-sparring/report.html">Sparring with Benjamin Mann on AI and product</a></td>
+<td class=dim>interactive</td>
+<td>3</td>
+<td>4</td>
+<td class=dim>7:00</td>
+<td class=dim>$0.0003</td>
+<td class="bad">✗ fail</td>
+<td><a href="../runs/2026-07-22T09-11-03-mann-ai-sparring/report.html">report</a></td>
+</tr>
 <tr>
 <td class=dim>07-20 · 08:00</td>
 <td><a href="../runs/2026-07-20T08-00-17-mann-ai-sparring/report.html">Sparring with Benjamin Mann on AI and product</a></td>
@@ -153,10 +255,48 @@ kbd{border:1px solid var(--line);padding:0 4px;border-radius:2px}
 <td><a href="../runs/2026-07-20T07-52-56-mann-ai-sparring/report.html">report</a></td>
 </tr></table>
 
-<h2 class=p>documents</h2>
-<div class=docs><div><a href="../README.md">README.md</a><span class=dim>onthespot</span></div><div><a href="../decisions.md">decisions.md</a><span class=dim>Decisions</span></div><div><a href="../scenario-map-draft.md">scenario-map-draft.md</a><span class=dim>Scenario map — draft for Ben's review (2026-07-20)</span></div><div><a href="../scenarios.md">scenarios.md</a><span class=dim></span></div><div><a href="../scenarios/e1-friday-drop.md">scenarios/e1-friday-drop.md</a><span class=dim>Family E1. Thursday 1:1. Ben is mid-quarter with two committed workstreams, one already at risk. His manager hands him an exec-requested competitive analysis due in ten days. The trap is the instant yes and the flat no; the pass is naming the trade.</span></div><div><a href="../scenarios/family-e-questions-draft.md">scenarios/family-e-questions-draft.md</a><span class=dim>Family E: manager difficult-conversation questions — draft for Ben's review (2026-07-20)</span></div><div><a href="../scenarios/mann-ai-sparring.md">scenarios/mann-ai-sparring.md</a><span class=dim>Family C. Ben articulates how he actually uses LLMs as a PM, his take on frontier vs open models, and how multi-agent systems work. Mann probes for operational definitions and evidence.</span></div><div><a href="../personas/fit-summary-draft.md">personas/fit-summary-draft.md</a><span class=dim>Persona x scenario fit summary (draft)</span></div><div><a href="../coaching/audience-calibration-research-draft.md">coaching/audience-calibration-research-draft.md</a><span class=dim>Audience calibration research — draft for Ben's review (2026-07-20)</span></div><div><a href="../coaching/pedagogy-research-draft.md">coaching/pedagogy-research-draft.md</a><span class=dim>Coaching pedagogy research — draft 1</span></div><div><a href="../evals/practicer-rubric-draft.md">evals/practicer-rubric-draft.md</a><span class=dim>Practicer rubric — draft 1 (binary failure-mode judges)</span></div></div>
+<h2 class=t>coaching stream (grades ben, accumulates)</h2>
+<table><tr><th>when</th><th>session</th><th>habit verdicts</th><th>one fix chosen</th></tr>
+<tr>
+<td class=dim>07-22 · 09:52</td>
+<td><a href="../runs/2026-07-22T09-52-09-vp-networking-intro/coaching.html">The networking VP (introduce yourself and your career)</a><div class=dim style="font-size:11px">external</div></td>
+<td><div class=pvrow><span class="pv bad">✗ answers-first</span> <span class="pv ok">✓ commits</span> <span class="pv ok">✓ lands-ending</span> <span class="pv ok">✓ no-leak</span> <span class="pv ok">✓ answers-asked</span> <span class="pv bad">✗ structured</span></div></td>
+<td>Lead every substantive turn with a one-sentence answer to the exact question, then stop and let the counterpart pull the next thread.</td>
+</tr>
+<tr>
+<td class=dim>07-22 · 09:56</td>
+<td><a href="../runs/2026-07-22T09-56-32-boz-frontier-vs-open/coaching.html">Hot-take with Boz on frontier vs open models</a><div class=dim style="font-size:11px">across-up</div></td>
+<td><div class=pvrow><span class="pv ok">✓ answers-first</span> <span class="pv ok">✓ commits</span> <span class="pv ok">✓ lands-ending</span> <span class="pv ok">✓ no-leak</span> <span class="pv bad">✗ answers-asked</span> <span class="pv ok">✓ structured</span></div></td>
+<td>When the pointed 'have you actually done it' question lands, answer it straight, even when the honest answer is 'no, not yet,' then defend the bet with a named fallback.</td>
+</tr></table>
+<p class=sub>from the practicer rubric, graded by a pinned Opus judge, reconciled by harness/reconcile.mjs. oldest first so the fix-over-time reads down the column.</p>
 
-<footer><span><kbd>m</kbd> light/dark</span><span>generated 2026-07-20 08:00 · ben + claude</span></footer>
+<h2 class=b>a/b: model comparison (roleplay, same human turns)</h2>
+<table><tr><th>scenario</th><th>overall winner</th><th>dimension tally</th><th>judge</th></tr>
+<tr>
+<td><a href="../runs/AB-2026-07-22T12-01-14-vp-networking-intro/index.html">vp-networking-intro</a></td>
+<td><span class="pv ok">deepseek</span></td>
+<td class=dim>deepseek 5 · gemini 1 · tie 0</td>
+<td class=dim>claude-opus-4-8</td>
+</tr>
+<tr>
+<td><a href="../runs/AB-2026-07-22T12-01-00-mann-ai-sparring/index.html">mann-ai-sparring</a></td>
+<td><span class="pv ok">deepseek</span></td>
+<td class=dim>deepseek 4 · gemini 0 · tie 2</td>
+<td class=dim>claude-opus-4-8</td>
+</tr>
+<tr>
+<td><a href="../runs/AB-2026-07-22T12-00-30-boz-frontier-vs-open/index.html">boz-frontier-vs-open</a></td>
+<td><span class="pv ok">deepseek</span></td>
+<td class=dim>deepseek 4 · gemini 1 · tie 1</td>
+<td class=dim>claude-opus-4-8</td>
+</tr></table>
+<p class=sub>deepseek v4-flash vs gemini 3.5-flash-lite as the counterpart, driven with Ben's real turns from the graded plays. Blind pinned pairwise judge, code checks and latency and cost measured deterministically.</p>
+
+<h2 class=p>documents</h2>
+<div class=docs><div><a href="../README.md">README.md</a><span class=dim>onthespot</span></div><div><a href="../decisions.md">decisions.md</a><span class=dim>Decisions</span></div><div><a href="../scenario-map-draft.md">scenario-map-draft.md</a><span class=dim>Scenario map — draft for Ben's review (2026-07-20)</span></div><div><a href="../scenarios.md">scenarios.md</a><span class=dim></span></div><div><a href="../scenarios/boz-frontier-vs-open.md">scenarios/boz-frontier-vs-open.md</a><span class=dim>Family C (Ben #6). Ben defends a position on frontier versus open-weight models and token efficiency to Andrew Bosworth. Boz concedes specifics, attacks specifics, and demands firsthand evidence. The trap is a hype claim or a hedge with no position; the pass is a committed take argued from things Ben has actually built or tested.</span></div><div><a href="../scenarios/e1-friday-drop.md">scenarios/e1-friday-drop.md</a><span class=dim>Family E1. Thursday 1:1. Ben is mid-quarter with two committed workstreams, one already at risk. His manager hands him an exec-requested competitive analysis due in ten days. The trap is the instant yes and the flat no; the pass is naming the trade.</span></div><div><a href="../scenarios/exec-bandwidth-probe.md">scenarios/exec-bandwidth-probe.md</a><span class=dim>Family B (Ben #3, #4). A senior group-company executive catches Ben and asks what he is working on and whether he has bandwidth. The literal question is not the real one; answering it flat, either I'm free or I'm slammed, is the trap. The pass is reading the real ask, giving a crisp prioritized portfolio, and surfacing the tradeoff before committing.</span></div><div><a href="../scenarios/family-e-questions-draft.md">scenarios/family-e-questions-draft.md</a><span class=dim>Family E: manager difficult-conversation questions — draft for Ben's review (2026-07-20)</span></div><div><a href="../scenarios/mann-ai-sparring.md">scenarios/mann-ai-sparring.md</a><span class=dim>Family C. Ben articulates how he actually uses LLMs as a PM, his take on frontier vs open models, and how multi-agent systems work. Mann probes for operational definitions and evidence.</span></div><div><a href="../scenarios/vp-networking-intro.md">scenarios/vp-networking-intro.md</a><span class=dim>Family A (Ben #1, #2). A senior VP of Product Ben just met at an industry mixer asks what he does, then how his career in product has gone. The trap is the rambling autobiography and insider jargon; the pass is a compressed, concrete, hooky answer that earns a real follow-up.</span></div><div><a href="../personas/fit-summary-draft.md">personas/fit-summary-draft.md</a><span class=dim>Persona x scenario fit summary (draft)</span></div><div><a href="../coaching/audience-calibration-research-draft.md">coaching/audience-calibration-research-draft.md</a><span class=dim>Audience calibration research — draft for Ben's review (2026-07-20)</span></div><div><a href="../coaching/pedagogy-research-draft.md">coaching/pedagogy-research-draft.md</a><span class=dim>Coaching pedagogy research — draft 1</span></div><div><a href="../coaching/session-2026-07-22-baseline.md">coaching/session-2026-07-22-baseline.md</a><span class=dim>Session baseline, 2026-07-22</span></div><div><a href="../evals/practicer-rubric-draft.md">evals/practicer-rubric-draft.md</a><span class=dim>Practicer rubric — draft 1 (binary failure-mode judges)</span></div></div>
+
+<footer><span><kbd>m</kbd> light/dark</span><span>generated 2026-07-22 12:11 · ben + claude</span></footer>
 </main>
 <script>
 if(matchMedia("(prefers-color-scheme:dark)").matches)document.body.classList.add("dark");

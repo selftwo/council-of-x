@@ -14,6 +14,7 @@ All computed from transcript.jsonl (per-message timestamps) plus the parakeet wo
 
 - **Wispr Flow cleans the text.** Fillers, restarts, and some hedges are removed by Wispr's formatting before the text reaches the chat. So filler and pause metrics MUST come from the raw-audio transcript (parakeet), not the chat text. Hedge-phrase counts on chat text are a lower bound; run them on both and record both numbers. TODO: verify empirically how much Wispr removes by diffing one session's raw transcript against its chat text.
 - **Audio is personal data.** All audio-derived metrics are computed locally; raw transcript content never appears in committed files without Ben's OK. The baseline record stores numbers, not quotes.
+- **Transcription errors are not performance (decided 2026-07-22).** Wispr garbles domain terms, and the judge must grade Ben's intent, never the transcription. Confirmed real cases from session 1: "hardness" means harness, "revals" means evals, "loans" means LLMs, "stimulating" means simulating. Judges are fed the domain glossary below and told to normalize silently before grading; a turn is never marked down for a Wispr misspelling. Glossary (extend as new garbles appear): harness, evals, LLMs, RAG, simulating, orchestration, inference provider, open weights, frontier, quantization, tokenizer, logits, fine-tune, eval suite, Wispr Flow, parakeet. If a garble is ambiguous enough that intent is unclear, the judge flags the turn for Ben instead of guessing.
 
 ### C1. Reply latency
 Per Ben turn: seconds from the counterpart's message timestamp to the start of Ben's dictation audio (fallback: to Ben's message timestamp, minus estimated dictation duration). Record per-turn values, median, p90. No pass/fail threshold yet; this is a tracked metric. Long latency is not automatically bad (thinking pause is coached FOR, behavior 7); what matters is the trend and the pairing with filler density.
@@ -72,9 +73,11 @@ TODO: few-shot examples, especially the pass case that distinguishes calibrated 
 
 **PASS:** turns end on a declarative close, a clear question, or an explicit ask. A deliberate summary prompt ("so what I want you to take away is...") is the model behavior.
 
-**FAIL:** a turn that tapers into qualification, trails off mid-thought, or ends by un-saying the content ("...I don't know if that makes sense", "...but maybe not"). One clear instance in a session fails the mode; this is the single cheapest habit to fix and the rubric treats it strictly.
+**FAIL:** a turn that tapers into qualification, trails off mid-thought, or ends by un-saying the content ("...I don't know if that makes sense", "...but maybe not").
 
-TODO: few-shot examples; also decide after real sessions whether one instance per session is too strict for a baseline period.
+**Severity gate (decided 2026-07-22 from real data, enforced in harness/reconcile.mjs).** One soft rhetorical taper in a session ("so why not") is recorded as a note, not a session failure, during the baseline period. Ben's call: failing the whole mode on a single mild close is noise, not guidance, and it buries the real fixes. P3 fails the session only when there are 2+ tapers OR one that actively reverses the content ("...but maybe that's wrong", "...I don't know if any of that is right"). When the judge sees a content-reversing close, it sets `reversal: true` on the verdict so the gate keeps it. The single-taper note still shows in the report so the habit stays visible; it just does not fail the session.
+
+TODO: few-shot examples, including one clear reversal (keeps failing) versus one soft taper (note only).
 
 ### P4 — leaking
 **Evaluates:** self-sabotaging meta-commentary (behavior 6: no leaking; de Montebello stay-in-character, Pfeffer no preemptive apologies). Feed: all Ben turns, plus C5 hits.
@@ -92,7 +95,9 @@ TODO: few-shot examples. Note: Wispr may strip some of this from text; if C5 fir
 
 **FAIL:** a question is met with an answer to a different, easier question, with unrequested context instead of the answer, or is silently abandoned while Ben moves to his own thread.
 
-TODO: few-shot examples from real sessions (this failure mode is already known to be Ben's from the shreyas-sparring run, where the persona's FM4 fail was exactly a dodged pre-mortem question; when that transcript is labeled it can seed this mode).
+**Tiebreaker with P1 (decided 2026-07-22 from real data, enforced in harness/reconcile.mjs).** When the same Ben turn fails both P1 (buried_lead) and P5 (question_dodged), the burying is the root act and it is counted once, under P1. Rationale: on the networking run, turns 4 and 6 failed both modes for a single behavior (the direct answer was buried under abstraction), which double-counts one habit. P5 keeps only the turns where Ben answered a DIFFERENT question with a direct answer that was available to him, which is a real dodge (the Boz run, turn 5, "you will see when we get there," is the clean example: P1 passed, so the deflection stands on its own). If, after removing the buried-lead turns, P5 has no turns left, P5 passes. The removed turns are recorded on P5 as `subsumed_turns` so nothing is hidden.
+
+TODO: few-shot examples separating a buried answer (P1) from a substituted answer with a direct one available (P5); the Boz turn 5 deflection can seed the P5 side.
 
 ### P6 — incoherent_structure
 **Evaluates:** whether Ben's longer turns have a recognizable shape (behavior 4: structured, not listed; behavior 3: one direction, committed; Abrahams "structure halves your burden", de Montebello choose a strong direction). Feed: Ben turns over ~80 words.
@@ -119,7 +124,13 @@ Delta computation later: same scenario family, ordered by date, per-metric time 
 
 ## 4. Open questions for Ben
 
-1. Is one un-said ending per session too strict for the baseline period (P3)?
+Resolved 2026-07-22 from session 1 (enforced in harness/reconcile.mjs, so they are code now, not prose):
+- P3 single-taper strictness: RESOLVED. One soft taper is a recorded note, not a session fail; fails on 2+ or a content-reversing close.
+- P1/P5 double-count: RESOLVED. Tiebreaker counts a buried-then-dodged turn once, under P1; P5 keeps only real dodges where a direct answer was available.
+- Garbled Wispr terms: RESOLVED. Judge grades intent against the domain glossary in section 1; transcription errors never cost Ben.
+
+Still open:
+1. (was open) P6 auto-passes when no Ben turn is long enough to judge (the whole Boz run). Should the record say "not enough long turns to judge" separately from a real pass, so a quiet session is not mistaken for a structured one?
 2. Should P4 judge the audio-derived transcript when Wispr cleaned the leak out of the chat text, or stay chat-only with the audio hit recorded as a metric?
 3. The hedge lexicon (C3) needs pruning against your real register; "just" and "probably" may be noise.
 4. Threshold for a "pause" (C6): 2.0s is a guess.

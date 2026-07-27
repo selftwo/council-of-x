@@ -74,6 +74,13 @@ createServer(async (req, res) => {
       res.writeHead(200, { "content-type": "application/json" });
       return res.end(JSON.stringify({ report: `/runs/${run}/report.html` }));
     }
+    if (p === "/api/coaching") {
+      const run = (url.searchParams.get("run") || "").replace(/[^0-9A-Za-z:_.-]/g, "");
+      const f = normalize(join(ROOT, "runs", run, "practicer.json"));
+      if (!run || !f.startsWith(join(ROOT, "runs")) || !existsSync(f)) { res.writeHead(404, { "content-type": "application/json" }); return res.end("{}"); }
+      res.writeHead(200, { "content-type": "application/json" });
+      return res.end(readFileSync(f));
+    }
     // static: reports, canvas, docs
     const file = normalize(join(ROOT, p));
     if (!file.startsWith(ROOT) || !existsSync(file) || statSync(file).isDirectory()) { res.writeHead(404); return res.end("not found"); }

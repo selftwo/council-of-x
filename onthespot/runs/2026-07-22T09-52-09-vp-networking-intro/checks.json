@@ -1,0 +1,46 @@
+{
+  "banned_characters": {
+    "pass": false,
+    "failing_turns": [
+      {
+        "turn": 3,
+        "count": 1
+      },
+      {
+        "turn": 5,
+        "count": 1
+      },
+      {
+        "turn": 8,
+        "count": 1
+      }
+    ]
+  },
+  "stacked_questions": {
+    "pass": false,
+    "failing_turns": [
+      {
+        "turn": 2,
+        "questions": 2
+      },
+      {
+        "turn": 7,
+        "questions": 2
+      }
+    ]
+  },
+  "overlong_reply": {
+    "pass": true,
+    "failing_turns": []
+  },
+  "markdown_leak": {
+    "pass": true,
+    "failing_turns": []
+  },
+  "compliment_opener_flag": {
+    "pass": true,
+    "failing_turns": [],
+    "soft": true
+  },
+  "all_hard_pass": false
+}

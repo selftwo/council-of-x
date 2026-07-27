@@ -1,0 +1,118 @@
+<!doctype html><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1">
+<title>A/B · Sparring with Benjamin Mann on AI and product · deepseek vs gemini</title>
+<style>
+:root{--fg:#16181d;--bg:#fff;--dim:#7a7f8a;--line:#e6e8ec;--soft:#f5f6f8;--ok:#0f8a3d;--okbg:#e9f7ee;--bad:#c8321f;--badbg:#fbeeec;--warn:#a86400;--warnbg:#fdf4e3;--blue:#1d5fd6;--bluebg:#eaf1fd;--purple:#6d3fc4;--purplebg:#f2ecfb;--teal:#0b7f74;--tealbg:#e6f5f3}
+body.dark{--fg:#e8eaee;--bg:#131417;--dim:#8b8f99;--line:#2a2d33;--soft:#1c1e23;--ok:#57cf82;--okbg:#15291c;--bad:#ff7b6b;--badbg:#311b17;--warn:#e0a63f;--warnbg:#2d2413;--blue:#6d9ff2;--bluebg:#17233a;--purple:#af8df0;--purplebg:#241b36;--teal:#4ecdc0;--tealbg:#12302d}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.55 "SF Mono",ui-monospace,Menlo,monospace}
+main{max-width:1000px;margin:0 auto;padding:40px 24px 80px}
+h1{font-size:18px;margin:0 0 4px}
+h2{font-size:12px;font-weight:600;letter-spacing:.08em;margin:44px 0 14px;padding-left:10px;border-left:3px solid var(--accent,var(--blue))}
+h2.g{--accent:var(--ok)}h2.p{--accent:var(--purple)}h2.b{--accent:var(--blue)}h2.t{--accent:var(--teal)}
+.meta{color:var(--dim);font-size:12px}.meta b{color:var(--fg)}a{color:var(--blue)}.dim{color:var(--dim)}.ok{color:var(--ok);font-weight:700}.bad{color:var(--bad);font-weight:700}.b{color:var(--blue);font-weight:700}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th{text-align:left;font-weight:400;color:var(--dim);font-size:10px;padding:4px 8px 8px 0;border-bottom:1px solid var(--line)}
+td{padding:7px 8px 7px 0;border-bottom:1px solid var(--line);vertical-align:top}
+.callout{background:var(--bluebg);border:1px solid var(--blue);padding:10px 14px;font-size:12px;margin-bottom:16px}
+.verdict{font-size:15px}
+.exch{margin:0 0 22px;border-top:1px solid var(--line);padding-top:14px}
+.ben{border-left:3px solid var(--blue);padding-left:12px;margin-bottom:10px}
+.who{font-size:11px;letter-spacing:.06em;color:var(--blue);font-weight:700}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.rep{border:1px solid var(--line);padding:10px 12px}
+.rep.a{border-left:3px solid var(--purple)}.rep.b{border-left:3px solid var(--teal)}
+.rlab{font-size:10px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:5px}.rep.a .rlab{color:var(--purple)}.rep.b .rlab{color:var(--teal)}
+.txt{white-space:pre-wrap}.chips{font-size:10px;color:var(--dim);margin-top:6px}
+footer{margin-top:70px;color:var(--dim);font-size:11px;border-top:1px solid var(--line);padding-top:12px;display:flex;justify-content:space-between}
+kbd{border:1px solid var(--line);padding:0 4px;border-radius:2px}
+@media(max-width:720px){.cols{grid-template-columns:1fr}}
+</style>
+<main>
+<h1>A/B roleplay: deepseek v4-flash vs gemini 3.5-flash-lite</h1>
+<p class=meta>scenario <b>Sparring with Benjamin Mann on AI and product</b> · audience <b>across-up</b> · same human turns (<b>from-run:2026-07-22T09-11-03-mann-ai-sparring</b>) driven through both brains · the counterpart is the only variable.<br>
+deepseek run <b>2026-07-22T12-01-00-mann-ai-sparring</b> · gemini run <b>2026-07-22T12-01-04-mann-ai-sparring</b></p>
+
+<h2 class=b>the pinned judge</h2>
+<div class=callout>pinned judge <b>claude-opus-4-8</b>, 2026-07-22T12:08:59.338Z. Pairwise preference (which counterpart role-played better), not an absolute score. Comparison is easier and more reliable than scoring, so it is the one judge call this A/B leans on.</div>
+  <p class=verdict>overall: <b>deepseek v4-flash</b></p>
+  <p>A is the more faithful probing-expert Mann, distills Ben's messy input into operational challenges, and applies steadier pressure, whereas B lands one strong reframe but drifts into peer self-disclosure and gets pulled off course by garbled input.</p>
+  <table><tr><th>dimension</th><th>winner</th><th>why</th></tr><tr><td class=dim>persona_fidelity</td><td class="ok">deepseek</td><td>A runs Mann's operational-test and marginal-impact moves every turn while B drifts into generic-peer self-disclosure ('Mine is mostly goal-specific because we are building core systems').</td></tr>
+<tr><td class=dim>substance</td><td class="ok">deepseek</td><td>Both are concrete and B's curation reframe is sharp, but A directs more analytic force at Ben across all three turns while B spends turn 2 describing itself.</td></tr>
+<tr><td class=dim>spoken_register</td><td class="dim">tie</td><td>A leaks a forbidden verdict ('That is interesting') and B gets writerly ('the taste function for a very fast engine'); both end every turn on a question, so the flaws cancel.</td></tr>
+<tr><td class=dim>variety</td><td class="dim">tie</td><td>Neither varies the core shape since all three replies from both end in a question, never the flat statement the persona explicitly wants.</td></tr>
+<tr><td class=dim>handles_messy_input</td><td class="ok">deepseek</td><td>A distills the garbled dictation into clean challenges each time while B latched onto the garbled tail question and answered it about itself, pulling off Ben's point.</td></tr>
+<tr><td class=dim>practice_value</td><td class="ok">deepseek</td><td>A keeps sustained pressure forcing Ben to define terms and commit, while B's turn 2 mutual exchange softens the moment and slightly rescues him.</td></tr></table>
+  <p><b>deepseek:</b> Strong operational-definition and marginal-cost moves and clean handling of garbled input, but it opens turn 2 with a mild verdict and ends all three turns on a question.</p>
+  <p><b>gemini:</b> Has a genuinely sharp turn-3 reframe about curation and taste, but breaks role in turn 2 by talking about its own workflow and ends every turn on a question.</p>
+  <div class=callout style="border-color:var(--purple);background:var(--purplebg)"><b>for your use case:</b> Counterpart A, because it stays in the expert-probe role and forces operational precision on the practicer without rescuing or drifting onto itself.</div>
+
+<h2 class=g>the numbers · deterministic</h2>
+<table><tr><th>metric</th><th>deepseek v4-flash</th><th>gemini 3.5-flash-lite</th></tr>
+<tr><td class=dim>brain</td><td>deepseek-v4-flash</td><td>deepseek-v4-flash</td></tr>
+<tr><td class=dim>visible reply, median words</td><td>47</td><td>50</td></tr>
+<tr><td class=dim>first token, median</td><td>526ms</td><td>2887ms</td></tr>
+<tr><td class=dim>full reply, median</td><td>1566ms</td><td>2891ms</td></tr>
+<tr><td class=dim>hidden thinking tokens (total)</td><td>0 (disabled)</td><td>1846</td></tr>
+<tr><td class=dim>visible output tokens (total)</td><td>153</td><td>165</td></tr>
+<tr><td class=dim>cost for the session</td><td>$0.00028</td><td>$0.00126</td></tr>
+<tr><td class=dim>no — – * chars</td><td><span class=ok>clean</span></td><td><span class=ok>clean</span></td></tr>
+<tr><td class=dim>one question per reply</td><td><span class=ok>clean</span></td><td><span class=ok>clean</span></td></tr>
+<tr><td class=dim>length in bounds</td><td><span class=ok>clean</span></td><td><span class=ok>clean</span></td></tr>
+<tr><td class=dim>no markdown</td><td><span class=ok>clean</span></td><td><span class=ok>clean</span></td></tr></table>
+<p class=dim>code checks from harness/checks.mjs, never judged by an LLM. Gemini 3.x cannot fully disable thinking; the lowest setting still spends the hidden tokens shown, which raises latency and cost even though the visible reply is short.</p>
+
+<h2 class=t>same input, two counterparts</h2>
+
+<div class=exch>
+  <div class=ben><div class=who>ben · turn 1</div><div class=txt>The way I use agents, and the way it has been over the past eight months, is by throwing it at different problems or aspects that I am working on. I am curious about how much it can do, whether it is:
+- researching
+- looking up something
+- doing feasibility research
+- answering questions
+- analyzing some information
+- taking a basic set of context and feeding it in certain directions
+These were the kinds of explorations that happened.
+Starting with very small feedback, critics say, “This design or UI,” or just answering very specific questions: “What do these options do? What feasibility do we need to look at in terms of backward compatibility? What are the products in the e-commerce space?”
+Largely, it has been around those aspects. What has helped and improved it is that it has pushed it more into building functional prototypes and being closer to arriving there. Is it a greenfield or brownfield one? How do we get there?
+Every step along the way has been with a coding agent, the Codex, or Claude Code. We tried and learned along the way.</div></div>
+  <div class=cols>
+    <div class="rep a"><div class=rlab>deepseek</div><div class=txt>When you say agent, do you mean you give it a task and it goes away and comes back with an answer, or you're in an interactive loop with it the whole time? Because those two modes have very different failure profiles.</div><div class=chips>42w · 753ms first · $0.00019</div></div>
+    <div class="rep b"><div class=rlab>gemini</div><div class=txt>When you use a coding agent for prototyping, does it actually save net time once you factor in fixing the output, or is the real value just exploring the design space faster?</div><div class=chips>32w · 2887ms first · 639 think · $0.00040</div></div>
+  </div>
+</div>
+
+<div class=exch>
+  <div class=ben><div class=who>ben · turn 2</div><div class=txt>The code I write is mostly for:
+- functioning prototypes
+- visualizations
+- giving feedback
+- understanding
+- getting the touch and feel of things right
+- stimulating it to be closer to what that experience would look like
+- trying to get feedback, either by myself or from others
+Right now, the bottleneck is the ability to pay attention. You can really push to be a bit more ambitious, do a bit more research, and do that last 5-10% optimization. As much as that works, it also means you need to pay more attention and be more focused. Without really knowing, you can do four or five other things at the same time, and it becomes hard to stay on that.
+Focus and attention are also important. Knowing what kind of work you can verify and closing the loop on that with feedback makes you think more.
+In terms of this kind of thing, is it exploratory through your work, or is it very focused on critical, goal-specific work? Given that PM work is small and exploratory, you are not much to show for it.</div></div>
+  <div class=cols>
+    <div class="rep a"><div class=rlab>deepseek</div><div class=txt>You are describing a bottleneck that sounds less like the model's capability and more like your own attention budget. That is interesting. What is the marginal cost of one more agent call versus one more minute of your focus, and which one is more constrained right now?</div><div class=chips>47w · 526ms first · $0.00005</div></div>
+    <div class="rep b"><div class=rlab>gemini</div><div class=txt>Mine is mostly goal-specific because we are building core systems, but the exploratory phase bleeds right into it. You have to test hypotheses before committing engineering resources. 
+
+When you hit that attention bottleneck on the last ten percent of a prototype, do you write tighter specs to force the model to stay on track, or do you just step in and finish the code yourself?</div><div class=chips>65w · 3435ms first · 587 think · $0.00042</div></div>
+  </div>
+</div>
+
+<div class=exch>
+  <div class=ben><div class=who>ben · turn 3</div><div class=txt>The challenge is essentially abundance. There are so many things you can do and not do at the same time, with so many levers in the playground, or so many knobs. Whether it is a bit more research to shape this better, a bit more data to contextualize your user persona, or using that for that use case, a bit more search on capability (for example, changing input from text to voice), doing it in more iterations and versions without actually having that real environment.
+
+It takes feedback, so the abundance of too many things you can possibly do becomes the bottleneck. The way you are doing this is also not the same for PMs and not the same for developers. Trying to do that and optimize also does not help.</div></div>
+  <div class=cols>
+    <div class="rep a"><div class=rlab>deepseek</div><div class=txt>You said abundance is the bottleneck, but abundance of what exactly. Is it that the model surfaces too many plausible next steps and you cannot evaluate them fast enough, or that the model narrows too quickly and you have to fight it to explore? Those are opposite problems.</div><div class=chips>48w · 489ms first · $0.00005</div></div>
+    <div class="rep b"><div class=rlab>gemini</div><div class=txt>When generation is nearly free, the scarce resource stops being execution and becomes curation. You spend all your energy acting as the taste function for a very fast engine. How do you decide which branch of the prototype tree to prune when spinning up a new version takes ten seconds?</div><div class=chips>50w · 2815ms first · 620 think · $0.00044</div></div>
+  </div>
+</div>
+
+<footer><span><a href="../../canvas/index.html">← canvas</a> · <a href="../2026-07-22T12-01-00-mann-ai-sparring/report.html">deepseek report</a> · <a href="../2026-07-22T12-01-04-mann-ai-sparring/report.html">gemini report</a> · <kbd>m</kbd> light/dark</span><span>onthespot A/B · 2026-07-22</span></footer>
+</main>
+<script>
+if(matchMedia("(prefers-color-scheme:dark)").matches)document.body.classList.add("dark");
+addEventListener("keydown",e=>{if(e.key==="m")document.body.classList.toggle("dark")});
+</script>

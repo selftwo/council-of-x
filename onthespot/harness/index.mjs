@@ -32,8 +32,10 @@ const runs = existsSync(RUNS) ? readdirSync(RUNS).filter((d) => existsSync(join(
   const when = d.match(/^(\d{4})-(\d{2})-(\d{2})T(\d{2})-(\d{2})/);
   const checks = readJson(join(RUNS, d, "checks.json"));
   const hasReport = existsSync(join(RUNS, d, "report.html"));
+  const practicer = readJson(join(RUNS, d, "practicer.json"));
+  const hasCoaching = existsSync(join(RUNS, d, "coaching.html"));
   return {
-    id: d, meta, usd, benTurns, counterpartTurns, durationS, checks, hasReport,
+    id: d, meta, usd, benTurns, counterpartTurns, durationS, checks, hasReport, practicer, hasCoaching,
     stamp: when ? `${when[2]}-${when[3]} · ${when[4]}:${when[5]}` : d.slice(0, 10),
   };
 }) : [];
@@ -51,6 +53,38 @@ const runRows = runs.map((r) => `<tr>
 <td class="${r.checks ? (r.checks.all_hard_pass ? "ok" : "bad") : "none"}">${r.checks ? (r.checks.all_hard_pass ? "✓ pass" : "✗ fail") : "unchecked"}</td>
 <td>${r.hasReport ? `<a href="../runs/${esc(r.id)}/report.html">report</a>` : "<span class=dim>—</span>"}</td>
 </tr>`).join("\n");
+
+// ---- coaching stream: graded sessions, accumulates over time (measures Ben) ----
+const P_SHORT = { P1_buried_lead: "answers-first", P2_hedged_claims: "commits", P3_unsaid_ending: "lands-ending", P4_leaking: "no-leak", P5_question_dodged: "answers-asked", P6_incoherent_structure: "structured" };
+const coached = runs.filter((r) => r.practicer).sort((a, b) => a.id.localeCompare(b.id)); // oldest first, so deltas read forward
+const coachingRows = coached.map((r) => {
+  const v = r.practicer.verdicts || {};
+  const chips = Object.entries(v).map(([k, val]) => `<span class="pv ${val.pass ? "ok" : "bad"}">${val.pass ? "✓" : "✗"} ${P_SHORT[k] || k}</span>`).join(" ");
+  const link = r.hasCoaching ? `../runs/${esc(r.id)}/coaching.html` : `../runs/${esc(r.id)}/report.html`;
+  return `<tr>
+<td class=dim>${esc(r.stamp)}</td>
+<td><a href="${link}">${esc(r.meta.title || r.meta.scenario)}</a><div class=dim style="font-size:11px">${esc(r.meta.audience || "")}</div></td>
+<td><div class=pvrow>${chips}</div></td>
+<td>${esc(r.practicer.one_fix?.what || "")}</td>
+</tr>`;
+}).join("\n");
+
+// ---- A/B model comparisons: deepseek vs gemini on the same human turns ----
+const abDirs = existsSync(RUNS) ? readdirSync(RUNS).filter((d) => d.startsWith("AB-") && existsSync(join(RUNS, d, "index.html"))).sort().reverse() : [];
+const abRows = abDirs.map((d) => {
+  const j = readJson(join(RUNS, d, "judge.json"));
+  const win = j ? j.overall_winner : null;
+  const wins = j ? (j.per_dimension || []).filter((x) => x.dimension) : [];
+  const tally = (m) => wins.filter((x) => x.winner === m).length;
+  const winChip = win ? `<span class="pv ${win === "deepseek" ? "ok" : win === "gemini" ? "bad" : ""}">${win}</span>` : "<span class=dim>unjudged</span>";
+  const scen = d.replace(/^AB-[0-9T-]+/, "");
+  return `<tr>
+<td><a href="../runs/${esc(d)}/index.html">${esc(scen)}</a></td>
+<td>${winChip}</td>
+<td class=dim>${j ? `deepseek ${tally("deepseek")} · gemini ${tally("gemini")} · tie ${tally("tie")}` : ""}</td>
+<td class=dim>${j ? esc(j.judge_model) : ""}</td>
+</tr>`;
+}).join("\n");
 
 // ---- documents table ----
 function describe(path) {
@@ -104,6 +138,9 @@ table{border-collapse:collapse;width:100%;font-size:13px}
 th{text-align:left;font-weight:400;color:var(--dim);font-size:10px;padding:4px 8px 8px 0;border-bottom:1px solid var(--line)}
 td{padding:7px 8px 7px 0;border-bottom:1px solid var(--line);vertical-align:top}
 td.ok{color:var(--ok);font-weight:700}td.bad{color:var(--bad);font-weight:700}td.none{color:var(--dim)}
+.pvrow{display:flex;flex-wrap:wrap;gap:4px}
+.pv{font-size:10px;padding:2px 6px;border:1px solid var(--line);border-radius:2px;white-space:nowrap}
+.pv.ok{border-color:var(--ok);color:var(--ok);background:var(--okbg)}.pv.bad{border-color:var(--bad);color:var(--bad);background:var(--badbg)}
 .docs div{padding:7px 0;border-bottom:1px solid var(--line);display:flex;gap:14px;font-size:13px;align-items:baseline}
 .docs .dim{margin-left:auto;text-align:right;max-width:60%}
 footer{margin-top:70px;color:var(--dim);font-size:11px;border-top:1px solid var(--line);padding-top:12px;display:flex;justify-content:space-between}
@@ -119,6 +156,16 @@ kbd{border:1px solid var(--line);padding:0 4px;border-radius:2px}
 <h2 class=g>runs</h2>
 <table><tr><th>when</th><th>scenario</th><th>mode</th><th>ben turns</th><th>counterpart turns</th><th>duration</th><th>cost</th><th>checks</th><th>report</th></tr>
 ${runRows || "<tr><td colspan=9 class=dim>no runs yet</td></tr>"}</table>
+
+<h2 class=t>coaching stream (grades ben, accumulates)</h2>
+${coached.length ? `<table><tr><th>when</th><th>session</th><th>habit verdicts</th><th>one fix chosen</th></tr>
+${coachingRows}</table>
+<p class=sub>from the practicer rubric, graded by a pinned Opus judge, reconciled by harness/reconcile.mjs. oldest first so the fix-over-time reads down the column.</p>` : `<p class=sub>no graded sessions yet. play a scenario, then run the practicer judge to grade your responses.</p>`}
+
+<h2 class=b>a/b: model comparison (roleplay, same human turns)</h2>
+${abDirs.length ? `<table><tr><th>scenario</th><th>overall winner</th><th>dimension tally</th><th>judge</th></tr>
+${abRows}</table>
+<p class=sub>deepseek v4-flash vs gemini 3.5-flash-lite as the counterpart, driven with Ben's real turns from the graded plays. Blind pinned pairwise judge, code checks and latency and cost measured deterministically.</p>` : `<p class=sub>no a/b comparisons yet. run harness/ab.mjs then ab-judge.mjs then ab-report.mjs.</p>`}
 
 <h2 class=p>documents</h2>
 <div class=docs>${docRows}</div>
