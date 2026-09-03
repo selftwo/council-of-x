@@ -1,0 +1,55 @@
+---
+title: "Casey Winters"
+type: entity-person
+frequency: 45
+---
+
+# Casey Winters
+
+## Appearances (45 mentions)
+
+- [[28 Ways To Grow Supply In A Marketplace]]
+- [[Accelerating Growth At Scale  Phase 2 Of Kickstarting And Scaling A Marketplace]]
+- [[All The Ways To Grow Your Product]]
+- [[Breaking Into Growth]]
+- [[Choosing A Take Rate]]
+- [[Evaluating A Marketplace Business Idea]]
+- [[How To Hire Your First Growth Team]]
+- [[How To Increase Your Products Retention]]
+- [[How To Increase Your Retention]]
+- [[How To Kickstart And Scale A Consumer Business Step 4 Find Your Early Adopters B]]
+- [[How To Kickstart And Scale A Consumer Business Step 5 Retain Iterate Until Enoug]]
+- [[How To Kickstart And Scale A Marketplace Business   Part 2 Cracking The Chicken]]
+- [[How To Kickstart And Scale A Marketplace Business   Part 3 Cracking The Chicken]]
+- [[How To Kickstart And Scale A Marketplace Business   Part 4 Cracking The Chicken]]
+- [[How To Kickstart And Scale A Marketplace Business]]
+- [[How To Know If Youre Supply Or Demand Constrained    Phase 2 Of Kickstarting And]]
+- [[How To Know If Youve Got Product Market Fit]]
+- [[Kickstarting And Scaling A Consumer Business Step 6 Scale Build Your Growth Engi]]
+- [[Maintaining Quality  Phase 2 Of Kickstarting And Scaling A Marketplace Business]]
+- [[Marketplace City Expansion Strategy]]
+- [[Moving From Ic Product Manager To Manager Of Product Managers]]
+- [[My All Time Favorite Reads On Product Growth Leadership Writing Investing And Mu]]
+- [[My Favorite Pm Courses]]
+- [[Saying No]]
+- [[Six Rules Of Hiring For Growth]]
+- [[The Subscription Value Loop A Framework For Growing Consumer Subscription Busine]]
+- [[Turning Around An Underperforming Team   Issue 17]]
+- [[What Is A Good Payback Period]]
+- [[What Is Good Retention]]
+- [[What Theyd Do Differently  Kickstarting And Scaling A Marketplace Business]]
+- [[Why Marketplaces Fail]]
+- [[Bangaly Kaba]]
+- [[Brian Balfour]]
+- [[Brian Tolkin]]
+- [[Carilu Dietrich]]
+- [[Casey Winters]]
+- [[Elena Verna 30]]
+- [[Eli Schwartz]]
+- [[Fareed Mosavat]]
+- [[Jason Shah]]
+- [[Manik Gupta]]
+- [[Shishir Mehrotra]]
+- [[Timothy Davis]]
+- [[Todd Jackson]]
+- [[Yuriy Timen]]

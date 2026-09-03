@@ -1,0 +1,61 @@
+---
+title: "OKRs"
+type: entity-framework
+frequency: 90
+domain: "goal-setting"
+---
+
+# OKRs
+
+## Appearances (90 mentions)
+
+- [[A Founders Guide To Community]]
+- [[A Pms Guide To Influence]]
+- [[A Product Managers Guide To Web3]]
+- [[Fostering A Culture Of Experimentation]]
+- [[Getting Buy In]]
+- [[How A Traumatic Brain Injury Made Me A Better Pm And Person]]
+- [[How Ai Will Impact Product Management]]
+- [[How Coda Builds Product]]
+- [[How Duolingo Builds Product]]
+- [[How Figma Builds Product]]
+- [[How Gong Builds Product]]
+- [[How Linear Builds Product]]
+- [[How Miro Builds Product]]
+- [[How Notion Builds Product]]
+- [[How Perplexity Builds Product]]
+- [[How Ramp Builds Product]]
+- [[How Shopify Builds Product]]
+- [[How Snowflake Builds Product]]
+- [[How To Communicate Tradeoffs So Leaders Will Listen]]
+- [[How To Get Into Product Management]]
+- [[How To Get Your Marketing Team To Drive More Impact]]
+- [[Leading Your Company Through A Pandemic   Issue 20]]
+- [[My All Time Favorite Reads On Product Growth Leadership Writing Investing And Mu]]
+- [[Skills Pms Need To Build]]
+- [[The Art Of The Pivot Part 2 How Why And When To Pivot]]
+- [[The Best Of Lennys Newsletter 2023]]
+- [[What Seven Years At Airbnb Taught Me About Building A Business]]
+- [[Alisa Cohn]]
+- [[Annie Pearl]]
+- [[Anuj Rathi]]
+- [[Archie Abrams]]
+- [[Asha Sharma]]
+- [[Ben Horowitz]]
+- [[Ben Williams]]
+- [[Camille Fournier]]
+- [[Camille Ricketts]]
+- [[Carilu Dietrich]]
+- [[Casey Winters]]
+- [[Christina Wodtke]]
+- [[Claire Hughes Johnson]]
+- [[Claire Vo]]
+- [[Crystal W]]
+- [[Emily Kramer]]
+- [[Eoy Review]]
+- [[Evan Lapointe]]
+- [[Geoff Charles]]
+- [[Itamar Gilad]]
+- [[Jake Knapp  John Zeratsky]]
+- [[Janna Bastow]]
+- [[Jason Fried]]

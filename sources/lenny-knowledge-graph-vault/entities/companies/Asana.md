@@ -1,0 +1,57 @@
+---
+title: "Asana"
+type: entity-company
+frequency: 47
+---
+
+# Asana
+
+## Appearances (47 mentions)
+
+- [[A Comprehensive Survey Of Product Management]]
+- [[Counterintuitive Advice For Building Ai Products]]
+- [[Everyone Should Be Using Claude Code More]]
+- [[Examples And Templates Of 1 Pagers And Prds]]
+- [[Gtm Motions Of 30 B2B Saas Companies]]
+- [[How Figma Builds Product]]
+- [[How Shopify Builds Product]]
+- [[How To Describe Your Business As An Equation]]
+- [[How To Determine Your Activation Metric]]
+- [[How To Get Your Marketing Team To Drive More Impact]]
+- [[How To Interview Product Managers]]
+- [[How To Learn The Most About A Candidate From A Single Interview Question]]
+- [[How To Make An Impact In Your First 90 Days]]
+- [[How To Validate Your B2B Startup Idea]]
+- [[How Todays Fastest Growing B2B Businesses Found Their First Ten Customers]]
+- [[How Todays Fastest Growing B2B Startups Turned Their Early Users Into Paying Cus]]
+- [[Magical Growth Loops]]
+- [[My Favorite Decision Making Frameworks]]
+- [[My Favorite Product Management Templates]]
+- [[Seo Keywords Career Ladders Backlog Tools Copywriting Onlyfans Ama With Pete Kaz]]
+- [[Skills Pms Need To Build]]
+- [[The Best Of Lennys Newsletter 2022]]
+- [[What Is Good Monthly Churn]]
+- [[What Is Good Retention]]
+- [[Whats In Your Software Stack   Product Design Analytics Ds Research And More]]
+- [[Whats In Your Stack The State Of Tech Tools In 2025]]
+- [[Andrew Wilkinson]]
+- [[Claire Butler]]
+- [[Emily Kramer]]
+- [[Eoy Review]]
+- [[Interview Q Compilation]]
+- [[Itamar Gilad]]
+- [[Jackie Bavaro]]
+- [[Jason Fried]]
+- [[Jason M Lemkin]]
+- [[Jonathan Becker]]
+- [[Keith Coleman  Jay Baxter]]
+- [[Kristen Berman]]
+- [[Madhavan Ramanujam]]
+- [[Matt Mochary]]
+- [[Mihika Kapoor]]
+- [[Nabeel S Qureshi]]
+- [[Nikita Miller]]
+- [[Noah Weiss]]
+- [[Paige Costello]]
+- [[Wes Kao]]
+- [[Yuhki Yamashata]]

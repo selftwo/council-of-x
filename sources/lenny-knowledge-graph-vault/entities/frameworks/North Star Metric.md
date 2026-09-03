@@ -1,0 +1,61 @@
+---
+title: "North Star Metric"
+type: entity-framework
+frequency: 82
+domain: "metrics"
+---
+
+# North Star Metric
+
+## Appearances (82 mentions)
+
+- [[28 Ways To Grow Supply In A Marketplace]]
+- [[A Pms Guide To Influence]]
+- [[Choosing Your North Star Metric]]
+- [[Fostering A Culture Of Experimentation]]
+- [[General Management Functional And Hybrid Models Which Org Design Works Best For]]
+- [[How Close Is Ai To Replacing Product Managers]]
+- [[How Duolingo Reignited User Growth]]
+- [[How Givedirectly Increased Donations By Over 3 Millionyear Through Experimentati]]
+- [[How Linear Builds Product]]
+- [[How Snowflake Builds Product]]
+- [[How To Get Into Product Management]]
+- [[How To Know If Youre Supply Or Demand Constrained    Phase 2 Of Kickstarting And]]
+- [[Inspiration For The Year Ahead]]
+- [[Lessons From Going Freemium A Decision That Broke Our Business]]
+- [[Mission  Vision  Strategy  Goals  Roadmap  Task]]
+- [[My All Time Favorite Reads On Product Growth Leadership Writing Investing And Mu]]
+- [[Navigating Your Early Career]]
+- [[Product Led Marketing]]
+- [[Setting Goals]]
+- [[Six Rules Of Hiring For Growth]]
+- [[Summary The Ultimate Guide To Adding A Plg Motion  Hila Qu Reforge Gitlab]]
+- [[The Best Of 2021]]
+- [[The Definitive Guide To Mastering Analytical Thinking Interviews]]
+- [[The Definitive Guide To Mastering Product Sense Interviews]]
+- [[The Most Important Consumer Metrics To Track]]
+- [[The Most Important Marketplace Metrics To Track]]
+- [[The Pm  Design Partnership]]
+- [[This Week 0 Advice On Growth Product And Leadership]]
+- [[This Week 10 Keeping Designers And Engineers Excited About Metrics  Transitionin]]
+- [[Adriel Frederick]]
+- [[Albert Cheng]]
+- [[Alex Hardimen]]
+- [[Alex Komoroske]]
+- [[Andy Raskin ]]
+- [[Archie Abrams]]
+- [[Arielle Jackson]]
+- [[Asha Sharma]]
+- [[Brandon Chu]]
+- [[Chris Hutchins]]
+- [[Dan Hockenmaier]]
+- [[Dr Fei Fei Li]]
+- [[Ebi Atawodi]]
+- [[Edwin Chen]]
+- [[Elena Verna 30]]
+- [[Elena Verna 40]]
+- [[Gia Laudi]]
+- [[Grant Lee]]
+- [[Hari Srinivasan]]
+- [[Hila Qu]]
+- [[Itamar Gilad]]

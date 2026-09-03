@@ -1,0 +1,14 @@
+---
+title: "Glove Course Lead"
+type: entity-person
+frequency: 4
+---
+
+# Glove Course Lead
+
+## Appearances (4 mentions)
+
+- [[Healing Your Co Founder Relationship]]
+- [[How Long It Takes To Find Product Market Fit]]
+- [[Skills Pms Need To Build]]
+- [[Types Of Business Models]]
